@@ -1,4 +1,5 @@
 # Summary
 
 * Preparation
+* Database Schema
 
