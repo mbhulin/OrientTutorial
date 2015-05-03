@@ -1,5 +1,5 @@
 # Summary
 
-* Preparation
-* Database Schema
+* [chapter 1] Preparation
+* [chapter 2] Database Schema
 
