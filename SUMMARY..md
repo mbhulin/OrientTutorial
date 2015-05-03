@@ -1,5 +1,6 @@
 # Summary
 
-* [chapter 1] Preparation
-* [chapter 2] Database Schema
+* Preparation
+   * OrientDB Installation
+* Database Schema
 
