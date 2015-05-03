@@ -1,5 +1,5 @@
 # Summary
 
-* Preparation
+* [Preparation](preparation.md)
 * Database Schema
 
