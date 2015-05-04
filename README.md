@@ -21,15 +21,15 @@ There may be more than one kitchen or bathroom in one apartment. Therefore it is
 Inside of a room an autonomous robot can move using its sensors. Therefore it does not need certain positions with connections as navigation paths inside of rooms. However positions are necessary to indicate doors as connections between different rooms. Thus the robot knows where to navigate to enter another room. Also other connections between rooms like elevators are stored as positions.
 
 Fig. 1 shows the topological hierarchy of real locations together with the conceptual location hierarchy.
-![Figure 1](file:///C:/mh/GitHub/OrientTutorial/ThesisStaehleLocations.pn)
-Figure 1: Conceptual hierarchy of location concepts, location instances and place instances
-(example concept: place 1 in lab kitchen)
+![Figure 1](file:///C:/mh/GitHub/OrientTutorial/ThesisStaehleLocations.png)
+Figure 1: Conceptual hierarchy of location concepts, location instances and place instances (example concept: place 1 in lab kitchen)
 
 ####Objects and Object Concepts
 The robot has to use and interact with a lot of objects. In contrast to the locations the objects are not fixed at one position but can be moved, consumed, substituted by new objects etc. Similar to locations real objects belong to one or more object classes. However we will not use the "is part of" relationship between objects. The reason is that assembling or disassembling of objects are not tasks of our service robot.
 ![Figure 2](file:///C:/mh/GitHub/OrientTutorial/ThesisStaehleObjects.png)
 
 ####Properties of Objects
-Each object has several properties that may be relevant for the service robot e.g. to distinguish similar objects by color or by size. The robot might get the instruction: "Bring me my hat!" and ask in response: "Which hat? The black one or the blue one?" Each property type like color has some possible values like Yellow, Green or Blue. Of course 
+Each object has several properties that may be relevant for the service robot e.g. to distinguish similar objects by color or by size. The robot might get the instruction: "Bring me my hat!" and ask in response: "Which hat? The black one or the blue one?" Each property type like color has some possible values like Yellow, Green or Blue. Different objects may have different properties. The color e.g. is important for clothes but is not of interest for a newspaper.
+![Figure 3]()
 
 
