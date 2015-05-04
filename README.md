@@ -21,7 +21,7 @@ There may be more than one kitchen or bathroom in one apartment. Therefore it is
 Inside of a room an autonomous robot can move using its sensors. Therefore it does not need certain positions with connections as navigation paths inside of rooms. However positions are necessary to indicate doors as connections between different rooms. Thus the robot knows where to navigate to enter another room. Also other connections between rooms like elevators are stored as positions.
 
 Fig. 1 shows the topological hierarchy of real locations together with the conceptual location hierarchy.
-![Figure 1](file:///./ThesisStaehleLocations.png)
+![Figure 1](.ThesisStaehleLocations.png)
 Figure 1: Conceptual hierarchy of location concepts, location instances and place instances (example concept: place 1 in lab kitchen)
 
 ####Objects and Object Concepts
