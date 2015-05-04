@@ -1,6 +1,6 @@
 # Summary
 
-* [introduction](README.md)
-* [Preparation](preparation.md)
-* [Database Schema](database_schema.md)
+[introduction](README.md)
+1. [Preparation](preparation.md)
+2. [Database Schema](database_schema.md)
 
