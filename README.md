@@ -8,12 +8,12 @@ Usual tasks of such a service robot are to search for objects and bring them to 
 
 Find more information about this project at [Univesity Ravensburg-Weingarten, Institute for Artificial Intelligence](http://iki.hs-weingarten.de/?lang=eng&page=aktuelles)
 ###World Model
-The service robot can perform a lot of tasks in a permanently changing environment using its sensors: find its way avoiding obstacles at changing positions, detecting and grasping objects, understanding commands given in natural language etc. However to plan its activities the robot needs some information about its environment: Where are other rooms? Where are doors to get from one room to another one? Where could certain objects be? To which object class does an object belong? How can similar objects be distinguished?
+The service robot can perform a lot of tasks in a permanently changing environment, using its sensors: find its way avoiding obstacles at changing positions, detect and grasp objects, understand commands given in natural language etc. However to plan its activities the robot needs some information about its environment: Where are other rooms? Where are doors to get from one room to another one? Where could certain objects be? To which object class does an object belong? How can similar objects be distinguished?
 
-In his **Master-Theses Benjamin Stähle** suggested a database structure to store the information about the robot's environment.This structure is briefly described here.
+In his **Master-Theses Benjamin Stähle** suggested a database structure to store the information about the robot's environment. This structure is briefly described here.
 
 ####Locations and Location Concepts
-Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbour. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "is part" relationship: A certain room e.g. the kitchen **is part** of the 1st floor which is part of an apartment which is part of a certain house.
+Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbour. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "is part of" relationship: A certain room e.g. the kitchen **is part of** the 1st floor which is part of an apartment which is part of a certain house.
 
 There may be more than one kitchen or bathroom in one apartment. Therefore it is necessary to store the type of a location e.g. the kitchen on the 1st floor **is a** kitchen. The abstract information about location concepts forms an extra hierchy.
 
