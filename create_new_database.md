@@ -13,4 +13,10 @@ A "New Java Project"-dialog opens. Type in a name for the project e.g. *RobotWor
 
 ![](EclipseNewProjectDialog.JPG)
 
-In the following dialog click on 
+In the following "Java Settings"-dialog click on the *Libraries* tab and then on *Add External JARs...*
+
+![](EclipseAddLibraries.JPG)
+
+A file dialog opens. Navigate to your orient root directory and choose the following JAR-files:
+
+
