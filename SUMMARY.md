@@ -4,5 +4,5 @@
 * [Motivation](motivation.md)
 * [Preparation](preparation.md)
 * [Database Schema](database_schema.md)
-   * Develop Schema for World-Model
+   * [Develop Schema for World-Model](schema_for_world-model.md)
 
