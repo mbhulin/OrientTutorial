@@ -17,6 +17,6 @@ In the following "Java Settings"-dialog click on the *Libraries* tab and then on
 
 ![](EclipseAddLibraries.JPG)
 
-A file dialog opens. Navigate to your orient root directory and choose the following JAR-files:
+A file dialog opens. Navigate to your orient root directory and then to the jar-directory. Choose the following JAR-files:
 
 
