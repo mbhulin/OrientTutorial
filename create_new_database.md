@@ -9,6 +9,8 @@ In this tutorial we will use the last method. To do so we will first create a Ja
 
 Start Eclipse on your computer. In the main menu of eclipse click on *File* > *New* > *Java Project*
 
-A "new project"-dialog opens. Type in a name for the project e.g. *RobotWorldModel* and choose the default JRE (Java Runtime Environment). Click *Next* to continue.
+A "New Java Project"-dialog opens. Type in a name for the project e.g. *RobotWorldModel* and choose the default JRE (Java Runtime Environment). Click *Next* to continue.
 
+![](EclipseNewProjectDialog.JPG)
 
+In the following dialog click on 
