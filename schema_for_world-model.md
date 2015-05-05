@@ -1,2 +1,0 @@
-# Develop Schema for Locations
-
