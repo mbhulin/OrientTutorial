@@ -1,2 +1,2 @@
-# Develop Schema for World-Model
+# Develop Schema for Locations
 
