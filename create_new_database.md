@@ -20,7 +20,7 @@ A file dialog opens. Navigate to your orient root directory and then to the jar-
 * orientdb-client-x.x.x.jar
 * orientdb-core-x.x.x.jar
 * orientdb-enterprise-x.x.x.jar
-* orientdb-grafphdb-x.x.x.jar
+* orientdb-graphdb-x.x.x.jar
 
 Click Finish - a new empty Java project is created and is added to the list of your Java projects in your workspace. You can see it in the Package Explorer. If it is not visible open it with  
 *Window* > *Show View* > *Package Explorer*
@@ -30,5 +30,14 @@ In the package explorer choose your new project RotWorldModel. Click on the "New
 
 ### Create a new Java Class with a Main Method
 In the package explorer choose the newly created package *createDBSchema*. In the main menu click on *File* > *New* > *Class* or click on the "New Java Class"-icon. In the "New Class"-dialog type in the class name e.g. *CreateDBSchema*, select the check box "Create a static main method" and click *Finish*.
+
+### Create a New Database
+The graph-API of OrientDB is based on [Tinkerpop Blueprints](https://github.com/tinkerpop/blueprints/wiki) which is a general API for graph traversal. Inside the main method we use this API to establish a connection to the database.
+
+```
+OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld");
+OrientGraphNoTx db = factory.getNoTx(); // For data definition instructions transactions are not relevant
+```
+
 
 
