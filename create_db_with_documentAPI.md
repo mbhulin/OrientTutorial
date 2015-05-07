@@ -4,7 +4,7 @@ Since a graph database is a special document database in OrientDB with the speci
 ``` java
 try {
     new OServerAdmin("remote:MyOrientServer").connect("root", "rootpw").createDatabase("RobotWorld","graph","local").close();
-} catch (IOException e) {
+} catch (Exception e) {
     e.printStackTrace ();
 }
 ```
