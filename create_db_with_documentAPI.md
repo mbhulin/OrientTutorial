@@ -10,4 +10,4 @@ try {
 OrientGraphFactory factory = new OrientGraphFactory("remote:MyOrientServer/RobotWorld", "admin", "admin");
 OrientGraphNoTx db = factory.getNoTx();
 ```
-To identify yourself on the remote server you have to provide the root account and password (here "rootpw"). If you forgot the root user credentials you can find them in ``<Orient root directory>/config/orient-server-config.xml`` at the &lt;users&gt; tag
+To identify yourself on the remote server you have to provide the root account and password (here "rootpw"). If you forgot the root user credentials you can find them in ``<Orient root directory>/config/orient-server-config.xml`` at the &lt;users&gt; tag.
