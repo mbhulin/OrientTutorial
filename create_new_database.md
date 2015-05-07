@@ -1,8 +1,8 @@
 # Create a new Database using the OrientDB Java API
 OrientDB offers several possibilities to create new databases:
-* Use Studio to [create a new database interactively](http://orientdb.com/docs/last/orientdb-studio.wiki/Home-page.html#create-a-new-database)
-* Use Console and the [create database command](http://orientdb.com/docs/last/orientdb.wiki/Console-Command-Create-Database.html)
-* Use the Java API to create a database with a Java program.
+* Use **Studio** to [create a new database interactively](http://orientdb.com/docs/last/orientdb-studio.wiki/Home-page.html#create-a-new-database)
+* Use **Console** and the [create database command](http://orientdb.com/docs/last/orientdb.wiki/Console-Command-Create-Database.html)
+* Use the **Java API** to create a database with a Java program.
 
 ## Create a Database using the Java API
 ### Create a Java Project
@@ -16,7 +16,7 @@ In the following "Java Settings"-dialog click on the *Libraries* tab and then on
 
 A file dialog opens. Navigate to your orient root directory and then to the jar-directory. Choose the following JAR-files (where x.x.x is the version number installed on your computer):
 * blueprints-core-x.x.x.jar
-* concurrentlidedhashmap-lru-x.x.x.jar
+* concurrentlinkedhashmap-lru-x.x.x.jar
 * orientdb-client-x.x.x.jar
 * orientdb-core-x.x.x.jar
 * orientdb-enterprise-x.x.x.jar
@@ -38,7 +38,12 @@ The graph-API of OrientDB is based on [Tinkerpop Blueprints](https://github.com/
 OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld");
 OrientGraphNoTx db = factory.getNoTx(); // For data definition instructions transactions are not relevant
 ```
-The first instruction connects to the database. If it does not exist the database is created. This works only in **"plocal" mode** where the Java program is executed on the computer where OrientDB was installed. After "plocal:" the path to the database follows. Usually this path is &lt;Orient-Root directory>/databases. Be shure that no other program accesses the database when you are in "plocal" mode. With a remote connection to a database server which is explained later 
+The first instruction connects to the database. If it does not exist the database is created. This works only in **"plocal" mode** where the Java program is executed on the computer where OrientDB was installed. After "plocal:" the path to the database follows. Usually this path is &lt;Orient-Root directory>/databases. Be shure that no other program accesses the database when you are in "plocal" mode.  
+*With a **remote connection** to a database server, which is explained later, a new database cannot be created automatically.*
+
+The second instruction gets a new connection to the database from the factory. Since we want to define the structure of the database we do not use tansactions and use ``factory.getNoTx()`` instead of ``factory.getTx()``.
+
+If you are interested in alternatives creating a database which also work in "remote"-mode go to ["Create graph database using the document API"](create_db_with_documentAPI.md).
 
 If you want to connect to a remote server you have to use a remote connection. Assume your database server has got the server name "MyOrientServer". Then you use ``OrientGraphFactory("remote:MyOrientServer/RobotWorld")`` where remote: indicates a remote connection and &lt;URL-to-database&gt; is the 
 
