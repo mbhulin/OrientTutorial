@@ -34,10 +34,12 @@ In the package explorer choose the newly created package *createDBSchema*. In th
 ### Create a New Database
 The graph-API of OrientDB is based on [Tinkerpop Blueprints](https://github.com/tinkerpop/blueprints/wiki) which is a general API for graph traversal. Inside the main method we use this API to establish a connection to the database.
 
-```
+``` Java
 OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld");
 OrientGraphNoTx db = factory.getNoTx(); // For data definition instructions transactions are not relevant
 ```
+The first instruction connects to the database. If it does not exist the database is created. This works only in **"plocal" mode** where the Java program is executed on the computer where OrientDB was installed. After "plocal:" the path to the database follows. Usually this path is &lt;Orient-Root directory>/databases. Be shure that no other program accesses the database when you are in "plocal" mode. With a remote connection to a database server which is explained later 
 
+If you want to connect to a remote server you have to use a remote connection. Assume your database server has got the server name "MyOrientServer". Then you use ``OrientGraphFactory("remote:MyOrientServer/RobotWorld")`` where remote: indicates a remote connection and &lt;URL-to-database&gt; is the 
 
 
