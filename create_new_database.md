@@ -53,6 +53,5 @@ If you are interested in alternatives creating a database which also work in "re
 
 The second instruction gets a new connection to the database from the factory. Since we want to define the structure of the database we do not use tansactions and use ``factory.getNoTx()`` instead of ``factory.getTx()``.
 
-~~If you want to connect to a remote server you have to use a remote connection. Assume your database server has got the server name "MyOrientServer". Then you use ``OrientGraphFactory("remote:MyOrientServer/RobotWorld")`` where remote: indicates a remote connection and &lt;URL-to-database&gt; is the~~
 
 
