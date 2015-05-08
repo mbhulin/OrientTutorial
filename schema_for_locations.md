@@ -1,4 +1,4 @@
-# Develop Schema for Locations
+# Develop the Schema for Locations
 ![Location Hierarchy](LocationHierarchy.JPG)
 
 Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. Hence we have to define a vertex class **Location** as subclass of V.
