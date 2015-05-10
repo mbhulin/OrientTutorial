@@ -12,4 +12,10 @@ To store a shape we have several options in OrientDB:
 * We can connect a location vertex with one position vertex by a "first_corner" edge. This position vertex is then connected to another position vertex by a "next-position" edge. ![Location connected to corners](LocationPositionGraph2.png)
 * OrientDB is not only a graph database but also obeyes to the object oriented paradigm. Therefore a third alternative is possible using aggregation: Each location has a *shape* property which is of type *LINKLIST* or *EMBEDDEDLIST* of positions. Use *EMBEDDEDLIST* if the positions can only exist as a part of a location, use *LINKLIST* if the positions can be used for other purposes.
 
-In this tutorial we will use the last alternative because this is a special feature of OrientDB.
+Let's briefly discuss the different alternatives. In the first and second alternative positions and locations are different, stand alone entities connected by a relationship. If the location is deleted the positions remain in the database e.g. because objects stand at these positions. The second alternative has the disadvantage that after deletion of a location the corresponding positions are still connected by the *next_corner* relationship. The application which deletes a location has to delete the corresponding *next_corner*-edges.
+
+The third alternative connects locations and positions more tightly. Locations are the main entities and the positions forming the shape of the location are a part of the location. However the positions can exist without a location; they get an independant object id.
+
+The last alternative is similar to the third one but the positions are embedded in the location object. If a location is deleted they are automatically deleted, too.
+
+In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of objects we don't embed them into locations.
