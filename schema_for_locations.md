@@ -1,7 +1,7 @@
 # Develop the Schema for Locations
 ![Location Hierarchy](LocationHierarchy.JPG)
 
-Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in ["Motivation"](motivation.md#Locations and Location Concepts) we distinguish between real locations and location concepts. Hence we have to define a vertex class **Location** as subclass of V.
+Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in the [chapter "Motivation"](motivation.md#Locations-and-Location-Concepts) we distinguish between real locations and location concepts. Hence we have to define a vertex class **Location** as subclass of V.
 
 Each *location* needs a **name**. The persons attended by the service robot use the name to refer to the location. The name need not be unique because a location can be identified by the containing location. A command to the robot could e.g. be: "Bring this bottle of juice to the *kitchen of Mr. Millers apartement*".
 
