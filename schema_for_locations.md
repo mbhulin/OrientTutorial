@@ -1,11 +1,13 @@
 # Develop the Schema for Locations
 ![Location Hierarchy](LocationHierarchy.JPG)
 
-Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. Hence we have to define a vertex class **Location** as subclass of V.
+Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in ["Motivation"](motivation.md) we distinguish between real locations and location concepts. Hence we have to define a vertex class **Location** as subclass of V.
 
 Each *location* needs a **name**. The persons attended by the service robot use the name to refer to the location. The name need not be unique because a location can be identified by the containing location. A command to the robot could e.g. be: "Bring this bottle of juice to the *kitchen of Mr. Millers apartement*".
 
 Often it might be conveniant to store a **description** of the location.
+
+Location concepts also need a name and optionally a description
 
 To move inside of a room a robot must get the information about the **shape** of the room. A *shape* can be stored as a list of **positions** where each *position* is a pair of x- and y-coordinates.
 
@@ -26,7 +28,7 @@ The last alternative is similar to the third one but the positions are embedded 
 In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *objects* we don't embed them into locations.
 
 ## Create the Vertex Classes "Position" using the Java API
-Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. 
+Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. We can use integer instead of float if we use centimeter as unit. The robot does not need more accurate values.
 ```java
 OrientVertexType position = db.createVertexType("Position2D");
 position.createProperty("x", OType.INTEGER).setMandatory(true).setNotNull(true);
