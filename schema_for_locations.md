@@ -25,12 +25,20 @@ The last alternative is similar to the third one but the positions are embedded 
 
 In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *objects* we don't embed them into locations.
 
-## Create the Vertex Class "Location" using the Java API
-Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Location". This is straight forward using the createVertexType() method. Then we use the createProperty() method to create the properties "Name" and "Description" of datatype String.
+## Create the Vertex Classes "Position" using the Java API
+Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. 
+```java
+OrientVertexType position = db.createVertexType("Position2D");
+position.createProperty("x", OType.INTEGER).setMandatory(true).setNotNull(true);
+position.createProperty("y", OType.INTEGER).setMandatory(true).setNotNull(true);
+```
 
+The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each position object must have a x and y property and these properties must have a value.
+
+## Create the Vertex Classes "Location" and "LocationConcept"
+and a new vertex class "Location". This is straight forward using the createVertexType() method. Then we use the createProperty() method to create the properties "Name" and "Description" of datatype String.
 ```java
 OrientVertexType location = db.createVertexType("Location");
 location.createProperty("Name", OType.STRING).setMandatory(true).setNotNull(true);
 location.createProperty("Description", OType.STRING);
 ```
-The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each location object must have a Name property and this Name property must not be null.
