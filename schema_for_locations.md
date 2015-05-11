@@ -1,13 +1,13 @@
 # Develop the Schema for Locations
 ![Location Hierarchy](LocationHierarchy.JPG)
 
-Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in the [chapter "Motivation"](motivation.md#Locations-and-Location-Concepts) we distinguish between real locations and location concepts. Hence we have to define a vertex class **Location** as subclass of V.
+Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in the chapter [Motivation: Locations and Location Concepts](motivation.md#Locations-and-Location-Concepts) we distinguish between real locations and location concepts. Hence we have to define a vertex classes **Location** and **LocationConcept** as subclasses of V.
 
 Each *location* needs a **name**. The persons attended by the service robot use the name to refer to the location. The name need not be unique because a location can be identified by the containing location. A command to the robot could e.g. be: "Bring this bottle of juice to the *kitchen of Mr. Millers apartement*".
 
 Often it might be conveniant to store a **description** of the location.
 
-Location concepts also need a name and optionally a description
+Location concepts also need a name and optionally a description.
 
 To move inside of a room a robot must get the information about the **shape** of the room. A *shape* can be stored as a list of **positions** where each *position* is a pair of x- and y-coordinates.
 
@@ -38,9 +38,17 @@ position.createProperty("y", OType.INTEGER).setMandatory(true).setNotNull(true);
 The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each position object must have a x and y property and these properties must have a value.
 
 ## Create the Vertex Classes "Location" and "LocationConcept"
-and a new vertex class "Location". This is straight forward using the createVertexType() method. Then we use the createProperty() method to create the properties "Name" and "Description" of datatype String.
+
+OrientDB supports inheritance. Both classes, *LocationConcept* and *Location*, need a *Name* and a *Description* attribut. We will see later that other classes have a name and a description attribute, too. Therefore we first define a subclass **NamedVertex** of V. Then *Location* and *LocationConcept* are subclasses of *NamedVertex*.
+
+Again the ``.createVertexType()`` and ``.createProperty()`` methods are used.
 ```java
-OrientVertexType location = db.createVertexType("Location");
-location.createProperty("Name", OType.STRING).setMandatory(true).setNotNull(true);
-location.createProperty("Description", OType.STRING);
+OrientVertexType namedVertex = db.createVertexType("NamedVertex");
+namedVertex.createProperty("Name", OType.STRING).setMandatory(true).setNotNull(true);
+namedVertex.createProperty("Description", OType.STRING);
+
+OrientVertexType locationConcept = db.createVertexType("LocationConcept", "NamedVertex");
+
+OrientVertexType location = db.createVertex("Location", "NamedVertex");
+location.createProperty("Shape", OType.LINKLIST, 
 ```
