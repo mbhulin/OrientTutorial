@@ -54,3 +54,7 @@ location.createProperty("Shape", OType.LINKLIST, position2D);
 ```
 Let's look at the last instruction in more detail:
 *createProperty()* is a method of the OrientVertexType class. The first parameter, "Shape", is the property's name as string. The second parameter is the property's type which is LINKLIST here. Since we have a link we need a third parameter which is the linked type. Be careful not to use the name of the linked type as string but a parameter of type *OrientVertexType*.
+
+## Create the Edge Classes "IS_A" and "IS_PART_OF"
+Now we have defined all vertex classes related to locations. As last step we define the edge classes that express the relationships between locations and location concepts.
+
