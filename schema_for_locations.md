@@ -57,4 +57,16 @@ Let's look at the last instruction in more detail:
 
 ## Create the Edge Classes "IS_A" and "IS_PART_OF"
 Now we have defined all vertex classes related to locations. As last step we define the edge classes that express the relationships between locations and location concepts.
+````java
+OrientEdgeType is_a = db.createEdgeType("IS_A");
+OrientEdgeType is_part_of = db.createEdgeType("IS_PART_OF");
+
+```
+If you wanted to constrain the edge type *IS_A* to only connect a *location* vertex with a *location concept* vertex you could explicitly add the *in* and *out* links to the *IS_A* class.
+```java
+is_a.createProperty("out", OType.LINK, location).setMandatory(true);
+is_a.createProperty("in", OType.LINK, locationConcept).setMandatory(true);
+
+```
+However we want to use the IS_A edge class also for object entities we omit these constraints.
 
