@@ -25,9 +25,9 @@ object.createProperty("Size", OType.EMBEDDED, size3D);
 ```
 
 At last we define the edge classes:  
-* IS_A is the relationship between objects and object instances.
+* IS_A is the relationship between objects and object instances. This edge class alreadyexists for locations.
 * PROB_IS_AT stores the probability of an object beeing at a location, position or another object. Therefore this edge class has some sort of probability as a property. In fact not a probability but a score is stored. Additionally a hight may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
-* IS_PART_OF models aggregation when complex objects are composed of other objects.
+* IS_PART_OF models aggregation when complex objects are composed of other objects.  This edge class alreadyexists for locations.
 
 ```java
 OrientEdgeType is_part_of = db.createEdgeType("IS_PART_OF");  
