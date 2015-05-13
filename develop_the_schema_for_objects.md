@@ -28,6 +28,9 @@ At last we define the edge classes. Since we already have defined the IS_A and I
 
 ```java
 OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
+prob_is_at.createProperty("Probability", OType.INTEGER).setMin("0").setMandatory(true).setNotNull(true);
+prob_is_at.createPropery("Hight", OType.INTEGER).setMin("0");
+
 ```
 Finally the database connection is closed.
 ```java
