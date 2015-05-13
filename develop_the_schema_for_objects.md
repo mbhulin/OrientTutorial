@@ -1,5 +1,25 @@
 # Develop the Schema for Objects
 
-While the *location* class stores all immobile objects we need an **object class** to store mobile objects. Of course the border between immobile locations and mobile objects is fluent. A chair will often be moved to other positions, a table may be moved a little bit after cleaning the floor and a heavy wardrobe normally isn't moved at all. If you want to read again about the details of objects go back to the chapter [Motivation](motivation.md#)  
+While the *location* class stores all immobile objects we need an **object class** to store mobile objects. Of course the border between immobile locations and mobile objects is fluent. A chair will often be moved to other positions, a table may be moved a little bit after cleaning the floor and a heavy wardrobe normally isn't moved at all. If you want to read again about the details of objects go back to the chapter [Motivation](motivation.md#Objects-and-Object-Concepts).
 
-The objects build a hierarchy. At the leafs we have real objects which the robot can fetch. These real objects belong to abstract object classes or object concepts. 
+For each real object we want to store its size as surrounding cuboid with length, width and hight. To connect these three dimensions we define a Size3D class. Each object then gets an embedded Size property of type Size3D. Since Size3D isn't a subclass of V it cannot be created using ``db.createVertexType("Size3D")`` but has to be defined as document class. One possibility to do this is to use SQL. SQL can be executed inside Java programs with ``db.command(new OCommandSQL("SQL-string").execute()``. 
+
+So we add to the main method in our CreateDBSchema class
+```java
+db.command(new OCommandSQL ("create class Size3D")).execute();
+db.command(new OCommandSQL("create Property Size3D.Length INTEGER")).execute(); // length in cm
+db.command(new OCommandSQL("ALTER PROPERTY Size3D.Length MANDATORY true")).execute();
+db.command(new OCommandSQL("create Property Size3D.Width INTEGER")).execute();
+db.command(new OCommandSQL("ALTER PROPERTY Size3D.Width MANDATORY true")).execute();
+db.command(new OCommandSQL("create Property Size3D.Hight INTEGER")).execute();
+db.command(new OCommandSQL("ALTER PROPERTY Size3D.Hight MANDATORY true")).execute();
+```
+
+Now we can define the classes for objects and object concepts.
+```java
+OrientVertexType objectConcept = db.createVertexType("ObjectConcept", namedVertex); // abstract objects
+OrientVertexType object = db.createVertexType("Object", namedVertex);
+object.createProperty("Path_to_Histogram", OType.STRING); // Link to file
+OClass size3D = db.getRawGraph().getMetadata().getSchema().getClass("Size3D");
+object.createProperty("Size", OType.EMBEDDED, size3D);
+```
