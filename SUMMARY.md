@@ -6,5 +6,5 @@
 * [Database Schema](database_schema.md)
    * [Create new Database](create_new_database.md)
    * [Develop the Schema for Locations](schema_for_locations.md)
-   * Develop the Schema for Objects
+   * [Develop the Schema for Objects](develop_the_schema_for_objects.md)
 
