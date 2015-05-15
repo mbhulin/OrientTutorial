@@ -24,7 +24,7 @@ OClass size3D = db.getRawGraph().getMetadata().getSchema().getClass("Size3D");
 object.createProperty("Size", OType.EMBEDDED, size3D);
 ```
 
-At last we define the edge classes. Since we already have defined the IS_A and IS_PART_OF edge classes for locations we only need to add the edge class PROB_IS_AT which stores the probability of an object beeing at a location, position or another object. Therefore this edge class has some sort of probability as a property. In fact not a probability but a score is stored. Additionally a hight may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
+At last we define the edge classes. Since we already have defined the *IS_A* and *IS_PART_OF* edge classes for locations we only need to add the edge class **PROB_IS_AT** which stores the probability of an object beeing at a location, position or in/on/at another object. Therefore this edge class has some sort of **probability** as a property. In fact not a probability but a **score** is stored. Additionally a **hight** may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
 
 ```java
 OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
