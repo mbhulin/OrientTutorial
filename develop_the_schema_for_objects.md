@@ -30,7 +30,7 @@ object.createProperty("Size", OType.EMBEDDED, size3D);
 
 At last we define the edge classes. Since we already have defined the *IS_A* and *IS_PART_OF* edge classes for locations we only need to add the edge class **PROB_IS_AT** which stores the probability of an object beeing at a location, position or in/on/at another object. Therefore this edge class has some sort of **probability** as a property. In fact not a probability but a **score** is stored. Additionally a **hight** may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
 
-If you prefer to wach the last step as screencast video click on the video start page.
+If you prefer to wach the last steps as screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel2c.mp4
 " target="_blank"><img src="ThumbnailEclipseVideo2c.JPG"
