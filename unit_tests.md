@@ -106,5 +106,7 @@ public class LocationTests {
 
 * Start the OrientDB server. Then run your test class. All tests should succeed.
 
+You can download both Java files, *CreateDBSchema.java* and *LocationTests.java*, as [ZIP-Archive here](RobotWorldModel.zip).
+
 
 
