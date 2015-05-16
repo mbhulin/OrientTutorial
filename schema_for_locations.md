@@ -29,7 +29,11 @@ In this tutorial we will use the third alternative because *LINKLIST* is an inte
 
 ## Create the Vertex Classes "Position" using the Java API
 
-Here you can watch a screencast video that sho
+If you prefer to wach the next screencast video click on the video start page.
+
+<a href="EclipseRobotWorldModel2a.mp4
+" target="_blank"><img src="ThumbnailEclipseVideo2a.JPG"
+alt="Eclipse Video" width="160" height="150" border="10" /></a>
 
 Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. We can use integer instead of float if we use centimeter as unit. The robot does not need more accurate values.
 ```java
