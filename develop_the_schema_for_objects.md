@@ -1,4 +1,9 @@
 # Develop the Schema for Objects
+If you prefer to wach the next steps as screencast video click on the video start page.
+
+<a href="EclipseRobotWorldModel2b.mp4
+" target="_blank"><img src="ThumbnailEclipseVideo2b.JPG"
+alt="Eclipse Video" width="160" height="150" border="10" /></a>
 
 While the *location* class stores all immobile objects we need an **object class** to store mobile objects. Of course the border between immobile locations and mobile objects is fluent. A chair will often be moved to other positions, a table may be moved a little bit after cleaning the floor and a heavy wardrobe normally isn't moved at all. If you want to read again about the details of objects go back to the chapter [Motivation](motivation.md#Objects-and-Object-Concepts).
 
@@ -24,6 +29,12 @@ object.createProperty("Size", OType.EMBEDDED, size3D);
 ```
 
 At last we define the edge classes. Since we already have defined the *IS_A* and *IS_PART_OF* edge classes for locations we only need to add the edge class **PROB_IS_AT** which stores the probability of an object beeing at a location, position or in/on/at another object. Therefore this edge class has some sort of **probability** as a property. In fact not a probability but a **score** is stored. Additionally a **hight** may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
+
+If you prefer to wach the last step as screencast video click on the video start page.
+
+<a href="EclipseRobotWorldModel2c.mp4
+" target="_blank"><img src="ThumbnailEclipseVideo2c.JPG"
+alt="Eclipse Video" width="160" height="150" border="10" /></a>
 
 ```java
 OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
