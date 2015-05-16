@@ -28,6 +28,9 @@ The last alternative is similar to the third one but the positions are embedded 
 In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *objects* we don't embed them into locations.
 
 ## Create the Vertex Classes "Position" using the Java API
+
+Here you can watch a screencast video that sho
+
 Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. We can use integer instead of float if we use centimeter as unit. The robot does not need more accurate values.
 ```java
 OrientVertexType position2D = db.createVertexType("Position2D");
