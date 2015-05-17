@@ -108,5 +108,12 @@ public class LocationTests {
 
 You can download both Java files, *CreateDBSchema.java* and *LocationTests.java*, as [ZIP-Archive here](RobotWorldModel.zip).
 
+---
+Here's a quiz about Gitbook
+
+|                  | Good | Bad |
+| ---------------- | ---- | --- |
+| What is Gitbook? | (x)  | ( ) |
+---
 
 
