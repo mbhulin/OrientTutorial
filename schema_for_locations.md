@@ -27,7 +27,7 @@ The last alternative is similar to the third one but the positions are embedded 
 
 In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *objects* we don't embed them into locations.
 
-## Create the Vertex Classes "Position" using the Java API
+## Create the Vertex Classes "Position2D" using the Java API
 
 If you prefer to wach the next screencast video click on the video start page.
 
@@ -77,3 +77,6 @@ is_a.createProperty("in", OType.LINK, locationConcept).setMandatory(true);
 ```
 However we want to use the IS_A edge class also for object entities we omit these constraints.
 
+## Create the Edge Class "IS_CONNECTED_TO"
+
+The robot must know which locations are connected by doors, elevators, passages etc. to navigate to desired objects. Each connection must provide information about the type and the position of the connection. In fact two positions may be necessary because the robot may have to recalibrate its position when it gets to another floor or another appartment.
