@@ -1,0 +1,52 @@
+create database plocal:C:/orientdb/databases/RobotWorld
+create class Position2D extends V
+create Property Position2D.x INTEGER
+alter property Position2D.x MANDATORY true
+alter property Position2D.x NOTNULL true
+create Property Position2D.y INTEGER
+alter property Position2D.y MANDATORY true
+alter property Position2D.y NOTNULL true
+		
+create class NamedVertex extends V
+create Property NamedVertex.Name STRING
+alter property NamedVertex.Name MANDATORY true
+alter property NamedVertex.Name true
+create Property NamedVertex.Description STRING
+		
+create class LocationConcept extends NamedVertex
+create class Location extends NamedVertex
+create property Location.Shape LINKLIST position2D
+		
+create class IS_A extends E
+create class IS_PART_OF extends E
+create class IS_CONNECTED_TO extends E
+create property IS_CONNECTED_TO.PositionIn LINK position2D
+create property IS_CONNECTED_TO.PositionOut LINK position2D
+create property IS_CONNECTED_TO.PassTimeSec INTEGER -- Time to pass connection in seconds
+create property IS_CONNECTED_TO.Width INTEGER -- Width of door/connection in cm
+		
+create class Size3D
+create Property Size3D.Length INTEGER -- Length in cm
+alter property Size3D.Length MANDATORY true
+alter property Size3D.Length NOTNULL true
+create Property Size3D.Width INTEGER -- Width in cm
+alter property Size3D.Width MANDATORY true
+alter property Size3D.Width NOTNULL true
+create Property Size3D.Hight INTEGER -- Hight in cm
+alter property Size3D.Hight MANDATORY true
+alter property Size3D.Hight NOTNULL true
+
+create class ObjectConcept extends namedVertex -- Abstract Objects
+create class Object extends namedVertex) -- Real Objects
+		object.createProperty("Path_to_Image", OType.STRING); // Path to image file
+		object.createProperty("Size", OType.EMBEDDED, size3D);
+		
+create class PROB_IS_AT extends E
+create Property PROB_IS_AT.Score INTEGER
+alter property PROB_IS_AT.Score MIN 0
+alter property PROB_IS_AT.Score MANDATORY true
+alter property PROB_IS_AT.Scoreset NOTNULL true
+create Property PROB_IS_AT.Hight INTEGER -- Hight above floor for robot's linear drive
+		
+disconnect
+
