@@ -79,4 +79,11 @@ However we want to use the IS_A edge class also for object entities we omit thes
 
 ## Create the Edge Class "IS_CONNECTED_TO"
 
-The robot must know which locations are connected by doors, elevators, passages etc. to navigate to desired objects. Each connection must provide information about the type and the position of the connection. In fact two positions may be necessary because the robot may have to recalibrate its position when it gets to another floor or another appartment.
+The robot must know which locations are connected by doors, elevators, passages etc. to navigate to desired objects. Each connection must provide information about the estimated time to pass the connection and the position of the connection. In fact two positions may be necessary because the robot may have to recalibrate its position when it gets to another floor or another appartment.
+
+````java
+OrientEdgeType is_connected_to = db.createEdgeType("IS_CONNECTED_TO");
+is_connected_to.createProperty("PassTime", OType.STRING);
+is_connected_to.createProperty("PositionIn", OType.LINK, position2D);
+is_connected_to.createProperty("PositionOut", OType.LINK, position2D);
+```
