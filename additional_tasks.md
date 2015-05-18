@@ -4,4 +4,4 @@ Now you have learned how to create an OrientDB graph database using the Java API
 * Add some more unit tests to ``LocationTests.java``
 .
 * Create a Java class ``ObjectTests.java`` with unit tests for the OrientDB classes *Object*, *ObjectConcept*, *IS_A*, *IS_PART_OF* and *PROB_IS_AT*.
-* Develop the Schema for the 
+* Develop the Schema for *Property*, *PropertyConcept* and *HAS_PROPERTY* as described in [Motivation](motivation.md). Then and add intructions to ``CreateDBSchema.java`` which create these OrientDB classes.
