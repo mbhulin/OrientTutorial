@@ -2,7 +2,7 @@
 ##Autonomous Service Robots
 At the University of Applied Sciences Ravensburg-Weingarten a service robot is developed that helps elderly or disabled persons in their household. It is not a nursing robot but a service robot. Usual tasks of a service robot are to search for objects and bring them to the owner, serve the dinner, clean up the kitchen etc. This [video](http://link) shows a typical activity of the service robot.
 
-This service is only possible with an autonomous robot. An industrial robot that performs the same task at the same position very accurately again and again is not suitabale because the environment changes permanently: the equipment like cups, glasses, fruit etc. is located at different positions every time the robot looks for it, one time a yellow cup has to be used another time a blue one, the usual way to the kitchen is blocked by a chair, ...
+This service is only possible with an autonomous robot. An industrial robot that performs the same task at the same position very accurately again and again is not suitable because the environment changes permanently: the equipment like cups, glasses, fruit etc. is located at different positions every time the robot looks for it, one time a yellow cup has to be used another time a blue one, the usual way to the kitchen is blocked by a chair, ...
 
 Find more information about this project at [Univesity Ravensburg-Weingarten, Institute for Artificial Intelligence](http://iki.hs-weingarten.de/?lang=eng&page=aktuelles)
 ###World Model
@@ -11,9 +11,9 @@ The service robot can perform a lot of tasks in a permanently changing environme
 In his **Master-Theses Benjamin Stähle** suggested a database structure to store the information about the robot's environment. This structure is briefly described here.
 
 ####Locations and Location Concepts
-Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbour. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "is part of" relationship: A certain room e.g. the kitchen **is part of** the 1st floor which **is part of** an apartment which **is part of** a certain house.
+Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbor. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "is part of" relationship: A certain room e.g. the kitchen **is part of** the 1st floor which **is part of** an apartment which **is part of** a certain house.
 
-There may be more than one kitchen or bathroom in one apartment. Therefore it is necessary to store the type of a location e.g. the kitchen on the 1st floor **is a** kitchen. The abstract information about location concepts forms an extra hierchy.
+There may be more than one kitchen or bathroom in one apartment. Therefore it is necessary to store the type of a location e.g. the kitchen on the 1st floor **is a** kitchen. The abstract information about location concepts forms an extra hierarchy.
 
 ####Positions
 Inside of a room an autonomous robot can move using its sensors. Therefore it does not need certain positions with connections as navigation paths inside of rooms. However positions are necessary to indicate doors as connections between different rooms. Thus the robot knows where to navigate to enter another room. Also other connections between rooms like elevators are stored as positions.
