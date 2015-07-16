@@ -1,5 +1,5 @@
 # Create a Graph Database using the Document API
-Since a graph database in OrientDB is a special document database with the special classes V for Vertices and E for Edges you can create a graph database using the document API. After having created the database you can then connect to it on the remote server using ``OrientGraphFactory()`` as you saw in the last section. The newly created database automatically gets three users, one of them is the admin user with the credentials "admin", "admin".
+Since a graph database in OrientDB is a special document database with the special classes V for Vertices and E for Edges you can create a graph database using the document API. After having created the database you can then connect to it on the remote server using ``OrientGraphFactory()`` as you saw in the last section. The newly created database automatically gets three users. One of them is the admin user with the credentials "admin", "admin".
 
 ```java
 try {
