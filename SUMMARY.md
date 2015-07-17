@@ -1,6 +1,6 @@
 # Summary
 
-* [introduction](README.md)
+* [Introduction](README.md)
 * [Motivation](motivation.md)
 * [Preparation](preparation.md)
 * [Database Schema](database_schema.md)
