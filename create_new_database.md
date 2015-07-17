@@ -7,7 +7,7 @@ OrientDB offers several possibilities to create new databases:
 In this tutorial we will use the last method.
 
 ## Create a Database using the Java API
-If you prefer to wach a screencast video click on the video start page.
+If you prefer to watch a screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel.mp4
 " target="_blank"><img src="ThumbnailEclipseVideo.JPG"
