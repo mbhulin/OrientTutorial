@@ -4,5 +4,5 @@ One of the robot's tasks is to search for some object an bring it to the disable
 
 In this tutorial we want to simulate only the task to search for a single object. Since we have no real robot available we use a graphical user interface to specify the current position of the robot as start position for the search, the search object, and the current position of this object.
 
-Before we can start to develop the search algorithm we need some test data. 
+Before we can start to develop the search algorithm we need some test data.
 
