@@ -24,7 +24,7 @@ public class FillDB {
 		db.addEdge("class:IS_A", diningRoom, room, "IS_A");
 ```
 
-After establishing the connection to the database - again in plocal mode - some vertices of the
+After establishing the connection to the database - again in plocal mode - some vertices of the subclass
 * If you like you can edit FillDB.java and add some additional locations, objects or positions.
 * Start the OrientDB Server on your computer. This is explained in the OrientDB documentation in section [Run the Server](http://orientdb.com/docs/last/orientdb.wiki/Tutorial-Run-the-server.html)
 * Run FillDB
