@@ -9,4 +9,5 @@
    * [Develop the Schema for Objects](develop_the_schema_for_objects.md)
    * [Unit Tests](unit_tests.md)
    * [Additional Tasks](additional_tasks.md)
+* Let the Robot Search for Objects
 
