@@ -15,47 +15,64 @@ public class CreateDBSchema {
 		OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld");
 		OrientGraphNoTx db = factory.getNoTx();
 
-		OrientVertexType position2D = db.createVertexType("Position2D");
-		position2D.createProperty ("x", OType.INTEGER).setMandatory (true).setNotNull (true);
-		position2D.createProperty("y", OType.INTEGER).setMandatory (true).setNotNull (true);
-		position2D.createProperty("inLocation", OType.LINK, position2D);
-		
+		/* 3 dimensional vector as abstract class
+		 * used as position and as size for objects.
+		 */
+		db.command(new OCommandSQL ("create class Coordinate extends V ABSTRACT")).execute(); 
+		db.command(new OCommandSQL ("create Property Coordinate.x FLOAT")).execute();
+		db.command(new OCommandSQL ("alter property Coordinate.x MANDATORY true")).execute();
+		db.command(new OCommandSQL ("alter property Coordinate.x NOTNULL true")).execute();
+		db.command(new OCommandSQL ("create Property Coordinate.y FLOAT")).execute();
+		db.command(new OCommandSQL ("alter property Coordinate.y MANDATORY true")).execute();
+		db.command(new OCommandSQL ("alter property Coordinate.y NOTNULL true")).execute();
+		db.command(new OCommandSQL ("create Property Coordinate.z FLOAT")).execute();
+		db.command(new OCommandSQL ("alter property Coordinate.z MANDATORY true")).execute();
+		db.command(new OCommandSQL ("alter property Coordinate.z NOTNULL true")).execute();
+		OClass coordinate = db.getRawGraph().getMetadata().getSchema().getClass("Coordinate");
+	
 		OrientVertexType namedVertex = db.createVertexType("NamedVertex");
 		namedVertex.createProperty("Name", OType.STRING).setMandatory(true).setNotNull(true);
 		namedVertex.createProperty("Description", OType.STRING);
 		
 		OrientVertexType locationConcept = db.createVertexType("LocationConcept", "NamedVertex");
 		OrientVertexType location = db.createVertexType("Location", "NamedVertex");
-		location.createProperty("Shape", OType.LINKLIST, position2D);
+		OrientVertexType position = db.createVertexType("Position", coordinate); // Coordinate used as position
+		position.createProperty("inLocation", OType.LINK, location); 
+		location.createProperty("Shape", OType.LINKLIST, position); // Shape of the location as polygon stored as a list of positions
 		
+		/* Location instance IS_A Location concept e.g. kitchen of Mr. Smith IS_A kitchen,
+		 * Location concept IS_A other Location concept e.g. kitchen IS_A room,
+		 * Object instance IS_A Object concept e.g. red cup with the little crack IS_A cup
+		 * Object concept IS_A other Object concept e.g. cup IS_A tableware
+		 */
 		OrientEdgeType is_a = db.createEdgeType("IS_A");
+		
+		/* Location instance IS_PART_OF other Location instance e.g. kitchen of Mr. Smith IS_PART_OF flat of Mr. Smith
+		 * Location concept IS_PART_OF other Location concept e.g. room IS_PART_OF flat
+		 * Object instance IS_PART_OF other Object instance e.g. left top drawer IS_PART_OF big cupboard next to door
+		 * Object concept IS_PART_OF other Object concept e.g. drawer IS_PART_OF kitchen cabinent
+		 */
 		OrientEdgeType is_part_of = db.createEdgeType("IS_PART_OF");
+		
+		/* Location instance IS_CONNECTED_TO other Location instance which IS_A Connector
+		 * One Position IS_CONNECTED_TO another position; this means that the robot stores an estimated time to get from position 1 to position 2.
+		 * Principally the robot can navigate autonomously from any position to another position in the same room.
+		 */
 		OrientEdgeType is_connected_to = db.createEdgeType("IS_CONNECTED_TO");
-		is_connected_to.createProperty("PositionIn", OType.LINK, position2D);
-		is_connected_to.createProperty("PositionOut", OType.LINK, position2D);
-		is_connected_to.createProperty("PassTimeSec", OType.INTEGER); // Time to pass connection in seconds
-		is_connected_to.createProperty("Width", OType.INTEGER); // Width of door/connection in cm
 		
-		db.command(new OCommandSQL ("create class Size3D")).execute();
-		db.command(new OCommandSQL ("create Property Size3D.Length INTEGER")).execute(); // Length in cm
-		db.command(new OCommandSQL ("alter property Size3D.Length MANDATORY true")).execute();
-		db.command(new OCommandSQL ("alter property Size3D.Length NOTNULL true")).execute();
-		db.command(new OCommandSQL ("create Property Size3D.Width INTEGER")).execute(); // Width in cm
-		db.command(new OCommandSQL ("alter property Size3D.Width MANDATORY true")).execute();
-		db.command(new OCommandSQL ("alter property Size3D.Width NOTNULL true")).execute();
-		db.command(new OCommandSQL ("create Property Size3D.Hight INTEGER")).execute(); // Hight in cm
-		db.command(new OCommandSQL ("alter property Size3D.Hight MANDATORY true")).execute();
-		db.command(new OCommandSQL ("alter property Size3D.Hight NOTNULL true")).execute();
-
-		OrientVertexType objectConcept = db.createVertexType("ObjectConcept", namedVertex); // Abstract Objects
-		OrientVertexType object = db.createVertexType("Object", namedVertex); // Real Objects
+		OrientVertexType objectConcept = db.createVertexType("ObjectConcept", namedVertex); // Object types like cup, plate, table, ...
+		OrientVertexType object = db.createVertexType("Object", namedVertex); // Real Objects like the red cup with the little crack
 		object.createProperty("Path_to_Image", OType.STRING); // Path to image file
-		OClass size3D = db.getRawGraph ().getMetadata().getSchema().getClass("Size3D");
-		object.createProperty("Size", OType.EMBEDDED, size3D);
+		OrientVertexType size3D = db.createVertexType("Size3D", coordinate); // The abstract class coordinate is used to store sizes of objects
+		object.createProperty("Size", OType.EMBEDDED, size3D); // Size of an object with x > y and z = height in the object's default position
 		
+		/*
+		 * Sort of probability (score) that an object is at a certain position or at another object. The Score value is between 0 and 10.
+		 * However the sum of all scores is not fixed as it would be with probabilities. Scores are only compared.
+		 */
 		OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
 		prob_is_at.createProperty("Score", OType.INTEGER).setMin("0").setMandatory(true).setNotNull(true);
-		prob_is_at.createProperty("Hight", OType.INTEGER); // Hight above floor for robot's linear drive
+		prob_is_at.createProperty("Hight", OType.FLOAT); // Height above floor for robot's linear drive
 		
 		db.shutdown();
 		factory.close();
