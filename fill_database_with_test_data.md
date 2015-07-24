@@ -22,9 +22,14 @@ public class FillDB {
 		db.addEdge("class:IS_A", door, connector, "IS_A");
 		db.addEdge("class:IS_A", livingRoom, room, "IS_A");
 		db.addEdge("class:IS_A", diningRoom, room, "IS_A");
+		...
+    }
+}
 ```
 
 After establishing the connection to the database - again in plocal mode - some vertices and edges are created.
+
+There are several possibilities to add new vertices to the database using the addVertex method.
 
 If you like you can edit FillDB.java and add some additional locations, objects or positions.
 
