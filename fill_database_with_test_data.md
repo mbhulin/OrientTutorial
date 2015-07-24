@@ -45,7 +45,7 @@ db.addVertex("class:Object", "Name", "My Object", "Description", "My new Object"
 db.commit();
 ```
 
-The first parameter specifies the subclass of V. Thereafter follow pairs of property-name and value.
+The first parameter specifies the subclass of V. The following parameters are pairs of property-name and value.
 
 If you like you can edit FillDB.java and add some additional locations, objects or positions.
 
