@@ -56,6 +56,6 @@ db.commit();
 
 The first parameter specifies the subclass of V. The following parameters are pairs of property-name and value.
 
-The last possibility is to gather all information inside of a peroperty-value m
+The last possibility is to gather all information inside of a peroperty-value map
 
 
