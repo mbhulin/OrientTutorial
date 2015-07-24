@@ -30,7 +30,7 @@ A file dialog opens. Navigate to your orient root directory and then to the jar-
 * orientdb-enterprise-x.x.x.jar
 * orientdb-graphdb-x.x.x.jar
 
-Click Finish - a new empty Java project is created and is added to the list of your Java projects in your workspace. You can see it in the Package Explorer. If it is not visible open it with  
+Click Finish - a new empty Java project is created and is added to the list of your Java projects in your workspace. You can see it in the Package Explorer. If it is not visible open it with
 *Window* > *Show View* > *Package Explorer*
 
 ### Create a new Package
@@ -46,7 +46,7 @@ The graph-API of OrientDB is based on [Tinkerpop Blueprints](https://github.com/
 OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld");
 OrientGraphNoTx db = factory.getNoTx(); // For data definition instructions transactions are not relevant
 ```
-The first instruction connects to the database. If it does not exist the database is created. This works only in **"plocal" mode** where the Java program is executed on the computer where OrientDB was installed. After "plocal:" the path to the database follows. Usually this path is ``<Orient root directory>/databases``. Be shure that no other program accesses the database when you are in "plocal" mode.  
+The first instruction connects to the database. If it does not exist the database is created. This works only in **"plocal" mode** where the Java program is executed on the computer where OrientDB was installed. After "plocal:" the path to the database follows. Usually this path is ``<Orient root directory>/databases``. Be shure that no other program accesses the database when you are in "plocal" mode.
 *With a **remote connection** to a database server a new database cannot be created automatically with* ``OrientGraphFactory()``.
 
 The second instruction gets a new connection to the database from the factory. Since we want to define the structure of the database we do not use tansactions and use ``factory.getNoTx()`` instead of ``factory.getTx()``.

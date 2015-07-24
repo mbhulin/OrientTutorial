@@ -7,7 +7,7 @@ alt="Eclipse Video" width="160" height="150" border="10" /></a>
 
 While the *location* class stores all immobile objects we need an **object class** to store mobile objects. Of course the border between immobile locations and mobile objects is fluent. A chair will often be moved to other positions, a table may be moved a little bit after cleaning the floor and a heavy wardrobe normally isn't moved at all. If you want to read again about the details of objects go back to the chapter [Motivation](motivation.md#Objects-and-Object-Concepts).
 
-For each real object we want to store its size as surrounding cuboid with length, width and hight. To connect these three dimensions we define a Size3D class. Each object then gets an embedded Size property of type Size3D. Since Size3D isn't a subclass of V it cannot be created using ``db.createVertexType("Size3D")`` but has to be defined as document class. One possibility to do this is to use SQL. SQL can be executed inside Java programs with ``db.command(new OCommandSQL("SQL-string").execute()``.  
+For each real object we want to store its size as surrounding cuboid with length, width and hight. To connect these three dimensions we define a Size3D class. Each object then gets an embedded Size property of type Size3D. Since Size3D isn't a subclass of V it cannot be created using ``db.createVertexType("Size3D")`` but has to be defined as document class. One possibility to do this is to use SQL. SQL can be executed inside Java programs with ``db.command(new OCommandSQL("SQL-string").execute()``.
 Add to the main method in our CreateDBSchema class:
 ```java
 db.command(new OCommandSQL ("create class Size3D")).execute();
@@ -48,5 +48,5 @@ db.shutdown();
 factory.close();
 ```
 
-Now you can execute your program. Afterwords you can control the created shema using Studio or Console. 
+Now you can execute your program. Afterwords you can control the created shema using Studio or Console.
 

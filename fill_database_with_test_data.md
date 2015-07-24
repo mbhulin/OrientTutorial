@@ -5,7 +5,7 @@ Execute the following steps:
 * Inside of your Eclipse project *RobotWorldModel* create a new package *startApplications*.
 * Download the file FillDB.java
 * Import this file into the package *startApplications*.
-* Adapt the connection to the database.
+* Adapt the path to the database folder in ```OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin")```.
 * If you like you can edit FillDB.java and add some additional locations, objects or positions.
 * Finally run FillDB.
 
@@ -38,24 +38,39 @@ public class FillDB {
 
 After establishing the connection to the database - again in plocal mode - first all existing data are deleted. Then some vertices and edges are created.
 
-There are several possibilities to add new vertices to the database using the addVertex method. You can add a new empty vertex first and then set its properties:
+There are several possibilities to add new vertices to the database using the **addVertex method**. You can add a new empty vertex first and then set its properties:
 
 ```java
-Vertex myObject = db.addVertex("class:Object");
-myObject.setProperty("Name", "My Object");
-myObject.setProperty("Description", "My new object");
+Vertex myLocation = db.addVertex("class:Location");
+myObject.setProperty("Name", "Sophia's room");
+myObject.setProperty("Description", "Bedroom of Sophia");
 db.commit()
 ```
 
 Or you can create a vertex with all its properties in one step. This option is used in FillDB:
 
 ```java
-db.addVertex("class:Object", "Name", "My Object", "Description", "My new Object");
+db.addVertex("class:Location", "Name", "Sophia's room", "Description", "Bedroom of Sophia");
 db.commit();
 ```
 
 The first parameter specifies the subclass of V. The following parameters are pairs of property-name and value.
 
-The last possibility is to gather all information inside of a peroperty-value map.
+The last possibility is to gather all information inside of a property-value map and use this map as second parameter of addVertex:
+
+```java
+Map<String,Object> props = new HashMap<String,Object>();
+props.put("Name", "Sophia's room");
+props.put("Description", "Bedroom of Sophia");
+Vertex myObject = db.addVertex("class:Object", props);
+db.commit();
+```
+
+Instead of Blueprint's addVertex method you could also use SQL to create a new vertex:
+
+```java
+db.command(new OCommandSQL ("INSERT INTO Location (Name, Description) VALUES ('Sophia's room','Bedroom of Sophia')")).execute();
+```
+
 
 
