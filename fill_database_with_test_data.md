@@ -5,7 +5,11 @@ Execute the following steps:
 * Inside of your Eclipse project *RobotWorldModel* create a new package *startApplications*.
 * Download the file FillDB.java
 * Import this file into the package *startApplications*.
-* Take a look at the program
+* Adapt the connection to the database.
+* If you like you can edit FillDB.java and add some additional locations, objects or positions.
+* Finally run FillDB.
+
+Let's take a brief look at the program:
 
 ```java
 public class FillDB {
@@ -13,6 +17,11 @@ public class FillDB {
 	public static void main(String[] args) {
 		OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin");
 		OrientGraph db = factory.getTx();
+
+		// Clear the database: delete all edges and vertices
+		for (Edge e: db.getEdges()) db.removeEdge(e);
+		for (Vertex v: db.getVertices()) db.removeVertex(v);
+		db.commit();
 
 		//Create some vertices of LocationConcept with connecting edges
 		Vertex livingRoom = db.addVertex("class:LocationConcept", "Name", "living room", "Description", "Room to talk to other people, to read, to watch TV, ...");
@@ -27,7 +36,7 @@ public class FillDB {
 }
 ```
 
-After establishing the connection to the database - again in plocal mode - some vertices and edges are created.
+After establishing the connection to the database - again in plocal mode - first all existing data are deleted. Then some vertices and edges are created.
 
 There are several possibilities to add new vertices to the database using the addVertex method. You can add a new empty vertex first and then set its properties:
 
@@ -47,6 +56,6 @@ db.commit();
 
 The first parameter specifies the subclass of V. The following parameters are pairs of property-name and value.
 
-If you like you can edit FillDB.java and add some additional locations, objects or positions.
+The last possibility is to gather all information inside of a peroperty-value m
 
-Finally run FillDB.
+
