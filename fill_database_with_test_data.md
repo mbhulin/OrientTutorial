@@ -29,7 +29,23 @@ public class FillDB {
 
 After establishing the connection to the database - again in plocal mode - some vertices and edges are created.
 
-There are several possibilities to add new vertices to the database using the addVertex method.
+There are several possibilities to add new vertices to the database using the addVertex method. You can add a new empty vertex first and then set its properties:
+
+```java
+Vertex myObject = db.addVertex("class:Object");
+myObject.setProperty("Name", "My Object");
+myObject.setProperty("Description", "My new object");
+db.commit()
+```
+
+Or you can create a vertex with all its properties in one step. This option is used in FillDB:
+
+```java
+db.addVertex("class:Object", "Name", "My Object", "Description", "My new Object");
+db.commit();
+```
+
+The first parameter specifies the subclass of V. Thereafter follow pairs of property-name and value.
 
 If you like you can edit FillDB.java and add some additional locations, objects or positions.
 
