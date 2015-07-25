@@ -9,7 +9,7 @@
    * [Develop the Schema for Objects](develop_the_schema_for_objects.md)
    * [Unit Tests](unit_tests.md)
    * [Additional Tasks](additional_tasks.md)
+* Create the Search Method
 * [Let the Robot Search for Objects](let_the_robot_search_for_objects.md)
    * [Fill Database with Test Data](fill_database_with_test_data.md)
-* Create the Search Method
 
