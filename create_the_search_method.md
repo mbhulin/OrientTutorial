@@ -16,3 +16,14 @@ This search algorithm consists of the following parts:
 * Go to this position and look for the search object there
 * If the object is really there or if this is the last possible search position show the robot's search path
 else continue the search with the remaining positions at step 3.
+
+## GUI to get the Parameters
+To define the parameters download a simple GUI (Graphical User Interface):
+
+* In Eclipse create a new package: *gui*
+* Download the files 
+    * [MainFrameRWM.java](src/MainFrameRWM.java)
+    * [DrawingPane.java](src/DrawingPane.java)
+    * [DrawingPaneChangedListener.java](src/DrawingPaneChangedListener.java)
+    * [DrawingPaneChangedEvent.java](src/DrawingPaneChangedEvent.java)
+* Import the files into the gui package.
