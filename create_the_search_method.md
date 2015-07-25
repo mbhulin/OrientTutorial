@@ -6,14 +6,17 @@ In this tutorial we will consider one frequent task: **search for an object**
 
 This search algorithm consists of the following parts:
 
-1. Get the the parameters using a simple GUI: 
+1. Get the the parameters for the search using a simple GUI: 
     * the search Object
     * and for the simulation the current position of the robot
     * and the current position of the search object
-* Retrieve from the database all positions where the search object could be together with the probability (score) that the object is really there.
+* Retrieve all positions from the database where the search object could be together with the probability (score) that the object is really there.
 * Calculate the path to each possible position
 * Decide to which position the robot should go first
 * Go to this position and look for the search object there
 * If the object is really there or if this is the last possible search position show the robot's search path
 else continue the search with the remaining positions at step 3.
 
+To implement the search algorithm create a new package in Eclipse: **operations**
+
+Then create a new JAVA class **Operations** in this package.
