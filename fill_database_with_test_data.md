@@ -4,9 +4,9 @@ To keep this tutorial simple we do not develop a sophisticated user interface to
 ## Execute the Following Steps
 
 * Inside of your Eclipse project *RobotWorldModel* create a new package *startApplications*.
-* Download the file FillDB.java
+* Download the file [FillDB.java](FillDB.java)
 * Import this file into the package *startApplications*.
-* Adapt the path to the database folder in ```OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin")```
+* Adapt the path to the database folder ``OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin")``
 * If you like you can edit FillDB.java and add some additional locations, objects or positions.
 * Finally run FillDB.
 
@@ -41,7 +41,7 @@ public class FillDB {
 After establishing the connection to the database - again in plocal mode - first all existing data are deleted. Then some vertices and edges are created.
 
 ## Add Vertices to Database
-There are several possibilities to add new vertices to the database using the ```addVertex()``` method [(See OrientDB Documentation for details)](http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html).
+There are several possibilities to add new vertices to the database using the ``addVertex()`` method [(See OrientDB Documentation for details)](http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html).
 
 ### Create an empty Vertex first, then set property values
 You can add a new empty vertex first and then set its properties:
@@ -93,7 +93,7 @@ Vertex tableI = db.addVertex("class:Object", "Name", "dining table", "Descriptio
 ```
 
 ### Add a Linked List
-Locations have a Shape property which consists of a list of positions. To store a location with its shape you have to store the positions first, then create an ArrayList of positions, and finally use this list as parameter in the addVertice method:
+Locations have a Shape property which consists of a list of positions. To store a location with its shape you have to store the positions first, then create an ArrayList of positions, and finally use this list as parameter in the ``addVertice()`` method:
 
 ```java
 Vertex p1 = db.addVertex("class:Position", "x", 400, "y", 200, "z", 0);
@@ -109,7 +109,7 @@ Vertex mySleepingRoom = db.addVertex("class:Location", "Name", "sleeping room", 
 ```
 
 ### Add an Edge
-To create an edge use the ```addEdge``` method and provide the vertices to connect as parameters. If you do not use light weight edges you can add properties to edges.
+To create an edge use the ``addEdge()`` method and provide the vertices to connect as parameters. If you do not use light weight edges you can add properties to edges.
 
 ```java
 Edge passTime1 = db.addEdge(null, posTable2, doorSleepM, "IS_CONNECTED_TO");
