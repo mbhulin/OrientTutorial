@@ -22,8 +22,8 @@ To define the parameters download a simple GUI (Graphical User Interface):
 
 * In Eclipse create a new package: *gui*
 * Download the files 
-    * [MainFrameRWM.java](src/MainFrameRWM.java)
-    * [DrawingPane.java](src/DrawingPane.java)
-    * [DrawingPaneChangedListener.java](src/DrawingPaneChangedListener.java)
-    * [DrawingPaneChangedEvent.java](src/DrawingPaneChangedEvent.java)
+    * [MainFrameRWM.java](src/gui/MainFrameRWM.java)
+    * [DrawingPane.java](src/gui/DrawingPane.java)
+    * [DrawingPaneChangedListener.java](src/gui/DrawingPaneChangedListener.java)
+    * [DrawingPaneChangedEvent.java](src/gui/DrawingPaneChangedEvent.java)
 * Import the files into the gui package.
