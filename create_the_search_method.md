@@ -6,7 +6,7 @@ In this tutorial we will consider one frequent task: **search for an object**
 
 This search algorithm consists of the following parts:
 
-1. Get the the parameters: 
+1. Get the the parameters using a simple GUI: 
     * the search Object
     * and for the simulation the current position of the robot
     * and the current position of the search object
