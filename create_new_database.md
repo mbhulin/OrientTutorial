@@ -51,7 +51,7 @@ The first instruction connects to the database. If it does not exist the databas
 
 The second instruction gets a new connection to the database from the factory. Since we want to define the structure of the database we do not use tansactions and use ``factory.getNoTx()`` instead of ``factory.getTx()``.
 
-If you are interested in alternatives creating a database which also work in "remote"-mode take a look at ["Create graph database using the document API"](create_db_with_documentAPI.md).
+If you are interested in alternatives creating a database which also work in "remote"-mode take a look at [Create graph database using the document API](create_db_with_documentAPI.md).
 
 ### Create a Graph Database using the Document API
 Are you annoyed that you have to use *plocal mode* to create a database? This subsection explains an alternative creating a database which also works in *remote mode*. However you can very well skip this subsection and go on with the tutorial.
