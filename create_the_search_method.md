@@ -34,4 +34,9 @@ To retrieve possible positions of the search object we can use SQL and query the
 * Either we have a direct connection from an object to a position
 * Or we we have a connection from one object to another object, e. g. a bottle of milk is inside the refrigerator.
 
-Hence our method consists of two steps
+Hence we first retrieve all directly connected positions of our search object. This is a simple SQL-query:
+```java
+OSQLSynchQuery query1 = new OSQLSynchQuery ("select in as pos, Score as combiScore from PROB_IS_AT where out = ? and in.@class = 'Position'");
+
+```
+Each edge connects two vertices: **out** specifies the source vertex where the edge comes out and **in** specifies the target vertex where the edge goes in.
