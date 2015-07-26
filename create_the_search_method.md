@@ -10,7 +10,7 @@ This search algorithm consists of the following parts:
     * the search Object
     * and for the simulation the current position of the robot
     * and the current position of the search object
-* Retrieve all positions from the database where the search object could be together with the probability (score) that the object is really there.
+* [Retrieve all positions from the database where the search object could be](create_the_search_method.md#Retrieve_Positions_of_Search_Object) together with the probability (score) that the object is really there.
 * Calculate the path to each possible position
 * Decide to which position the robot should go first
 * Go to this position and look for the search object there
