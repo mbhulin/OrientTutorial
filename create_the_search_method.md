@@ -39,4 +39,4 @@ Hence we first retrieve all directly connected positions of our search object. T
 OSQLSynchQuery query1 = new OSQLSynchQuery ("select in as pos, Score as combiScore from PROB_IS_AT where out = ? and in.@class = 'Position'");
 
 ```
-Each edge connects two vertices: **out** specifies the source vertex where the edge comes out and **in** specifies the target vertex where the edge goes in.
+Each edge connects two vertices: **out** specifies the source vertex where the edge comes out and **in** specifies the target vertex where the edge goes in. out must be our search object. Instead of doing some String-operations and insert the 
