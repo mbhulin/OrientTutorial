@@ -29,3 +29,9 @@ Inside of the class Operations write a new method ``createPosList()``. As the na
 public ArrayList<Vertex> createPosList(Vertex obj) {
 ```
 
+To retrieve possible positions of the search object we can use SQL and query the PROB_IS_AT subclass of E. There are two alternatives for each PROB_IS_AT edge:
+
+* Either we have a direct connection from an object to a position
+* Or we we have a connection from one object to another object, e. g. a bottle of milk is inside the refrigerator.
+
+Hence our method consists of two steps
