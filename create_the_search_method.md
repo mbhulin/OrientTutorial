@@ -20,3 +20,5 @@ else continue the search with the remaining positions at step 3.
 To implement the search algorithm create a new package in Eclipse: **operations**
 
 Then create a new JAVA class **Operations** in this package.
+
+### Retrieve Positions of Search Object
