@@ -10,11 +10,11 @@ This search algorithm consists of the following parts:
     * the search Object
     * and for the simulation the current position of the robot
     * and the current position of the search object
-* [Retrieve all positions from the database where the search object could be](fill_database_with_test_data.md#add-an-edge) together with the probability (score) that the object is really there.
-* Calculate the path to each possible position
-* Decide to which position the robot should go first
-* Go to this position and look for the search object there
-* If the object is really there or if this is the last possible search position show the robot's search path
+1. [Retrieve all positions from the database where the search object could be](create_the_search_method.md#retrieve-positions-of-search-object) together with the probability (score) that the object is really there.
+1. Calculate the path to each possible position
+1. Decide to which position the robot should go first
+1. Go to this position and look for the search object there
+1. If the object is really there or if this is the last possible search position show the robot's search path
 else continue the search with the remaining positions at step 3.
 
 To implement the search algorithm create a new package in Eclipse: **operations**
@@ -22,4 +22,10 @@ To implement the search algorithm create a new package in Eclipse: **operations*
 Then create a new JAVA class **Operations** in this package.
 
 ### Retrieve Positions of Search Object
-x
+
+Inside of the class Operations write a new method ``createPosList()``. As the name says the result should be a list of positions and positions are vertices. To determine possible positions of the search Object the method needs the search object as a parameter which is also a vertex. So we get:
+
+```java
+public ArrayList<Vertex> createPosList(Vertex obj) {
+```
+
