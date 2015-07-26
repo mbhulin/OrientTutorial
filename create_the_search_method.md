@@ -41,4 +41,8 @@ OSQLSynchQuery query1 = new OSQLSynchQuery ("select in as pos, Score as combiSco
 ```
 Each edge connects two vertices: **out** specifies the source vertex where the edge comes out and **in** specifies the target vertex where the edge goes into. **out** must be our search object. Instead of doing some String-operations and insert the **rid** (record id) of the object into the where condition we use a [prepared query](http://orientdb.com/docs/last/Document-Database.html#prepared-query). The '?' in ``where out = ?`` is a parameter that is passed at execution time.
 
-Since we are only interested in PROB_IS_AT edges leading to a position we add a second condition that the class of the target vertex must be 'Position'. The special 
+Since we are only interested in PROB_IS_AT edges leading to a position we add a second condition that the class of the target vertex must be 'Position'. The record attribute ``@class`` returns the class of a vertex.
+
+Then the query is executed: ``db.command(query1).execute(obj)``
+
+The result is not a ``List`` but an ``Iterable``. So we have to convert it into a list
