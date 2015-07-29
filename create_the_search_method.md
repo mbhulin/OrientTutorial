@@ -87,3 +87,5 @@ select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as com
 ```
 
 We want to find the following situation:
+
+Object obj -->PROB_IS_AT e1 --> another object --> PROB_IS_AT e2 --> Position pos
