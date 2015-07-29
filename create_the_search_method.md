@@ -6,7 +6,7 @@ In this tutorial we will consider one frequent task: **search for an object**
 
 This search algorithm consists of the following parts:
 
-1. Get the the parameters for the search using a simple GUI: 
+1. Get the the parameters for the search using a simple GUI:
     * the search Object
     * and for the simulation the current position of the robot
     * and the current position of the search object
@@ -58,7 +58,7 @@ import com.tinkerpop.blueprints.Vertex;
 public class PositionScore {
 	public Vertex pos;
 	public int score;
-	
+
 	public PositionScore(Vertex pos, int score) {
 		this.pos = pos;
 		this.score = score;
@@ -80,12 +80,34 @@ for (Vertex pos: (Iterable<Vertex>) db.command(query1).execute(obj)) {
 ```
 #### As second step we retrieve all positions where an object is connected to another object
 
-The SQL-query is a little bit more complicated:
+The SQL-query is a little bit more complicated. We want to find the following situation:
+
+Object obj --> PROB_IS_AT e1 --> another object --> PROB_IS_AT e2 --> Position pos
+
+To get the position vertices we have to follow the arrows: ``in.outE('PROB_IS_AT')`` ``in`` delivers the other object and from this object we want to get all outgoing edges of class 'POB_IS_AT'.
+
+So we try the following query:
+```sql
+select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object'
+```
+
+The result of this query is an edge together with a list of edges like in this example.
+
+| e1 | e2 |
+| -- | -- |
+| #20:1 | [#20:2, #20:3] |
+| #20:10 | [#20:4, #20:5] |
+
+However we want a list of pairs e1, e2 as a result. The **unwind** expression will create one pair of edges in the result set for each e2 entry. We adjust our query to
+```sql
+select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2
+```
+
+Finally we don't want to get the edges but positions and scores. So we wrap the query by an outer SQL-query. From e2 we retrieve e2.in as position and from e1 and e2 we calculate a combined score. The division by 10 is necessara because our score alues vary from 0 to 10.
 
 ```sql
 select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as combiScore from (select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2)
 ```
 
-We want to find the following situation:
+Again we iterate over the result set and fill our result list ``posList`` with ``PositionScore`` pairs.`
 
-Object obj -->PROB_IS_AT e1 --> another object --> PROB_IS_AT e2 --> Position pos
