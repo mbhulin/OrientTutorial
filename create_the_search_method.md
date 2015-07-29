@@ -34,15 +34,49 @@ To retrieve possible positions of the search object we can use SQL and query the
 * Either we have a direct connection from an object to a position
 * Or we we have a connection from one object to another object, e. g. a bottle of milk is inside the refrigerator.
 
-Hence we first retrieve all directly connected positions of our search object. This is a simple SQL-query:
+#### Hence we first retrieve all directly connected positions of our search object. This is a simple SQL-query:
 ```java
 OSQLSynchQuery query1 = new OSQLSynchQuery ("select in as pos, Score as combiScore from PROB_IS_AT where out = ? and in.@class = 'Position'");
 
 ```
 Each edge connects two vertices: **out** specifies the source vertex where the edge comes out and **in** specifies the target vertex where the edge goes into. **out** must be our search object. Instead of doing some String-operations and insert the **rid** (record id) of the object into the where condition we use a [prepared query](http://orientdb.com/docs/last/Document-Database.html#prepared-query). The '?' in ``where out = ?`` is a parameter that is passed at execution time.
 
-Since we are only interested in PROB_IS_AT edges leading to a position we add a second condition that the class of the target vertex must be 'Position'. The record attribute ``@class`` returns the class of a vertex.
+Since we are only interested in PROB_IS_AT edges leading to a position we add a second condition: the class of the target vertex must be 'Position'. The record attribute ``@class`` returns the class of a vertex.
 
 Then the query is executed: ``db.command(query1).execute(obj)``
 
-The result is not a ``List`` but an ``Iterable``. So we have to convert it into a list
+The result is not a ``List`` but an ``Iterable``. So we have to convert it into a list. However we not only want to store the positions but also their Score value. Hence we define a new class ``PositionScore`` for pairs of position and score.
+
+```java
+package operations;
+
+import com.tinkerpop.blueprints.Vertex;
+
+/*
+ * Data structure to store a Position vertex together with a calculated score
+ */
+public class PositionScore {
+	public Vertex pos;
+	public int score;
+	
+	public PositionScore(Vertex pos, int score) {
+		this.pos = pos;
+		this.score = score;
+	}
+}```
+
+Now  we can declare a list where the positions are collected in ``createPosList()``.
+
+```java
+ArrayList <PositionScore> posList = new ArrayList <PositionScore> (); //Result list
+```
+
+Insert each position returned by the database into this list.
+
+```java
+for (Vertex pos: (Iterable<Vertex>) db.command(query1).execute(obj)) {
+	posList.add(new PositionScore (pos.getProperty("pos"), (int) pos.getProperty("combiScore")));
+		}
+```
+#### As second step we retrieve all
+
