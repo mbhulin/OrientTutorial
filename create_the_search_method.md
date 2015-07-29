@@ -78,5 +78,12 @@ for (Vertex pos: (Iterable<Vertex>) db.command(query1).execute(obj)) {
 	posList.add(new PositionScore (pos.getProperty("pos"), (int) pos.getProperty("combiScore")));
 		}
 ```
-#### As second step we retrieve all
+#### As second step we retrieve all positions where an object is connected to another object
 
+The SQL-query is a little bit more complicated:
+
+```sql
+select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as combiScore from (select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2)
+```
+
+We want to find the following situation:
