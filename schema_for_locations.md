@@ -29,7 +29,7 @@ In this tutorial we will use the third alternative because *LINKLIST* is an inte
 
 ## Create the Vertex Classes "Position2D" using the Java API
 
-If you prefer to wach the next screencast video click on the video start page.
+If you prefer to watch the next screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel2a.mp4
 " target="_blank"><img src="ThumbnailEclipseVideo2a.JPG"
@@ -38,8 +38,8 @@ alt="Eclipse Video" width="160" height="150" border="10" /></a>
 Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. We can use integer instead of float if we use centimeter as unit. The robot does not need more accurate values.
 ```java
 OrientVertexType position2D = db.createVertexType("Position2D");
-position.createProperty("x", OType.INTEGER).setMandatory(true).setNotNull(true);
-position.createProperty("y", OType.INTEGER).setMandatory(true).setNotNull(true);
+position2D.createProperty("x", OType.INTEGER).setMandatory(true).setNotNull(true);
+position2D.createProperty("y", OType.INTEGER).setMandatory(true).setNotNull(true);
 ```
 
 The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each position object must have a x and y property and these properties must have a value.
@@ -56,7 +56,7 @@ namedVertex.createProperty("Description", OType.STRING);
 
 OrientVertexType locationConcept = db.createVertexType("LocationConcept", "NamedVertex");
 
-OrientVertexType location = db.createVertex("Location", "NamedVertex");
+OrientVertexType location = db.createVertexType("Location", "NamedVertex");
 location.createProperty("Shape", OType.LINKLIST, position2D);
 ```
 Let's look at the last instruction in more detail:
