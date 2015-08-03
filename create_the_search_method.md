@@ -15,7 +15,7 @@ This search algorithm consists of the following parts:
 1. Decide to which position the robot should go first
 1. [Go to this position and look for the search object there](#repeat-the-search-until-the-object-is-found-or-all-possible-positions-are-visited)
 1. If the object is really there or if this is the last possible search position show the robot's search path
-else continue the search with the remaining positions at step 3.
+else continue the search with the remaining positions at **step 3**.
 
 To implement the search algorithm create a new package in Eclipse: **operations**
 
