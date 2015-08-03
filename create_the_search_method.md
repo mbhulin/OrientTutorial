@@ -103,7 +103,7 @@ However we want a list of pairs e1, e2 as a result. The **unwind** expression wi
 select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2
 ```
 
-Finally we don't want to get the edges but positions and scores. So we wrap the query by an outer SQL-query. From e2 we retrieve e2.in as position and from e1 and e2 we calculate a combined score. The division by 10 is necessara because our score alues vary from 0 to 10.
+Finally we don't want to get the edges but positions and scores. So we wrap the query by an outer SQL-query. From e2 we retrieve ``e2.in`` as position and from e1 and e2 we calculate a combined score. The division by 10 is necessary because our score values vary from 0 to 10.
 
 ```sql
 select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as combiScore from (select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2)
@@ -111,3 +111,33 @@ select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as com
 
 Again we iterate over the result set and fill our result list ``posList`` with ``PositionScore`` pairs.`
 
+### Calculate the paths to all positions in the position list
+
+This is a routing task. One possible routing algorithm is the [Dijkstra algorithm] (wikipedia). It is implemented in OrientDB and thus can be executed on the server without data transfer to the lient. OrientDB offers two versions of the dijkstra algorithm. We need the dijkstra2 function.
+
+We iterate the position list and for each position calculate the path to it from the current position of the robot, the estimated time to traverse the path and finally the ratio of passing time to the score of the position. The position with the least pass time to score ratio is choosen as the next position where the robot should go.
+
+```java
+PositionScore bestPos = null; // Store position with best pasTime/Score ratio found so far in bestPos
+float bestCost = Float.MAX_VALUE; // bestCost = passTime/Score ratio of best bestPos
+Iterable<OrientVertex> pathToBestPos = null;
+for (PositionScore ps: posList) {
+	// let OrientDB calculate the best path to position ps.pos using the dijkstra algorithm
+	String destRid = ps.pos.getId().toString(); // id of Vertex dest
+	String dijkstraQueryString = "SELECT dijkstra2(" + startRid + ", " + destRid + ", 'IS_CONNECTED_TO', 'PassTimeSec', 'BOTH')";
+	OSQLSynchQuery dijkstraQuery = new OSQLSynchQuery(dijkstraQueryString);
+	Iterable <Vertex> result = db.command(dijkstraQuery).execute();
+	Iterable <OrientVertex> pathIterable = null;
+	for (Vertex v: result) { pathIterable = v.getProperty("dijkstra2"); break; }
+	if (pathIterable != null) {
+		float timePerScore = calculatePathPassTime(pathIterable) / ps.score;
+		if (timePerScore < bestCost) { // is the new position better than the best position so far regarding timePerScore?
+			bestPos = ps;
+			pathToBestPos = pathIterable;
+			bestCost = timePerScore;
+		}
+	}
+}
+```
+
+Achtung: 
