@@ -39,7 +39,7 @@ alt="Eclipse Video" width="160" height="150" border="10" /></a>
 ```java
 OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
 prob_is_at.createProperty("Probability", OType.INTEGER).setMin("0").setMandatory(true).setNotNull(true);
-prob_is_at.createPropery("Hight", OType.INTEGER).setMin("0");
+prob_is_at.createProperty("Hight", OType.INTEGER).setMin("0");
 
 ```
 Finally the database connection is closed.
@@ -48,5 +48,5 @@ db.shutdown();
 factory.close();
 ```
 
-Now you can execute your program. Afterwords you can control the created shema using Studio or Console.
+Now you can execute your program. Afterwords you can control the created schema using Studio or Console.
 
