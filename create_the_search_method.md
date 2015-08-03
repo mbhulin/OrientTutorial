@@ -113,12 +113,12 @@ Again we iterate over the result set and fill our result list ``posList`` with `
 
 ### Calculate the paths to all positions in the position list
 
-This is a routing task. One possible routing algorithm is the [Dijkstra algorithm] (wikipedia). It is implemented in OrientDB and thus can be executed on the server without data transfer to the lient. OrientDB offers two versions of the dijkstra algorithm. We need the dijkstra2 function.
+This is a routing task. One possible routing algorithm is the [Dijkstra algorithm] (wikipedia). It is implemented in OrientDB and thus can be executed on the server without data transfer to the lient. OrientDB offers two versions of the Dijkstra algorithm. We need the dijkstra2 function.
 
 We iterate the position list and for each position calculate the path to it from the current position of the robot, the estimated time to traverse the path and finally the ratio of passing time to the score of the position. The position with the least pass time to score ratio is choosen as the next position where the robot should go.
 
 ```java
-PositionScore bestPos = null; // Store position with best pasTime/Score ratio found so far in bestPos
+PositionScore bestPos = null; // Store position with best passTime/Score ratio found so far in bestPos
 float bestCost = Float.MAX_VALUE; // bestCost = passTime/Score ratio of best bestPos
 Iterable<OrientVertex> pathToBestPos = null;
 for (PositionScore ps: posList) {
@@ -140,4 +140,37 @@ for (PositionScore ps: posList) {
 }
 ```
 
-Achtung: 
+Attention: The result of ``db.command(<OSQLSynchQuery>).execute()`` is always a list of vertices as Iterable. Even if you expect a list of integer e. g. in the query  ``SELECT MIN(x) FROM Position GROUP BY inLocation`` you get a list of vertices with a property "MIN". Therefore you have to iterate ``Iterable <Vertex> result`` though result has only one element. With ``v.getProperty("dijkstra2")`` you get the result of the dijkstra2 function which is the list of vertices on the path.
+
+### Repeat the search until the object is found or all possible positions are visited
+
+Go the position with the best passTime/Score ratio and look for the search object there. If the object is there the search is finished. Otherwise remove the current position from the positon list and repeat the search.
+
+```java
+while (!posList.isEmpty()) {
+    ... // search using the dijkstra2 function, see code above
+    
+	if (pathToBestPos != null) {
+		ArrayList <Vertex> currentPath = new ArrayList <Vertex> ();
+		for (OrientVertex v: pathToBestPos) {
+			currentPath.add(v);
+		}
+		searchPath.add(currentPath);
+		if (bestPos.pos.getId().toString().equals(dest.getId().toString())) {
+	        System.out.println("Object " + searchObject.getProperty("Name") + " found at position " + bestPos.pos.getId().toString());
+			return "Object " + searchObject.getProperty("Name") + " found at position " + bestPos.pos.getId().toString();
+		}
+		startRid = bestPos.pos.getId().toString(); // Update current position of robot which is new start
+	} else {
+		// pathToBestPos == null means that there is no path to any possible position of the object.
+		System.out.println("Robot cannot reach the object " + searchObject.getProperty("Name"));
+		return "Robot cannot reach the object " + searchObject.getProperty("Name");
+	}
+	posList.remove(bestPos);
+	if (posList.isEmpty()) {
+		System.out.println ("Robot could not find Object " + searchObject.getProperty("Name"));
+		return "Robot could not find Object " + searchObject.getProperty("Name");
+	}
+}
+```
+
