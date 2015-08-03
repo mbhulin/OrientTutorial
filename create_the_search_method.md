@@ -63,7 +63,8 @@ public class PositionScore {
 		this.pos = pos;
 		this.score = score;
 	}
-}```
+}
+```
 
 Now  we can declare a list where the positions are collected in ``createPosList()``.
 
@@ -78,6 +79,7 @@ for (Vertex pos: (Iterable<Vertex>) db.command(query1).execute(obj)) {
 	posList.add(new PositionScore (pos.getProperty("pos"), (int) pos.getProperty("combiScore")));
 		}
 ```
+
 #### As second step we retrieve all positions where an object is connected to another object
 
 The SQL-query is a little bit more complicated. We want to find the following situation:
