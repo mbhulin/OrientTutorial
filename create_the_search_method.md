@@ -11,9 +11,9 @@ This search algorithm consists of the following parts:
     * and for the simulation the current position of the robot
     * and the current position of the search object
 1. [Retrieve all positions from the database where the search object could be](#retrieve-positions-of-search-object) together with the probability (score) that the object is really there.
-1. Calculate the path to each possible position
+1. [Calculate the path to each possible position](#calculate-the-paths-to-all-positions-in-the-position-list)
 1. Decide to which position the robot should go first
-1. Go to this position and look for the search object there
+1. [Go to this position and look for the search object there](#repeat-the-search-until-the-object-is-found-or-all-possible-positions-are-visited)
 1. If the object is really there or if this is the last possible search position show the robot's search path
 else continue the search with the remaining positions at step 3.
 
