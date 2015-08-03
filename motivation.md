@@ -30,6 +30,8 @@ The robot has to use and interact with a lot of objects. In contrast to the loca
 ####Properties of Objects
 Each object has several properties that may be relevant for the service robot e.g. to distinguish similar objects by color or by size. The robot might get the instruction: "Bring me my hat!" and ask in response: "Which hat? The black one or the blue one?" Each property type like color has some possible values like Yellow, Green or Blue. Different objects may have different properties. The color e.g. is important for clothes but is not of interest for a newspaper.
 
-![Figure Properties](PropertyHierarchy.JPG)
+<img src="PropertyHierarchy.JPG"
+alt="Property Hierarchy" width="400" height="350" border="10" />
+
 Figure: Hierarchy of Property Concepts Pc and Property Instances 
 
