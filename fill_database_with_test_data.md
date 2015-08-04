@@ -41,7 +41,7 @@ public class FillDB {
 After establishing the connection to the database - again in plocal mode - first all existing data are deleted. Then some vertices and edges are created.
 
 ## Add Vertices to Database
-There are several possibilities to add new vertices to the database using the ``addVertex()`` method [(See OrientDB Documentation for details)](http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html).
+There are several possibilities to add new vertices to the database using the ``addVertex()`` method [(see OrientDB Documentation for details)](http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html).
 
 ### Create an empty Vertex first, then set property values
 You can add a new empty vertex first and then set its properties:
