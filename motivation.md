@@ -25,13 +25,14 @@ Conceptual hierarchy of location concepts, location instances and place instance
 ####Objects and Object Concepts
 The robot has to use and interact with a lot of objects. In contrast to the locations the objects are not fixed at one position but can be moved, consumed, substituted by new objects etc. Similar to locations real objects belong to one or more object classes. So we again use the "is a" relationship, here between objects and object classes.
 
-![Figure Objects](ObjectHierarchy.JPG)
+<img src="ObjectHierarchy.JPG"
+alt="Property Hierarchy" width="370" height="360" border="10" />
 
 ####Properties of Objects
 Each object has several properties that may be relevant for the service robot e.g. to distinguish similar objects by color or by size. The robot might get the instruction: "Bring me my hat!" and ask in response: "Which hat? The black one or the blue one?" Each property type like color has some possible values like Yellow, Green or Blue. Different objects may have different properties. The color e.g. is important for clothes but is not of interest for a newspaper.
 
 <img src="PropertyHierarchy.JPG"
-alt="Property Hierarchy" width="400" height="350" border="10" />
+alt="Property Hierarchy" width="300" height="270" border="10" />
 
 Figure: Hierarchy of Property Concepts Pc and Property Instances 
 
