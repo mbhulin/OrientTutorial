@@ -25,7 +25,7 @@ The following figure shows the topological hierarchy of real locations together 
 Conceptual hierarchy of location concepts, location instances and place instances (example concept: place 1 in lab kitchen)
 
 ####Objects and Object Concepts
-The robot has to use and interact with a lot of objects. In contrast to the locations the objects are not fixed at one position but can be moved, consumed, substituted by new objects etc. Similar to locations real objects belong to one or more object classes. So we again use the "is a" relationship, here between objects and object classes.
+The robot has to use and interact with a lot of mobile objects. In contrast to the locations the mobile objects are not fixed at one position but can be moved, consumed, substituted by new objects etc. Similar to locations mobile objects belong to one or more object concepts. So we again use the "is a" relationship, here between mobile objects and object concepts.
 
 <img src="ObjectHierarchy.JPG"
 alt="Property Hierarchy" width="370" height="360" border="10" />
