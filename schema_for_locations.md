@@ -78,6 +78,8 @@ The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefor
 
 Then *locationConcept* and *Location* are created as subclasses of *NamedVertex*.
 
+*NamedVertex* isn't an abstract class. If we wanted to make *NamedVertex* abstract we could not use ``db.createVertexType()`` but had to use SQL as for the *Coordinates* class or the Document API.
+
 ```java
 OrientVertexType locationConcept = db.createVertexType("LocationConcept", "NamedVertex");
 
