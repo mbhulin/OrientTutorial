@@ -57,29 +57,34 @@ db.command(new OCommandSQL ("alter property Coordinate.z NOTNULL true")).execute
 OClass coordinate = db.getRawGraph().getMetadata().getSchema().getClass("Coordinate");
 ```
 
-Then we can use the Blueprints API to define *Position* as a subclass of the abstract class *Coordinates*.
+Then we can use ``db.createVertexType()`` of the Blueprints API to define *Position* as a subclass of the abstract class *Coordinates*. Of course we could do that with SQL as well but this tutorial will show you several alternatives.
 
 ```java
 OrientVertexType position = db.createVertexType("Position", coordinate); // Coordinate used as position
 ```
 
-The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each position object must have a x and y property and these properties must have a value.
-
 ## Create the Vertex Class "Location" and "LocationConcept"
 
-OrientDB supports inheritance. Both classes, *LocationConcept* and *Location*, need a *Name* and a *Description* attribut. We will see later that other classes have a name and a description attribute, too. Therefore we first define a subclass **NamedVertex** of V. Then *Location* and *LocationConcept* are subclasses of *NamedVertex*.
+OrientDB supports inheritance. Both classes, *LocationConcept* and *Location*, need a *Name* and a *Description* attribute. We will see later that other classes have a name and a description attribute, too. Therefore we first define a subclass **NamedVertex** of V. Then *Location* and *LocationConcept* are subclasses of *NamedVertex*.
 
-Again the ``.createVertexType()`` and ``.createProperty()`` methods are used.
+Again the ``db.createVertexType()`` method is used. With the  ``db.createProperty()`` method the properties *Name* and *Description* are defined.
 ```java
 OrientVertexType namedVertex = db.createVertexType("NamedVertex");
 namedVertex.createProperty("Name", OType.STRING).setMandatory(true).setNotNull(true);
 namedVertex.createProperty("Description", OType.STRING);
+```
 
+The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each namedVertex object must have a *Name* property and the name must have a value.
+
+Then *locationConcept* and *Location* are created as subclasses of *NamedVertex*.
+
+```java
 OrientVertexType locationConcept = db.createVertexType("LocationConcept", "NamedVertex");
 
 OrientVertexType location = db.createVertexType("Location", "NamedVertex");
 location.createProperty("Shape", OType.LINKLIST, position2D);
 ```
+
 Let's look at the last instruction in more detail:
 *createProperty()* is a method of the OrientVertexType class. The first parameter, "Shape", is the property's name as string. The second parameter is the property's type which is LINKLIST here. Since we have a link we need a third parameter which is the linked type. Be careful not to use the name of the linked type as string but a parameter of type *OrientVertexType*.
 
