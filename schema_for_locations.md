@@ -38,11 +38,29 @@ If you prefer to watch the next screencast video click on the video start page.
 " target="_blank"><img src="ThumbnailEclipseVideo2a.JPG"
 alt="Eclipse Video" width="160" height="150" border="10" /></a>
 
-Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now add instructions which create a new vertex class "Position2D". A position is defined by two coordinates. Therefore the "Position2D" class gets two properties x and y. We can use integer instead of float if we use centimeter as unit. The robot does not need more accurate values.
+Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now want to add a new vertex class *Position* which consists of three Cartesian coordinates. Since the concept of a three dimensional vector may be useful for other classes let's define an abstract class *Coordinates*. Abstract classes cannot be declared with the  Tinkerpop Blueprints API. Here we use SQL and ``db.command(<OSQLCommand>).execute()``instead.
+
 ```java
-OrientVertexType position2D = db.createVertexType("Position2D");
-position2D.createProperty("x", OType.INTEGER).setMandatory(true).setNotNull(true);
-position2D.createProperty("y", OType.INTEGER).setMandatory(true).setNotNull(true);
+/* 3 dimensional vector as abstract class
+ * used as position and as size for objects.
+ */
+db.command(new OCommandSQL ("create class Coordinate extends V ABSTRACT")).execute(); 
+db.command(new OCommandSQL ("create Property Coordinate.x FLOAT")).execute();
+db.command(new OCommandSQL ("alter property Coordinate.x MANDATORY true")).execute();
+db.command(new OCommandSQL ("alter property Coordinate.x NOTNULL true")).execute();
+db.command(new OCommandSQL ("create Property Coordinate.y FLOAT")).execute();
+db.command(new OCommandSQL ("alter property Coordinate.y MANDATORY true")).execute();
+db.command(new OCommandSQL ("alter property Coordinate.y NOTNULL true")).execute();
+db.command(new OCommandSQL ("create Property Coordinate.z FLOAT")).execute();
+db.command(new OCommandSQL ("alter property Coordinate.z MANDATORY true")).execute();
+db.command(new OCommandSQL ("alter property Coordinate.z NOTNULL true")).execute();
+OClass coordinate = db.getRawGraph().getMetadata().getSchema().getClass("Coordinate");
+```
+
+Then we can use the Blueprints API to define *Position* as a subclass of the abstract class *Coordinates*.
+
+```java
+OrientVertexType position = db.createVertexType("Position", coordinate); // Coordinate used as position
 ```
 
 The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefore the method ``.setMandatory(true)`` can be applied. Again the result is a property object. So the ``.setNotNull(true)`` method can be applied in the same line. This means that each position object must have a x and y property and these properties must have a value.
