@@ -1,7 +1,7 @@
 # Develop the Schema for Locations
 ![Location Hierarchy](LocationHierarchy.JPG)
 
-Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in the chapter [Motivation: Locations and Location Concepts](motivation.md#Locations-and-Location-Concepts) we distinguish between real locations and location concepts. Hence we have to define a vertex classes **Location** and **LocationConcept** as subclasses of V.
+Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in the chapter [Motivation: Locations and Location Concepts](motivation.md#Locations-and-Location-Concepts) we distinguish between real locations and location concepts. Hence we have to define the vertex classes **Location** and **LocationConcept** as subclasses of V.
 
 Each *location* needs a **name**. The persons attended by the service robot use the name to refer to the location. The name need not be unique because a location can be identified by the containing location. A command to the robot could e.g. be: "Bring this bottle of juice to the *kitchen of Mr. Millers apartment*".
 
@@ -9,7 +9,7 @@ Often it might be convenient to store a **description** of the location.
 
 Location concepts also need a name and optionally a description.
 
-To move inside of a room a robot must get the information about the **shape** of the room. A *shape* can be stored as a list of **positions** where each *position* is a pair of x- and y-coordinates.
+To move inside of a room a robot must get the information about the **shape** of the room. A *shape* can be stored as a list of **positions** where each *position* is a triple of x-, y- and z-coordinates. ``Position`` is a subclass of ``Coordinate``.
 
 To store a *shape* we have several options in OrientDB:
 * We can connect a *location vertex* with some position vertices by an edge type "has_corner".
