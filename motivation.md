@@ -11,12 +11,14 @@ The service robot can perform a lot of tasks in a permanently changing environme
 In his **Master-Theses Benjamin Stähle** suggested a database structure to store the information about the robot's environment. This structure is briefly described here.
 
 ####Locations and Location Concepts
-Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbor. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "is part of" relationship: A certain room e.g. the kitchen **is part of** the 1st floor which **is part of** an apartment which **is part of** a certain house.
+Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbor. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "IS_PART_OF" relationship: A certain room e.g. the kitchen **is part of** the 1st floor which **is part of** an apartment which **is part of** a certain house.
 
 There may be more than one kitchen or bathroom in one apartment. Therefore it is necessary to store the type of a location e.g. the kitchen on the 1st floor **is a** kitchen. The abstract information about location concepts forms an extra hierarchy.
 
 ####Positions
 Inside of a room an autonomous robot can move using its sensors. Therefore it does not need certain positions with connections as navigation paths inside of rooms. However positions are necessary to indicate doors as connections between different rooms. Thus the robot knows where to navigate to enter another room. Also other connections between rooms like elevators are stored as positions.
+
+The robot may store information about times usually necessary to go from one position to another one in the relation "IS_CONNECTED_TO" with the property *PassTimeSec*.
 
 The following figure shows the topological hierarchy of real locations together with the conceptual location hierarchy.
 ![Figure Locations](LocationHierarchy.JPG)
