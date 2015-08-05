@@ -22,19 +22,23 @@ A "New Java Project"-dialog opens. Type in a name for the project e.g. *RobotWor
 
 In the following "Java Settings"-dialog click on the *Libraries* tab and then on *Add External JARs...*
 
-A file dialog opens. Navigate to your orient root directory and then to the jar-directory. Choose the following JAR-files (where x.x.x is the version number installed on your computer):
-* blueprints-core-x.x.x.jar
-* concurrentlinkedhashmap-lru-x.x.x.jar
-* orientdb-client-x.x.x.jar
-* orientdb-core-x.x.x.jar
-* orientdb-enterprise-x.x.x.jar
-* orientdb-graphdb-x.x.x.jar
+A file dialog opens. Navigate to your orient root directory and then to the jar-directory. Choose the following JAR-files where * is the version number installed on your computer ([Compare documentation](http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html)):
+```
+blueprints-core-*.jar
+concurrentlinkedhashmap-lru-*.jar
+jna-*.jar
+jna-platform-*.jar
+orientdb-client-*.jar
+orientdb-core-*.jar
+orientdb-enterprise-*.jar
+orientdb-graphdb-*.jar
+```
 
 Click Finish - a new empty Java project is created and is added to the list of your Java projects in your workspace. You can see it in the Package Explorer. If it is not visible open it with
 *Window* > *Show View* > *Package Explorer*
 
 ### Create a new Package
-In the package explorer choose your new project *RobotWorldModel*. Click on the "New Package"-icon or click on *File* > *New* > *Package* in the main menu. In the "New Package"-dialog type the package name e.g. *createDBSchema*.
+In the package explorer choose your new project *RobotWorldModel*. Click on the "New Package"-icon or click on *File* > *New* > *Package* in the main menu. In the "New Package"-dialog type the package name e.g. *startApplications*.
 
 ### Create a new Java Class with a Main Method
 In the package explorer choose the newly created package *createDBSchema*. In the main menu click on *File* > *New* > *Class* or click on the "New Java Class"-icon. In the "New Class"-dialog type in the class name e.g. *CreateDBSchema*, select the check box "Create a static main method" and click *Finish*.
@@ -52,9 +56,9 @@ The first instruction connects to the database. If it does not exist the databas
 The second instruction gets a new connection to the database from the factory. Since we want to define the structure of the database we do not use transactions and use ``factory.getNoTx()`` instead of ``factory.getTx()``.
 
 ### Create a Graph Database using the Document API
-Are you annoyed that you have to use *plocal mode* to create a database? This subsection explains an alternative creating a database which also works in *remote mode*. However you can very well skip this subsection and go on with the tutorial.
+Do you prefer *remote mode* to create a database? This subsection explains an alternative creating a database which also works in *remote mode*. However you can very well skip this subsection and go on with the tutorial.
 
-Since a graph database in OrientDB is a special document database with the special classes V for Vertices and E for Edges you can create a graph database using the document API. After having created the database you can then connect to it on the remote server using ``OrientGraphFactory()`` as you saw in the last section. The newly created database automatically gets three users, one of them is the admin user with the credentials "admin", "admin".
+Since a graph database in OrientDB is a special *document database* with the special classes V for Vertices and E for Edges you can create a graph database using the document API. After having created the database you can then connect to it on the remote server using ``OrientGraphFactory()`` as you saw in the last section. The newly created database automatically gets three users, one of them is the admin user with the credentials "admin", "admin".
 
 ```java
 try {
