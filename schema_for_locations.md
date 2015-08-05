@@ -90,6 +90,14 @@ location.createProperty("Shape", OType.LINKLIST, position);
 Let's look at the last instruction in more detail:
 *createProperty()* is a method of the OrientVertexType class. The first parameter, "Shape", is the property's name as string. The second parameter is the property's type which is LINKLIST here. Since we have a link we need a third parameter which is the linked type. Be careful not to use the name of the linked type as string but a parameter of type *OrientVertexType*.
 
+Perhaps you wondered why the *Coordinates* class was defined as an abstract class and *Position* as a subclass. Up to now there is no difference in the structure of both classes. With the *Location* class available we can now define an additional property *inLocation* of *Position* which links a position to the room where it is located.
+
+```java
+position.createProperty("inLocation", OType.LINK, location); 
+```
+
+In a graph database usually edges represent a bidirectional relationship between classes. Hence we could declare an edge class "IN_LOCATION" between *Position* and *Location*. However we only need a unidirectional link from *Position* to *Location* which can be expressed as ``OType.LINK``. To have the other direction from *Location* to *Position*, too, would decrease performance because one location could have hundreds of positions.
+
 ## Create the Edge Classes "IS_A" and "IS_PART_OF"
 Now we have defined all vertex classes related to locations. As last step we define the edge classes that express the relationships between locations and location concepts.
 ```java
@@ -107,12 +115,10 @@ However since we want to use the IS_A edge class also for object entities we omi
 
 ## Create the Edge Class "IS_CONNECTED_TO"
 
-The robot must know which locations are connected by doors, elevators, passages etc. to navigate to desired objects. Each connection must provide information about the estimated time to pass the connection and the position of the connection. In fact two positions may be necessary because the robot may have to re-calibrate its position when it gets to another floor or another apartment.
+The robot must know which locations are connected by doors, elevators, passages etc. to navigate to desired objects. Each connection must provide information about the estimated time to pass the connection. Two positions can be connected, too. The robot can store empirical pass times to get from one position to another position in the connecting edge.
 
 ````java
 OrientEdgeType is_connected_to = db.createEdgeType("IS_CONNECTED_TO");
-is_connected_to.createProperty("PositionIn", OType.LINK, position2D);
-is_connected_to.createProperty("PositionOut", OType.LINK, position2D);
-is_connected_to.createProperty("PassTimeSec", OType.INTEGER); // Time to pass connection in seconds
-is_connected_to.createProperty("Width", OType.INTEGER); // Width of door/connection in cm
+is_connected_to.createProperty("PassTimeSec", OType.FLOAT); // Estimated time to get from position 1 to position 2
+
 ```
