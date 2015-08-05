@@ -12,7 +12,7 @@ However the schema-less mode is not the best choice if different users access th
 
 OrientDB offers a third mode, the **schema-hybrid** or **schema-mixed mode**, where some properties are fixed and other ones can be freely defined by the users. Read more about the different modes in the [OrientDB dcumentation](http://orientdb.com/docs/last/orientdb.wiki/Graph-Schema.html).
 
-In this tutorial we will use the schema-full mode to avoid errors especially when different applications access the database.
+In this tutorial we will use the schema-full mode to avoid errors especially when different applications access the database. This chapter has the following sections:
 1. First [create a new database using JAVA](create_new_database.md)
 2. Then [define and implement the schema for Locations.](schema_for_locations.md)
 3. Then [define and implement the schema for Objects](develop_the_schema_for_objects.md).
