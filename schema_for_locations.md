@@ -13,7 +13,10 @@ To move inside of a room a robot must get the information about the **shape** of
 
 To store a *shape* we have several options in OrientDB:
 * We can connect a *location vertex* with some position vertices by an edge type "has_corner".
-![Location connected to corners](LocationPositionGraph1.png)
+
+<img src="LocationPositionGraph1.png"
+alt="Property Hierarchy" width="350" height="320" border="10" />
+
 We need an ordered list of edges for a location vertex because the sequence of the positions is relevant for the shape. Otherwise the same set of corners could define different shapes:
 ![two shapes](twoShapes.png)
 * We can connect a *location vertex* with one *position vertex* by a "first_corner" edge. This position vertex is then connected to another position vertex by a "next-position" edge. ![Location connected to corners](LocationPositionGraph2.png)
@@ -21,13 +24,13 @@ We need an ordered list of edges for a location vertex because the sequence of t
 
 Let's briefly discuss the different alternatives. In the first and second alternative positions and locations are different, stand alone entities connected by a relationship. If the location is deleted the positions remain in the database. They could be used for other puposes e.g. because objects are located at these positions. The second alternative has the disadvantage that after deletion of a location the corresponding positions are still connected by the *next_corner* relationship. The application which deletes a location has to delete the corresponding *next_corner*-edges.
 
-The third alternative connects locations and positions more tightly. Locations are the main entities and the positions forming the shape of the location are a part of the location. However the positions can exist without a location; they get an independant object id.
+The third alternative connects locations and positions more tightly. Locations are the main entities and the positions forming the shape of the location are a part of the location. However the positions can exist without a location; they get an independent object id.
 
 The last alternative is similar to the third one but the positions are embedded in the location object. If a location is deleted they are automatically deleted, too.
 
-In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *objects* we don't embed them into locations.
+In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *mobile objects* we don't embed them into locations.
 
-## Create the Vertex Classes "Position2D" using the Java API
+## Create the Vertex Classes "Position" using the Java API
 
 If you prefer to watch the next screencast video click on the video start page.
 
