@@ -41,11 +41,11 @@ OSQLSynchQuery query1 = new OSQLSynchQuery ("select in as pos, Score as combiSco
 ```
 Each edge connects two vertices: **out** specifies the source vertex where the edge comes out and **in** specifies the target vertex where the edge goes into. **out** must be our search object. Instead of doing some String-operations and insert the **rid** (record id) of the object into the where condition we use a [prepared query](http://orientdb.com/docs/last/Document-Database.html#prepared-query). The '?' in ``where out = ?`` is a parameter that is passed at execution time.
 
-Since we are only interested in PROB_IS_AT edges leading to a position we add a second condition: the class of the target vertex must be 'Position'. The record attribute ``@class`` returns the class of a vertex.
+Since we are only interested in PROB_IS_AT edges leading to a *Position* we add a second condition: the class of the target vertex must be 'Position'. The record attribute ``@class`` returns the class of a vertex.
 
 Then the query is executed: ``db.command(query1).execute(obj)``
 
-The result is not a ``List`` but an ``Iterable``. So we have to convert it into a list. However we not only want to store the positions but also their Score value. Hence we define a new class ``PositionScore`` for pairs of position and score.
+The result is not a ``List`` but an ``Iterable``. So we have to convert it into a list. However we not only want to store the positions but also their *Score* value. Hence we define a new class ``PositionScore`` for pairs of position and score.
 
 ```java
 package operations;
@@ -57,9 +57,9 @@ import com.tinkerpop.blueprints.Vertex;
  */
 public class PositionScore {
 	public Vertex pos;
-	public int score;
+	public Float score;
 
-	public PositionScore(Vertex pos, int score) {
+	public PositionScore(Vertex pos, Float score) {
 		this.pos = pos;
 		this.score = score;
 	}
@@ -75,9 +75,9 @@ ArrayList <PositionScore> posList = new ArrayList <PositionScore> (); //Result l
 Insert each position returned by the database into this list.
 
 ```java
-for (Vertex pos: (Iterable<Vertex>) db.command(query1).execute(obj)) {
-	posList.add(new PositionScore (pos.getProperty("pos"), (int) pos.getProperty("combiScore")));
-		}
+for (Vertex result: (Iterable<Vertex>) db.command(query1).execute(obj)) {
+	posList.add(new PositionScore (result.getProperty("pos"), (Float) result.getProperty("combiScore")));
+}
 ```
 
 #### As second step we retrieve all positions where an object is connected to another object
@@ -86,7 +86,7 @@ The SQL-query is a little bit more complicated. We want to find the following si
 
 Object obj --> PROB_IS_AT e1 --> another object --> PROB_IS_AT e2 --> Position pos
 
-To get the position vertices we have to follow the arrows: ``in.outE('PROB_IS_AT')`` ``in`` delivers the other object and from this object we want to get all outgoing edges of class 'POB_IS_AT'.
+To get the *Position* vertices we have to follow the arrows. Start the search with ``PROB_IS_AT e1`` which starts at the *Object* obj. Hence the FROM- and WHERE-part of the SQL-query is ``from PROB_IS_AT where out = ?``. ``in`` delivers the *other object* and from this object we want to get all outgoing edges of class 'PROB_IS_AT': ``in.outE('PROB_IS_AT')`` .
 
 So we try the following query:
 ```sql
@@ -100,12 +100,21 @@ The result of this query is an edge together with a list of edges like in this e
 | #20:1 | [#20:2, #20:3] |
 | #20:10 | [#20:4, #20:5] |
 
-However we want a list of pairs e1, e2 as a result. The **unwind** expression will create one pair of edges in the result set for each e2 entry. We adjust our query to
+However we want a list of pairs e1, e2 as a result:
+
+| e1 | e2 |
+| -- | -- |
+| #20:1 | #20:2 |
+| #20:1 | #20:3 |
+| #20:10 | #20:4 |
+| #20:10 | #20:5 |
+
+The **unwind** expression will create one pair of edges in the result set for each e2 entry. We adjust our query to
 ```sql
 select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2
 ```
 
-Finally we don't want to get the edges but positions and scores. So we wrap the query by an outer SQL-query. From e2 we retrieve ``e2.in`` as position and from e1 and e2 we calculate a combined score. The division by 10 is necessary because our score values vary from 0 to 10.
+Finally we don't want to get the edges but *Positions* and *scores*. So we wrap the query by an outer SQL-query. From e2 we retrieve ``e2.in`` as position *pos* and from e1 and e2 we calculate a combined score: ``eval('s1 * s2 / 10') as combiScore``. The division by 10 is necessary because our score values vary from 0 to 10. Attention! The eval-function expects the formula as String.
 
 ```sql
 select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as combiScore from (select @rid as e1, in.outE('PROB_IS_AT') as e2 from PROB_IS_AT where out = ? and in.@class = 'Object' unwind e2)
@@ -113,11 +122,22 @@ select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as com
 
 Again we iterate over the result set and fill our result list ``posList`` with ``PositionScore`` pairs.`
 
+If you like you can compare the OrientDB query on a graph database with a corresponding query on a relational database. Suppose we had three tables: A Position-table with the coordinates x, y and z as columns and a PID as primary key, a MobileObject-table with OID as primary key a connection table PROB_IS_AT_O_To_O-table with a score column and with OIDout and OIDin as foreign keys which connects two mobile objects and a connection table PROB_IS_AT_O_To_P with a score column and OID and PID as foreign keys which connects an object with a position.
+
+```sql
+SELECT pos.x, pos.y, pos.z, proboo.score * probop.score / 10 as combiScore
+FROM PROB_IS_AT_O_To_O proboo, MobileObject mo, PROB_IS_AT_O_To_P probop, Position pos
+WHERE   proboo.OIDin = mo.OID AND
+        mo.OID = probop.OID AND
+        probop.PID = pos.PID AND
+        proboo.OIDout = ?
+```
+
 ### Calculate the paths to all positions in the position list
 
-This is a routing task. One possible routing algorithm is the [Dijkstra algorithm] (wikipedia). It is implemented in OrientDB and thus can be executed on the server without data transfer to the lient. OrientDB offers two versions of the Dijkstra algorithm. We need the dijkstra2 function.
+This is a routing task. One possible routing algorithm is the [Dijkstra algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). It is implemented in OrientDB and thus can be executed on the server without data transfer to the client. OrientDB offers two versions of the Dijkstra algorithm. We need the dijkstra2 function.
 
-We iterate the position list and for each position calculate the path to it from the current position of the robot, the estimated time to traverse the path and finally the ratio of passing time to the score of the position. The position with the least pass time to score ratio is choosen as the next position where the robot should go.
+We iterate the *position list* and for each position calculate the path to it from the current position of the robot, the estimated time to traverse the path and finally the ratio of passing time to the score of the position. The lower the pass time or the higher the score, the better is that position. The position with the least (pass time / score)-ratio is chosen as the next position where the robot should go.
 
 ```java
 PositionScore bestPos = null; // Store position with best passTime/Score ratio found so far in bestPos
@@ -129,6 +149,11 @@ for (PositionScore ps: posList) {
 	String dijkstraQueryString = "SELECT dijkstra2(" + startRid + ", " + destRid + ", 'IS_CONNECTED_TO', 'PassTimeSec', 'BOTH')";
 	OSQLSynchQuery dijkstraQuery = new OSQLSynchQuery(dijkstraQueryString);
 	Iterable <Vertex> result = db.command(dijkstraQuery).execute();
+```
+
+Attention: The result of ``db.command(<OSQLSynchQuery>).execute()`` is always a list of vertices as Iterable. Even if you expect a list of integer e. g. in the query  ``SELECT MIN(x) FROM Position GROUP BY inLocation`` you get a list of vertices with a property "MIN". Therefore you have to iterate ``Iterable <Vertex> result`` though result has only one element. With ``v.getProperty("dijkstra2")`` you get the result of the dijkstra2 function which is the list of vertices on the path.
+
+```java
 	Iterable <OrientVertex> pathIterable = null;
 	for (Vertex v: result) { pathIterable = v.getProperty("dijkstra2"); break; }
 	if (pathIterable != null) {
@@ -142,11 +167,20 @@ for (PositionScore ps: posList) {
 }
 ```
 
-Attention: The result of ``db.command(<OSQLSynchQuery>).execute()`` is always a list of vertices as Iterable. Even if you expect a list of integer e. g. in the query  ``SELECT MIN(x) FROM Position GROUP BY inLocation`` you get a list of vertices with a property "MIN". Therefore you have to iterate ``Iterable <Vertex> result`` though result has only one element. With ``v.getProperty("dijkstra2")`` you get the result of the dijkstra2 function which is the list of vertices on the path.
-
 ### Repeat the search until the object is found or all possible positions are visited
 
-Go the position with the best passTime/Score ratio and look for the search object there. If the object is there the search is finished. Otherwise remove the current position from the positon list and repeat the search.
+Create a function ``searchForObject()`` which first calls ``createPosList()``.
+
+```java
+public String searchForObject (Vertex start, Vertex dest, Vertex searchObject) {
+		
+	ArrayList <PositionScore> posList = createPosList (searchObject); //Create list of positions where object could be together with scores and store it in posList
+	if (posList.isEmpty()) return "No positions exist where object " + searchObject.getProperty("Name") + " could be";
+	String startRid = start.getId().toString();
+
+```
+
+Go the position with the best passTime/Score ratio and look for the search object there. If the object is there the search is finished. Otherwise remove the current position from the position list and repeat the search: this is the enclosing ``while``-loop.
 
 ```java
 while (!posList.isEmpty()) {
@@ -175,4 +209,6 @@ while (!posList.isEmpty()) {
 	}
 }
 ```
+
+Since the the function ``searchForObject()`` returns a String with information about the success of the search the search path has to be stored in a variable: ``private ArrayList <ArrayList <Vertex>> searchPath;`` with this instruction: ``searchPath.add(currentPath);``
 
