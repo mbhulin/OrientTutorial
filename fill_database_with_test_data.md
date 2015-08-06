@@ -3,7 +3,6 @@ To keep this tutorial simple we do not develop a sophisticated user interface to
 
 ## Execute the Following Steps
 
-* Inside of your Eclipse project *RobotWorldModel* create a new package *startApplications*.
 * Download the file [FillDB.java](FillDB.java)
 * Import this file into the package *startApplications*.
 * Adapt the path to the database folder ``OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin")``
@@ -82,7 +81,7 @@ db.command(new OCommandSQL ("INSERT INTO Location (Name, Description) VALUES ('S
 ```
 
 ### Add an Embedded Document
-In our database for service robots physical objects have a size which consists of three dimensions: x, y and z. Since the property **Size** is not a linked vertex but embedded inside of the object vertex it has to be created as a **document** first using the [Document API](http://orientdb.com/docs/last/Document-Database.html):
+In our database for service robots physical objects have a size which consists of three dimensions: x, y and z. Since the property **Size** is not a linked vertex but embedded inside of the object vertex it has to be created as a **document** first, using the [Document API](http://orientdb.com/docs/last/Document-Database.html):
 
 ```java
 ODocument sizeTable = new ODocument ("Size3D");
