@@ -4,5 +4,5 @@
         "quizzes"
     ],
     "description": "This is such a great book!",
-    "gitbook": "=2.2.0"
+    "gitbook": "=1.5.0"
 }
