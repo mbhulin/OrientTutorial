@@ -8,7 +8,7 @@ Now you have learned how to create an OrientDB graph database using the Java API
 
 ---
 
-Here's a quiz about Gitbook
+Here is a quiz about Gitbook
 
 |                  | Good | Bad |
 | ---------------- | ---- | --- |
