@@ -1,6 +1,6 @@
 # Database Schema
 ##Schema-Full, Schema-Less and Schema-Hybrid Mode
-OrientDB can be used to store [graph databases](http://en.wikipedia.org/wiki/Graph_database). A graph database consits of **vertices** or **nodes** and **edges** which connect the vertices. Small graphs can easily be represented graphically using circles or squares for the vertices and lines for the edges.
+OrientDB can be used to store [graph databases](http://en.wikipedia.org/wiki/Graph_database). A graph database consists of **vertices** or **nodes** and **edges** which connect the vertices. Small graphs can easily be represented graphically using circles or squares for the vertices and lines for the edges.
 
 ![Part of a Graph](OrientGraph.JPG)
 
