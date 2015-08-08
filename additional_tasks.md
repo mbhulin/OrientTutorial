@@ -1,4 +1,4 @@
-# Additional Tasks
+# Additional Tasks and Quiz
 Now you have learned how to create an OrientDB graph database using the Java API of OrientDB which is based on Tinkerpop Blueprints, a general API for graph databases. Now you should do some programming tasks yourself.
 
 * Add some more unit tests to ``LocationTests.java``
