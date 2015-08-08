@@ -1,8 +1,5 @@
 {
-    "plugins": [
-        "mathjax",
-        "quizzes"
-    ],
-    "description": "This is such a great book!",
+    "plugins": [ "quizzes" ],
+    "description": "OrientDB JAVA API tutorial",
     "gitbook": "=2.2.0"
 }
