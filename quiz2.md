@@ -25,7 +25,7 @@
     </question>
     <question>
     <p>Which is the correct syntax if you want to find all mobile objects which may be at the position with @rid #20:15 and a score of 5 or more?</p>
-    <answer><code>db.executeSQL(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and PROB_IS_AT.Score &GE;= 5"));</code>
+    <answer><code>db.executeSQL(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and PROB_IS_AT.Score &gt;= 5"));</code>
     </answer>
     <answer correct>
         <code>db.command(new OSQLSynchQuery ("select out from PROB_IS_AT where in.@rid = #20:15 and Score &GE;= 5 and out.@class = 'MobileObject'")).execute();</code>
