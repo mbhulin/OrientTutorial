@@ -46,5 +46,13 @@ Now you have learned how to create an OrientDB graph database using the Java API
     <answer>db.command("create class Account extends V").execute();</answer>
     <explanation><a href="http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html#sql-commands"> See documentation for db.command()</a></explanation>
     </question>
+    <question>
+    <p>You want to create the property "accountNr" of the OrientDB class "Account" which should exist for every record of the class and must not be empty (null). Which constraint(s) is/are necessary?</p>
+    <answer>mandatory constraint</answer>
+    <answer>not null constraint</answer>
+    <answer>obligate constraint</answer>
+    <answer correct>both constraints: mandatory and not null</answer>
+    <explanation>The mandatory constraint ensures that every record has a field accountNr but this field need not have a value. Not null means that if a field accountNr is present it must have a value other than NULL but there may be records without this field. Only both constraints together guarantee that each record has an accountNr with a value. There is no constraint "obligate".</explanation>
+    </question>
 </quiz>
 
