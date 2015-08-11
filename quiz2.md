@@ -13,7 +13,7 @@
     <p>To create an edge two vertices which are connected by the edge must already exist.</p>
     <answer correct>True</answer>
     <answer>False</answer>
-    <explanation>In the db.addEdge(Object id, Vertex outVertex, Vertex inVertex, String label) method the second (start vertex) and third parameter (destination vertex of the edge) are mandatory. The last parameter is the subclass of E if needed. The first parameter may be null because the id is set automatically. </explanation>
+    <explanation>In the <code>db.addEdge(Object id, Vertex outVertex, Vertex inVertex, String label)</code> method the second (start vertex) and third parameter (destination vertex of the edge) are mandatory. The last parameter is the subclass of E if needed. The first parameter may be null because the id is set automatically. </explanation>
     </question>
     <question>
     <p>Can edges have properties?</p>
