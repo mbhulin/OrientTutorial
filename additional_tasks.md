@@ -36,7 +36,7 @@ Now you have learned how to create an OrientDB graph database using the Java API
     <p>You want to create a database schema using db.createVertexType() and db.createEdgeType(). In which mode do you connect to the database?</p>
     <answer>remote connection to an OrientDB server</answer>
     <answer correct>plocal mode</answer>
-    <explanation>Transactions with the possibility to rollback a transaction are useful if you insert, update, or delete data. A schema is usually defined before the application is used. Transaction are not necessary in this case. If the schema is not correct you can delete it, correct the errors in your script, and rebuild the schema.</explanation>
+    <explanation>If you want to use Tinkerpop Blueprints API you have to open the database locally on the database server in plocal mode. If you want to use a remote connection you have to use the underlying document database. </explanation>
     </question>
     <question>
     <p>Which is the correct syntax if you want to create a new class "Account" using the Java API with SQL?</p>
