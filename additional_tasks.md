@@ -31,17 +31,20 @@ Now you have learned how to create an OrientDB graph database using the Java API
     <answer>transactional mode: OrientGraph db = factory.getTx();</answer>
     <answer correct>non transactional mode: OrientGraphNoTx db = factory.getNoTx();</answer>
     <explanation>Transactions with the possibility to rollback a transaction are useful if you insert, update, or delete data. A schema is usually defined before the application is used. Transaction are not necessary in this case. If the schema is not correct you can delete it correct the errors in your script and rebuild the schema.</explanation>
+    </question>
     <question>
     <p>You want to create a database schema using db.createVertexType() and db.createEdgeType(). In which mode do you connect to the database?</p>
     <answer>remote connection to an OrientDB server</answer>
     <answer correct>plocal mode</answer>
     <explanation>Transactions with the possibility to rollback a transaction are useful if you insert, update, or delete data. A schema is usually defined before the application is used. Transaction are not necessary in this case. If the schema is not correct you can delete it, correct the errors in your script, and rebuild the schema.</explanation>
-        <question>
-        <p>Which is the correct syntax if you want to create a new class "Account" using the Java API with SQL?</p>
-        <answer>db.executeSQL(new OCommandSQL ("create class Account extends V"));</answer>
-        <answer correct>db.command(new OCommandSQL ("create class Account extends V")).execute();</answer>
-        <answer>db.command(new OSQLSynchQuery ("create class Account extends V")).execute();</answer>
-        <answer>db.command("create class Account extends V").execute();</answer>
-        <explanation><a href="http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html#sql-commands"> See documentation for db.command()</a></explanation>
+    </question>
+    <question>
+    <p>Which is the correct syntax if you want to create a new class "Account" using the Java API with SQL?</p>
+    <answer>db.executeSQL(new OCommandSQL ("create class Account extends V"));</answer>
+    <answer correct>db.command(new OCommandSQL ("create class Account extends V")).execute();</answer>
+    <answer>db.command(new OSQLSynchQuery ("create class Account extends V")).execute();</answer>
+    <answer>db.command("create class Account extends V").execute();</answer>
+    <explanation><a href="http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html#sql-commands"> See documentation for db.command()</a></explanation>
+    </question>
 </quiz>
 
