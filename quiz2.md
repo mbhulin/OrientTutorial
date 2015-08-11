@@ -1,12 +1,12 @@
 <quiz name="Using an OrientDB Database with the Java API">
     <question>
     <p>You want to insert a new vertex into your graph database. Which method can you use?</p>
-        <answer correct>db.addVertex()</answer>
-        <answer>db.createVertex()</answer>
-        <answer>db.createVertexType()</answer>
-        <answer>db.insertVertex()</answer>
-        <answer>db.insert()</answer>
-        <answer>db.add()</answer>
+        <answer correct><code>db.addVertex()</code></answer>
+        <answer><code>db.createVertex()</code></answer>
+        <answer><code>db.createVertexType()</code></answer>
+        <answer><code>db.insertVertex()</code></answer>
+        <answer><code>db.insert()</code></answer>
+        <answer><code>db.add()</code></answer>
         <explanation><a href="http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html#create-a-vertex"> See documentation</a></explanation>
     </question>
     <question>
@@ -27,10 +27,10 @@
     <answer correct><code>db.command(new OSQLSynchQuery ("select out from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5 and out.@class = 'MobileObject'")).execute();</code></answer>
     <answer><code>db.command(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and Score &GT;= 5")).execute();</code></answer>
     <answer><code>db.command("select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5").execute();</code></answer>
-    <explanation><code>db.command(&LT;OSQLSynchQuery&GT;).execute()</code> is the correct syntax. <code>select out from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5 and out.@class = 'MobileObject'</code> is the correct SQL query: Start at an edge because an edge has only one start vertex (out) and one destination vertex (in). So searh for all PROB_IS_AT edges with destination #20:15 and a Score of 5 or more which start at a MobileObject vertex; then return these MobileObject vertices.</explanation>
+    <explanation><code>db.command(&LT;OSQLSynchQuery&GT;).execute()</code> is the correct syntax. <code>select out from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5 and out.@class = 'MobileObject'</code> is the correct SQL query: Start at an edge because an edge has only one start vertex (out) and one destination vertex (in). So search for all PROB_IS_AT edges with destination #20:15 and a Score of 5 or more which start at a MobileObject vertex; then return these MobileObject vertices.</explanation>
     </question>
     <question>
-    <p>Which is the result of db.command(<OSQLSynchQuery>).execute()?</p>
+    <p>Which is the result of <code>db.command(<OSQLSynchQuery>).execute()?</code></p>
     <answer>A table of records</answer>
     <answer>Always <code>Iterable &LT;Vertex&GT;</code></answer>
     <answer>It depends. If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>. If you query a function with integer results e.g. <code>select count(*) from MobileObject</code> you get a result of type <code>Iterable &LT;Integer&GT;</code></answer>
