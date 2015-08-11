@@ -15,4 +15,10 @@
     <answer>False</answer>
     <explanation>In the db.addEdge(Object id, Vertex outVertex, Vertex inVertex, String label) method the second (start vertex) and third parameter (destination vertex of the edge) are mandatory. The last parameter is the subclass of E if needed. The first parameter may be null because the id is set automatically. </explanation>
     </question>
+    <question>
+    <p>Can edges have properties?</p>
+    <answer correct>Yes</answer>
+    <answer>No</answer>
+    <explanation>Edges may have properties. Only lightweight edges cannot have properties. Find more information about <a href="http://orientdb.com/docs/last/Lightweight-Edges.html"> lightweight edges in the documentation.</a></explanation>
+    </question>    
 </quiz>
