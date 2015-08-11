@@ -13,5 +13,5 @@
    * [Fill Database with Test Data](fill_database_with_test_data.md)
    * [Create the Search Method](create_the_search_method.md)
    * [Download a simple GUI](download_a_simple_gui.md)
-   * Quiz
+   * [Quiz](quiz2.md)
 
