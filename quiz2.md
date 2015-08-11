@@ -32,8 +32,9 @@
     <question>
     <p>Which is the result of db.command(<OSQLSynchQuery>).execute()?</p>
     <answer>A table of records</answer>
-    <answer correct>An iterable of vertices</answer>
-    <answer>It depends. If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>.</answer>
-    <explanation></explanation>
+    <answer>Always <code>Iterable &LT;Vertex&GT;</code></answer>
+    <answer>It depends. If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>. If you query a function with integer results e.g. <code>select count(*) from MobileObject</code> you get a result of type <code>Iterable &LT;Integer&GT;</code></answer>
+<answer correct>It depends. If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>. If you query anything else e.g. <code>select Score from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code></answer>
+    <explanation>In most cases you get a result of type <code>Iterable &LT;Vertex&GT;</code>. Only if you explicitly query edges you get a result of type <code>Iterable &LT;Edge&GT;</code></explanation>
     </question>
 </quiz>
