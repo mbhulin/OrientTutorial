@@ -26,5 +26,22 @@ Now you have learned how to create an OrientDB graph database using the Java API
         <answer>Oracle designer</answer>
         <explanation>To define a schema for OrientDB you can use <a href="http://orientdb.com/docs/last/Studio-Schema.html"> Studio with the Schema Manager</a> or Studio with SQL <a href="http://orientdb.com/docs/last/SQL-Create-Class.html"> 'Create Class'</a> and <a href="http://orientdb.com/docs/last/SQL-Create-Property.html"> 'Create Property'</a> commands, OrientDB Console or in Java the <a href="http://orientdb.com/docs/last/Graph-Schema.html#working-with-custom-vertex-and-edge-types"> createVertexType() and createEdgeType() methods.</a></explanation>
     </question>
+    <question>
+    <p>If you want to create a database and define a database schema, should you open the database in</p>
+    <answer>transactional mode: OrientGraph db = factory.getTx();</answer>
+    <answer correct>non transactional mode: OrientGraphNoTx db = factory.getNoTx();</answer>
+    <explanation>Transactions with the possibility to rollback a transaction are useful if you insert, update, or delete data. A schema is usually defined before the application is used. Transaction are not necessary in this case. If the schema is not correct you can delete it correct the errors in your script and rebuild the schema.</explanation>
+    <question>
+    <p>You want to create a database schema using db.createVertexType() and db.createEdgeType(). In which mode do you connect to the database?</p>
+    <answer>remote connection to an OrientDB server</answer>
+    <answer correct>plocal mode</answer>
+    <explanation>Transactions with the possibility to rollback a transaction are useful if you insert, update, or delete data. A schema is usually defined before the application is used. Transaction are not necessary in this case. If the schema is not correct you can delete it, correct the errors in your script, and rebuild the schema.</explanation>
+        <question>
+        <p>Which is the correct syntax if you want to create a new class "Account" using the Java API with SQL?</p>
+        <answer correct>db.command(new OCommandSQL ("create class Account extends V")).execute();</answer>
+        <answer>db.command(new OSQLSynchQuery ("create class Account extends V")).execute();</answer>
+        <answer>db.command("create class Account extends V").execute();</answer>
+        <answer correct>db.executeSQL(new OCommandSQL ("create class Account extends V"));</answer>
+        <explanation><a href="http://orientdb.com/docs/last/Graph-Database-Tinkerpop.html#sql-commands"> See documentation for db.command()</a></explanation>
 </quiz>
 
