@@ -23,11 +23,11 @@
     </question>
     <question>
     <p>Which is the correct syntax if you want to find all mobile objects which may be at the position with @rid #20:15 and a score of 5 or more?</p>
-    <answer><code>db.executeSQL(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and PROB_IS_AT.Score >= 5"));</code></answer>
-    <answer correct><code>db.command(new OSQLSynchQuery ("select out from PROB_IS_AT where in.@rid = #20:15 and Score >= 5 and out.@class = 'MobileObject'")).execute();</code></answer>
-    <answer><code>db.command(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and Score >= 5")).execute();</code></answer>
-    <answer><code>db.command("select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score >= 5").execute();</code></answer>
-    <explanation><code>db.command(&LT;OSQLSynchQuery&GT;).execute()</code> is the correct syntax. <code>select out from PROB_IS_AT where in.@rid = #20:15 and Score >= 5 and out.@class = 'MobileObject'</code> is the correct SQL query: Start at an edge because an edge has only one start vertex (out) and one destination vertex (in). So searh for all PROB_IS_AT edges with destination #20:15 and a Score of 5 or more which start at a MobileObject vertex; then return these MobileObject vertices.</explanation>
+    <answer><code>db.executeSQL(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and PROB_IS_AT.Score &GT;= 5"));</code></answer>
+    <answer correct><code>db.command(new OSQLSynchQuery ("select out from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5 and out.@class = 'MobileObject'")).execute();</code></answer>
+    <answer><code>db.command(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and Score &GT;= 5")).execute();</code></answer>
+    <answer><code>db.command("select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5").execute();</code></answer>
+    <explanation><code>db.command(&LT;OSQLSynchQuery&GT;).execute()</code> is the correct syntax. <code>select out from PROB_IS_AT where in.@rid = #20:15 and Score &GT;= 5 and out.@class = 'MobileObject'</code> is the correct SQL query: Start at an edge because an edge has only one start vertex (out) and one destination vertex (in). So searh for all PROB_IS_AT edges with destination #20:15 and a Score of 5 or more which start at a MobileObject vertex; then return these MobileObject vertices.</explanation>
     </question>
     <question>
     <p>Which is the result of db.command(<OSQLSynchQuery>).execute()?</p>
