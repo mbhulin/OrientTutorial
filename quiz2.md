@@ -52,6 +52,16 @@
     <explanation>Only if you explicitly query edges you get a result of type <code>Iterable &LT;Edge&GT;</code>. In most cases you get a result of type <code>Iterable &LT;Vertex&GT;</code>: If you select a subclass of V you get persistend vertices, if you select anything else you get temporary vertices. </explanation>
     </question>
     
-    <question>
-    <p>
+    <question multiple>
+    <p>Suppose you have a certain vertex in your code <code>Vertex myVertex;<code><br>You want to get all outgoing edges from myVertex of edge type MyEdge. Which of the following code lines produce this result?
+    </p>
+    <answer correct><code>Iterable <Edge> edges =<br>myVertex.getEdges(Direction.OUT, "MyEdge");
+    </answer>
+    <answer><code>Iterable <Edge> edges =<br>db.getEdges(myVertex, Direction.OUT, "MyEdge");</code></answer>
+    <answer correct><code>Vertex v = db.command(new OSQLSynchQuery("select outE('MyEdge') from V where @rid = ?")).execute(myVertex);
+    <br>Iterable <Edge> edges = (Iterable <Edge>) v.getProperty("outE");</code>
+    </answer>
+    <answer correct><code>Iterable <Edge> edges = <br>db.command(new OSQLSynchQuery("select from MyEdge where out = ?")).execute(myVertex);</code>
+    </answer>
+    </question>
 </quiz>
