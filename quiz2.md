@@ -47,13 +47,13 @@
     <answer>Always <code>Iterable &LT;Vertex&GT;</code></answer>
     <answer>It depends. <ul><li>If you query a vertex class e.g. <code>select * from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>.</li> <li>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Edge&GT;</code>.</li> <li>If you query a function with integer results e.g. <code>select count(*) from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Integer&GT;</code></li> </ul>
     </answer>
-    <answer correct>It depends. <br>If you query a vertex class e.g. <code>select * from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>. <br>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Edge&GT;</code>. <br>If you query anything else e.g. <code>select Score from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>
+    <answer correct>It depends. <ul><li>If you query a vertex class e.g. <code>select * from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>.</li> <li>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Edge&GT;</code>.</li> <li>If you query anything else e.g. <code>select Score from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code></li> </ul>
     </answer>
     <explanation>Only if you explicitly query edges you get a result of type <code>Iterable &LT;Edge&GT;</code>. In most cases you get a result of type <code>Iterable &LT;Vertex&GT;</code>: If you select a subclass of V you get persistend vertices, if you select anything else you get temporary vertices. </explanation>
     </question>
     
     <question multiple>
-    <p>Suppose you have a certain vertex in your code <code>Vertex myVertex;<code><br>You want to get all outgoing edges from myVertex of edge type MyEdge. Which of the following code lines produce this result?
+    <p>Suppose you have a certain vertex in your code <code>Vertex myVertex;</code><br>You want to get all outgoing edges from myVertex of edge type MyEdge. Which of the following code lines produce this result?
     </p>
     <answer correct><code>Iterable <Edge> edges =<br>myVertex.getEdges(Direction.OUT, "MyEdge");
     </answer>
