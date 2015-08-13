@@ -63,6 +63,6 @@
     </answer>
     <answer correct><code>Iterable <Edge> edges = <br>db.command(new OSQLSynchQuery("select from MyEdge where out = ?")).execute(myVertex);</code>
     </answer>
-    <explanation><code>db.getEdges(myVertex, Direction.OUT, "MyEdge");</code> is wrong. db.getEdges() is only suitable if you want to retrieve all edges of an edge class.<br>Attention: If you use SQL and refer to a vertex class in the from part you have to use outE() or inE() with parantheses to get the connected edges. If you refer to an edge class in the from part you have to use in or out without parantheses to get the connected verteces. </explanation>
+    <explanation><code>db.getEdges(myVertex, Direction.OUT, "MyEdge");</code> is wrong. <code>db.getEdges()</code> is only suitable if you want to retrieve all edges of an edge class.<br>Attention: If you use SQL and refer to a vertex class in the FROM part you have to use <code>outE()<c/ode> or <code>inE()</code> with parantheses to get the connected edges. If you refer to an edge class in the FROM part you have to use <code>in</code> or <code>out</code> without parantheses to get the connected vertices. </explanation>
     </question>
 </quiz>
