@@ -36,7 +36,7 @@
     <answer>
         <code>db.command(new OSQLSynchQuery (<br><tab indent=20>"select * from MobileObject where out = #20:15 and Score = 5"<br>)).execute();</code>
     </answer>
-    <answer><code>db.command("select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score = 5").execute();</code>
+    <answer><code>db.command(<br>"select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score = 5"<br>).execute();</code>
     </answer>
     <explanation><code>db.command(&LT;OSQLSynchQuery&GT;).execute()</code> is the correct syntax. <br><code>select out from PROB_IS_AT where in.@rid = #20:15 and Score = 5 and out.@class = 'MobileObject'</code> is the correct SQL query: Start at an edge because an edge has only one start vertex (out) and one destination vertex (in). So search for all PROB_IS_AT edges with destination #20:15 and a Score of 5 or more which start at a MobileObject vertex; then return these MobileObject vertices.</explanation>
     </question>
