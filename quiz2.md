@@ -45,10 +45,13 @@
     <p>Which is the result of <code>db.command(<OSQLSynchQuery>).execute()?</code></p>
     <answer>A table of records</answer>
     <answer>Always <code>Iterable &LT;Vertex&GT;</code></answer>
-    <answer>It depends. <br>If you query a vertex class e.g. <code>select * from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>. <br>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Edge&GT;</code>. If you query a function with integer results e.g. <code>select count(*) from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Integer&GT;</code>
+    <answer>It depends. <ul><li>If you query a vertex class e.g. <code>select * from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>.</li> <li>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Edge&GT;</code>.</li> <li>If you query a function with integer results e.g. <code>select count(*) from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Integer&GT;</code></li> </ul>
     </answer>
     <answer correct>It depends. <br>If you query a vertex class e.g. <code>select * from MobileObject</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>. <br>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Edge&GT;</code>. <br>If you query anything else e.g. <code>select Score from PROB_IS_AT</code> <br>you get a result of type <code>Iterable &LT;Vertex&GT;</code>
     </answer>
     <explanation>Only if you explicitly query edges you get a result of type <code>Iterable &LT;Edge&GT;</code>. In most cases you get a result of type <code>Iterable &LT;Vertex&GT;</code>: If you select a subclass of V you get persistend vertices, if you select anything else you get temporary vertices. </explanation>
     </question>
+    
+    <question>
+    <p>
 </quiz>
