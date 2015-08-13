@@ -34,7 +34,7 @@
         </code>
     </answer>
     <answer>
-        <code>db.command(new OSQLSynchQuery (<br>"select * from MobileObject where out = #20:15 and Score = 5"<br>)).execute();</code>
+        <code>db.command(new OSQLSynchQuery (<br><tab indent=20>"select * from MobileObject where out = #20:15 and Score = 5"<br>)).execute();</code>
     </answer>
     <answer><code>db.command("select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score = 5").execute();</code>
     </answer>
@@ -46,7 +46,7 @@
     <answer>A table of records</answer>
     <answer>Always <code>Iterable &LT;Vertex&GT;</code></answer>
     <answer>It depends. If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>. If you query a function with integer results e.g. <code>select count(*) from MobileObject</code> you get a result of type <code>Iterable &LT;Integer&GT;</code></answer>
-<answer correct>It depends. If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>. If you query anything else e.g. <code>select Score from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code></answer>
-    <explanation>In most cases you get a result of type <code>Iterable &LT;Vertex&GT;</code>. Only if you explicitly query edges you get a result of type <code>Iterable &LT;Edge&GT;</code></explanation>
+<answer correct>It depends. <br>If you query a vertex class e.g. <code>select * from MobileObject</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code>. <br>If you query an edge class e.g. <code>select * from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Edge&GT;</code>. <br>If you query anything else e.g. <code>select Score from PROB_IS_AT</code> you get a result of type <code>Iterable &LT;Vertex&GT;</code></answer>
+    <explanation>Only if you explicitly query edges you get a result of type <code>Iterable &LT;Edge&GT;</code>. In most cases you get a result of type <code>Iterable &LT;Vertex&GT;</code>: If you select a subclass of V you get persistend vertices, if you select anything else you get temporary vertices. </explanation>
     </question>
 </quiz>
