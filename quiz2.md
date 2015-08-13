@@ -31,7 +31,7 @@
         <code>db.command(new OSQLSynchQuery ("select out from PROB_IS_AT where in.@rid = #20:15 and Score = 5 and out.@class = 'MobileObject'")).execute();</code>
     </answer>
     <answer>
-        <code>db.command(new OSQLSynchQuery ("select * from MobileObject where out = #20:15 and Score = 5")).execute();</code>
+        <code>db.command(new OSQLSynchQuery (<br>"select * from MobileObject where out = #20:15 and Score = 5"<br>)).execute();</code>
     </answer>
     <answer><code>db.command("select out('MobileObject) from PROB_IS_AT where in.@rid = #20:15 and Score = 5").execute();</code>
     </answer>
