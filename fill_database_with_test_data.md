@@ -3,7 +3,7 @@ To keep this tutorial simple we do not develop a sophisticated user interface to
 
 ## Execute the Following Steps
 
-* Download the file [FillDB.java](FillDB.java)
+* Download the file [FillDB.java](./src/startApplications/FillDB.java)
 * Import this file into the package *startApplications*.
 * Adapt the path to the database folder ``OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin")``
 * If you like you can edit FillDB.java and add some additional locations, objects or positions.
