@@ -16,8 +16,8 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 public class FillDB {
 
 	public static void main(String[] args) {
-		OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/RobotWorld", "admin", "admin");
-//		OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin");
+//		OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/RobotWorld", "admin", "admin");
+		OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin");
 		OrientGraph db = factory.getTx();
 		
 		// Clear the database: delete all edges and vertices
