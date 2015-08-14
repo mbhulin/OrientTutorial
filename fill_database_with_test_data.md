@@ -92,7 +92,7 @@ Vertex tableI = db.addVertex("class:Object", "Name", "dining table", "Descriptio
 ```
 
 ### Add a Linked List
-Locations have a Shape property which consists of a list of positions. To store a location with its shape you have to store the positions first, then create an ArrayList of positions, and finally use this list as parameter in the ``addVertice()`` method:
+Locations have a Shape property which consists of a list of positions. To store a location with its shape you have to store the positions first, then create an ArrayList of positions, and finally use this list as parameter in the ``addVertex()`` method:
 
 ```java
 Vertex p1 = db.addVertex("class:Position", "x", 400, "y", 200, "z", 0);
