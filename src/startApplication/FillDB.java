@@ -1,4 +1,4 @@
-package startApplication;
+package startApplications;
 
 import java.util.ArrayList;
 
