@@ -1,4 +1,4 @@
-package createDBSchema;
+package startApplications;
 
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
