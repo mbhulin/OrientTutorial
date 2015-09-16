@@ -18,7 +18,9 @@ To store a *shape* we have several options in OrientDB:
 alt="Property Hierarchy" width="350" height="320" border="10" />
 
 We need an ordered list of edges for a location vertex because the sequence of the positions is relevant for the shape. Otherwise the same set of corners could define different shapes:
+
 ![two shapes](twoShapes.png)
+
 * We can connect a *location vertex* with one *position vertex* by a "first_corner" edge. This position vertex is then connected to another position vertex by a "next-position" edge. ![Location connected to corners](LocationPositionGraph2.png)
 * OrientDB is not only a graph database but also obeyes to the object oriented paradigm. Therefore a third alternative is possible using aggregation: Each location has a *shape* property which is of type *LINKLIST* or *EMBEDDEDLIST* of positions. Use *EMBEDDEDLIST* if the positions can only exist as a part of a location, use *LINKLIST* if the positions can be used for other purposes.
 
