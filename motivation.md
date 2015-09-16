@@ -8,7 +8,7 @@ Find more information about this project at [Univesity Ravensburg-Weingarten, In
 ###World Model
 The service robot can perform a lot of tasks in a permanently changing environment, using its sensors: find its way avoiding obstacles at changing positions, detect and grasp objects, understand commands given in natural language etc. However to plan its activities the robot needs some information about its environment: Where are other rooms? Where are doors to get from one room to another one? Where could certain objects be? To which object class does an object belong? How can similar objects be distinguished?
 
-In his **Master-Theses Benjamin Stähle** suggested a database structure to store the information about the robot's environment. This structure is briefly described here.
+In his Master-Theses **Benjamin Stähle** suggested a database structure to store the information about the robot's environment. This structure is briefly described here.
 
 ####Locations and Location Concepts
 Usually the robot works in an apartment or flat. However sometimes the robot may have to do some work outside of the apartment e.g. bring something to a neighbor. The apartment consists of rooms connected by doors. The rooms may be on different floors. Thus the locations build a hierarchy connected by the "IS_PART_OF" relationship: A certain room e.g. the kitchen **is part of** the 1st floor which **is part of** an apartment which **is part of** a certain house.
@@ -22,7 +22,7 @@ The robot may store information about times usually necessary to go from one pos
 
 The following figure shows the topological hierarchy of real locations together with the conceptual location hierarchy.
 ![Figure Locations](LocationHierarchy.JPG)
-Conceptual hierarchy of location concepts, location instances and place instances (example concept: place 1 in lab kitchen)
+Figure 1: Conceptual hierarchy of location concepts, location instances and place instances (example concept: place 1 in lab kitchen)
 
 ####Objects and Object Concepts
 The robot has to use and interact with a lot of mobile objects. In contrast to the locations the mobile objects are not fixed at one position but can be moved, consumed, substituted by new objects etc. Similar to locations mobile objects belong to one or more object concepts. So we again use the "is a" relationship, here between mobile objects and object concepts.
@@ -30,11 +30,13 @@ The robot has to use and interact with a lot of mobile objects. In contrast to t
 <img src="ObjectHierarchy.JPG"
 alt="Property Hierarchy" width="370" height="360" border="10" />
 
+Figure 2: Hierarchy of mobile objects and object concepts
+
 ####Properties of Objects
 Each object has several properties that may be relevant for the service robot e.g. to distinguish similar objects by color or by size. The robot might get the instruction: "Bring me my hat!" and ask in response: "Which hat? The black one or the blue one?" Each property type like color has some possible values like Yellow, Green or Blue. Different objects may have different properties. The color e.g. is important for clothes but is not of interest for a newspaper.
 
 <img src="PropertyHierarchy.JPG"
 alt="Property Hierarchy" width="300" height="270" border="10" />
 
-Figure: Hierarchy of Property Concepts Pc and Property Instances 
+Figure 3: Hierarchy of Property Concepts Pc and Property Instances Pi
 
