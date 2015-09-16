@@ -4,6 +4,8 @@ OrientDB can be used to store [graph databases](http://en.wikipedia.org/wiki/Gra
 
 ![Part of a Graph](OrientGraph.JPG)
 
+Figure 4: Visual representation of a graph
+
 Vertices and edges store information in properties. E.g. you may want to create a vertex to store a person with a Name, an E-Mail and a Telephone property.
 
 With OrientDB it is possible to work in a **schema-less mode**. In this mode there are only two types of records in your database: vertices stored in class V and edges stored in class E. Each vertex may have different properties. The schemaless mode is very good if the objects differ widely in their properties or if your schema is changing quickly.
