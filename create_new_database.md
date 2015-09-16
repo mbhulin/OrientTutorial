@@ -13,6 +13,8 @@ If you prefer to watch a screencast video click on the video start page.
 " target="_blank"><img src="ThumbnailEclipseVideo.JPG"
 alt="Eclipse Video" width="240" height="180" border="10" /></a>
 
+Screencast Video 1: Create a new Java project in Eclipse, create a new Orient Database
+
 ### Create a Java Project
 In this tutorial we will use Java to define the database structure. To do so we will first create a Java application.
 
@@ -41,7 +43,7 @@ Click Finish - a new empty Java project is created and is added to the list of y
 In the package explorer choose your new project *RobotWorldModel*. Click on the "New Package"-icon or click on *File* > *New* > *Package* in the main menu. In the "New Package"-dialog type the package name e.g. *startApplications*.
 
 ### Create a new Java Class with a Main Method
-In the package explorer choose the newly created package *createDBSchema*. In the main menu click on *File* > *New* > *Class* or click on the "New Java Class"-icon. In the "New Class"-dialog type in the class name e.g. *CreateDBSchema*, select the check box "Create a static main method" and click *Finish*.
+In the package explorer choose the newly created package *startApplications*. In the main menu click on *File* > *New* > *Class* or click on the "New Java Class"-icon. In the "New Class"-dialog type in the class name e.g. *startApplications*, select the check box "Create a static main method" and click *Finish*.
 
 ### Create a New Database
 The graph-API of OrientDB is based on [Tinkerpop Blueprints](https://github.com/tinkerpop/blueprints/wiki) which is a general API for graph traversal. Inside the main method we use this API to establish a connection to the database.
