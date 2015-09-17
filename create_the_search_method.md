@@ -1,6 +1,6 @@
 # Create the Search Method
 
-The special task of a service robot we will simulate in this tutorial is to search for a special object. Imagine that a person instructs the robot to bring a glass of apple juice. The robot has to understand the spoken instruction, parse it into simple actions, plan the actions and finally perform the task. In this example the robot has to search for a juice glass then to search for apple juice, bring the juice to the glass, fill the glass with the juice and finally bring the glass to the person.
+The special task of a service robot we will simulate in this tutorial is to search for a mobile object. Imagine that a person instructs the robot to bring a glass of apple juice. The robot has to understand the spoken instruction, parse it into simple actions, plan the actions and finally perform the task. In this example the robot has to search for a juice glass then to search for apple juice, bring the juice to the glass, fill the glass with the juice and finally bring the glass to the person.
 
 In this tutorial we will consider one frequent task: **search for an object**
 
@@ -26,7 +26,7 @@ Then create a new JAVA class **Operations** in this package.
 Inside of the class Operations write a new method ``createPosList()``. As the name says the result should be a list of positions and positions are vertices. To determine possible positions of the search Object the method needs the search object as a parameter which is also a vertex. So we get:
 
 ```java
-public ArrayList<Vertex> createPosList(Vertex obj) {
+public List<Vertex> createPosList(Vertex obj) {
 ```
 
 To retrieve possible positions of the search object we can use SQL and query the PROB_IS_AT subclass of E. There are two alternatives for each PROB_IS_AT edge:
@@ -69,7 +69,7 @@ public class PositionScore {
 Now  we can declare a list where the positions are collected in ``createPosList()``.
 
 ```java
-ArrayList <PositionScore> posList = new ArrayList <PositionScore> (); //Result list
+List <PositionScore> posList = new ArrayList <PositionScore> (); //Result list
 ```
 
 Insert each position returned by the database into this list.
@@ -84,9 +84,9 @@ for (Vertex result: (Iterable<Vertex>) db.command(query1).execute(obj)) {
 
 The SQL-query is a little bit more complicated. We want to find the following situation:
 
-Object obj --> PROB_IS_AT e1 --> another object --> PROB_IS_AT e2 --> Position pos
+MobileObject obj --> PROB_IS_AT e1 --> another mobile object --> PROB_IS_AT e2 --> Position pos
 
-To get the *Position* vertices we have to follow the arrows. Start the search with ``PROB_IS_AT e1`` which starts at the *Object* obj. Hence the FROM- and WHERE-part of the SQL-query is ``from PROB_IS_AT where out = ?``. ``in`` delivers the *other object* and from this object we want to get all outgoing edges of class 'PROB_IS_AT': ``in.outE('PROB_IS_AT')`` .
+To get the *Position* vertices we have to follow the arrows. Start the search with ``PROB_IS_AT e1`` which starts at the *MobileObject* obj. Hence the FROM- and WHERE-part of the SQL-query is ``from PROB_IS_AT where out = ?``. ``in`` delivers the *other object* and from this object we want to get all outgoing edges of class 'PROB_IS_AT': ``in.outE('PROB_IS_AT')`` .
 
 So we try the following query:
 ```sql
