@@ -74,14 +74,14 @@ db.commit();
 ```
 
 ### Create Vertex using SQL
-Instead of Blueprint's addVertex method you could also use SQL to create a new vertex:
+Instead of Blueprint's addVertex method you could use SQL to create a new vertex:
 
 ```java
 db.command(new OCommandSQL ("INSERT INTO Location (Name, Description) VALUES ('Sophia's room','Bedroom of Sophia')")).execute();
 ```
 
 ### Add an Embedded Document
-In our database for service robots physical objects have a size which consists of three dimensions: x, y and z. Since the property **Size** is not a linked vertex but embedded inside of the object vertex it has to be created as a **document** first, using the [Document API](http://orientdb.com/docs/last/Document-Database.html):
+In our database for service robots mobile objects have a size which consists of three dimensions: x, y and z. Since the property **Size3D** is not a linked vertex but embedded inside of the object vertex it has to be created as a **document** first, using the [Document API](http://orientdb.com/docs/last/Document-Database.html):
 
 ```java
 ODocument sizeTable = new ODocument ("Size3D");
