@@ -5,7 +5,7 @@ In your Eclipse project *RobotWorldModel* execute the following steps:
 * Add a new package with name *tests*.
 * Add the library *JUnit4* to your project. To do this go to  
 *Project > Properties > Java Build Path*  
-and there to the Libraries tab. Click on *Add Library*, choose *JUnit* and then *JUnit4*.
+and there to the *Libraries* tab. Click on *Add Library*, choose *JUnit* and then *JUnit4*.
 * In the tests package add a new Java class with name *LocationTests*.
 * Add a static method ``setupBeforeClass()``. This method is executed before all tests and hence is used to prepare a proper environment for the tests. The connection to the database is established and all data in the class *Location* are deleted. Notice: This time a *remote connection* to the database is used. Hence the server must be running when you execute the tests.
 
@@ -40,8 +40,9 @@ public class LocationTests {
 	@Test
 	public void testPositionWithoutX() {
 		String errorMessage = "";
-		Vertex pos = db.addVertex("class:Position2D");
+		Vertex pos = db.addVertex("class:Position");
 		pos.setProperty("y", 100);
+		pos.setProperty("z", 0);
 		try {
 			db.commit();
 		} catch (Exception e) {
@@ -50,6 +51,7 @@ public class LocationTests {
 		}
 		Assert.assertTrue(errorMessage.contains("x' is mandatory"));
 	}
+
 ```
 
 * Add a test where you try to store a *Location* with *Name* set to NULL. In this test method SQL is used. Again OrientDB should not store this location.
@@ -76,10 +78,10 @@ public class LocationTests {
 	public void testLocationOK () {
 		long nrLocationsBefore = db.countVertices("Location");
 		String errorMessage = "No exception";
-		Vertex pos1 = db.addVertex("class:Position2D", "x", 0, "y", 0);
-		Vertex pos2 = db.addVertex("class:Position2D", "x", 1000, "y", 0);
-		Vertex pos3 = db.addVertex("class:Position2D", "x", 1000, "y", 500);
-		Vertex pos4 = db.addVertex("class:Position2D", "x", 0, "y", 500);
+		Vertex pos1 = db.addVertex("class:Position", "x", 0, "y", 0, "z", 0);
+		Vertex pos2 = db.addVertex("class:Position", "x", 1000, "y", 0, "z", 0);
+		Vertex pos3 = db.addVertex("class:Position", "x", 1000, "y", 500, "z", 0);
+		Vertex pos4 = db.addVertex("class:Position", "x", 0, "y", 500, "z", 0);
 		
 		ArrayList <Vertex> shape = new ArrayList <Vertex> ();
 		shape.add(pos1);
@@ -101,9 +103,15 @@ public class LocationTests {
 		long nrLocationsAfter = db.countVertices("Location");
 		Assert.assertEquals("No exception", errorMessage);
 		Assert.assertEquals(nrLocationsBefore + 1, nrLocationsAfter);
+		db.removeVertex(pos1);
+		db.removeVertex(pos2);
+		db.removeVertex(pos3);
+		db.removeVertex(pos4);
+		db.removeVertex(newLocation);
+		db.commit();
 	}
 ```
 
-* Start the OrientDB server. Then run your test class. All tests should succeed.
+* Start the [OrientDB server](http://orientdb.com/docs/last/Tutorial-Run-the-server.html). Then run your test class. To do this right click on *LocationTests.java* in the Eclipse package explorer. In the pop up menu choose *Run As* > *JUnit Test*. All tests should succeed.
 
 You can download both Java files, *CreateDBSchema.java* and *LocationTests.java*, as [ZIP-Archive here](RobotWorldModel_V1.zip).
