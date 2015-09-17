@@ -1,5 +1,5 @@
 # Develop the Schema for Locations
-![Location Hierarchy](LocationHierarchy.JPG)
+<img src="LocationHierarchy.JPG" alt="Location Hierarchy" width="600" height="450" border="10" />
 
 Locations relevant for the robot are rooms, floors, houses, even outdoor locations like a yard or a street. As discussed before in the chapter [Motivation: Locations and Location Concepts](motivation.md#Locations-and-Location-Concepts) we distinguish between real locations and location concepts. Hence we have to define the vertex classes **Location** and **LocationConcept** as subclasses of V.
 
@@ -38,7 +38,7 @@ If you prefer to watch the next screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel2a.mp4
 " target="_blank"><img src="ThumbnailEclipseVideo2a.JPG"
-alt="Eclipse Video" width="160" height="150" border="10" /></a>
+alt="Eclipse Video" width="240" height="225" border="10" /></a>
 
 Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now want to add a new vertex class *Position* which consists of three Cartesian coordinates. Since the concept of a three dimensional vector may be useful for other classes let's define an abstract class *Coordinates*. Abstract classes cannot be declared with the  Tinkerpop Blueprints API. Here we use SQL and ``db.command(<OSQLCommand>).execute()``instead.
 
@@ -80,7 +80,7 @@ The result of ``createProperty()`` is of type ``OrientVertexProperty``. Therefor
 
 Then *locationConcept* and *Location* are created as subclasses of *NamedVertex*.
 
-*NamedVertex* isn't an abstract class. If we wanted to make *NamedVertex* abstract we could not use ``db.createVertexType()`` but had to use SQL as for the *Coordinates* class or the Document API.
+*NamedVertex* could be an abstract class, but is not, because the Graph API doesn't allow to create abstract classes. If we wanted to make *NamedVertex* abstract we could not use ``db.createVertexType()`` but had to use SQL as we did for the *Coordinates* class or the Document API.
 
 ```java
 OrientVertexType locationConcept = db.createVertexType("LocationConcept", "NamedVertex");
@@ -113,7 +113,7 @@ is_a.createProperty("out", OType.LINK, location).setMandatory(true);
 is_a.createProperty("in", OType.LINK, locationConcept).setMandatory(true);
 
 ```
-However since we want to use the IS_A edge class also for mobile object entities we omit these constraints.
+However since we want to use the IS_A edge class also for mobile object entities we **omit these constraints**.
 
 ## Create the Edge Class "IS_CONNECTED_TO"
 
