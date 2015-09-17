@@ -23,7 +23,7 @@ mobileObject.createProperty("Size", OType.EMBEDDED, size3D); // Size of an objec
 
 ```
 
-At last we define the edge classes. Since we already have defined the IS_A and IS_PART_OF edge classes for locations we only need to add the edge class **PROB_IS_AT** which stores the probability of an object being at a location, position or in/on/at another object. Therefore this edge class has some sort of **probability** as a property. In fact not a probability but a **score** is stored. Additionally a **height** may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
+At last we define the edge classes. Since we already have defined the IS_A and IS_PART_OF edge classes for locations we only need to add the edge class **PROB_IS_AT** which stores the probability of an object being at a location, position or in/on/at another object. Therefore this edge class has some sort of **probability** as a property. In fact not a probability but a **score** is stored. If we used a probability we would have to guarantee that the sum of all probabilities for a mobile object is 1 when one probability is changed. This could be a time consuming operation. In contrast score values can be changed independently. Additionally a **height** may be stored as information at which level an object can be found e. g. in a cupboard or on a shelf.
 
 If you prefer to watch the last steps as screencast video click on the video start page.
 
