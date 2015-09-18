@@ -154,7 +154,9 @@ for (PositionScore ps: posList) {
 	Iterable <Vertex> result = db.command(dijkstraQuery).execute();
 ```
 
-Attention: The result of ``db.command(<OSQLSynchQuery>).execute()`` is always a list of vertices as Iterable. Even if you expect a list of integer e. g. in the query  ``SELECT MIN(x) FROM Position GROUP BY inLocation`` you get a list of vertices with a property "MIN". Therefore you have to iterate ``Iterable <Vertex> result`` though result has only one element. With ``v.getProperty("dijkstra")`` you get the result of the dijkstra function which is the list of vertices on the path.
+>**NOTE**: The result of ``db.command(<OSQLSynchQuery>).execute()`` is always a list of vertices as Iterable. Even if you expect a list of integer e. g. in the query  ``SELECT MIN(x) FROM Position GROUP BY inLocation`` you get a list of vertices with a property "MIN". 
+
+Therefore you have to iterate ``Iterable <Vertex> result`` though result has only one element. With ``v.getProperty("dijkstra")`` you get the result of the dijkstra function which is the list of vertices on the path.
 
 ```java
 	Iterable <OrientVertex> pathIterable = null;
@@ -172,7 +174,7 @@ Attention: The result of ``db.command(<OSQLSynchQuery>).execute()`` is always a 
 
 ### Repeat the search until the object is found or all possible positions are visited
 
-Create a function ``searchForObject()`` which first calls ``createPosList()``.
+Create a function ``searchForObject()`` which first calls ``createPosList()`` we have just developed.
 
 ```java
 public String searchForObject (Vertex start, Vertex dest, Vertex searchObject) {
@@ -213,5 +215,7 @@ while (!posList.isEmpty()) {
 }
 ```
 
-Since the the function ``searchForObject()`` returns a string with information about the success of the search the search path has to be stored in a variable: ``private ArrayList <ArrayList <Vertex>> searchPath;`` with this instruction: ``searchPath.add(currentPath);``
+Since the the function ``searchForObject()`` returns a string with information about the success of the search the search path has to be stored in a variable:  
+``private ArrayList <ArrayList <Vertex>> searchPath``  
+with this instruction: ``searchPath.add(currentPath)``
 
