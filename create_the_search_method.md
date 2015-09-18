@@ -123,9 +123,10 @@ select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as com
 Again we iterate over the result set and fill our result list ``posList`` with ``PositionScore`` pairs.`
 
 If you like you can compare the last OrientDB query on a **graph database** with a corresponding query on a **relational database**. Suppose we had three tables: A Position-table with the coordinates x, y and z as columns and a PID as primary key, a MobileObject-table with OID as primary key a connection table PROB_IS_AT_O_To_O-table with a score column and with OIDout and OIDin as foreign keys which connects two mobile objects and a connection table PROB_IS_AT_O_To_P with a score column and OID and PID as foreign keys which connects an object with a position.
-![relational table structure](RelTableStruct.png)
 
-Three slow join operations are necessary.
+<img src="RelTableStruct.jpg" alt="relational table structure" height="360" width="600"> 
+
+Three slow join operations are necessary for the query, using a relational database.
 
 ```sql
 SELECT pos.x, pos.y, pos.z, proboo.score * probop.score / 10 as combiScore
@@ -215,7 +216,5 @@ while (!posList.isEmpty()) {
 }
 ```
 
-Since the the function ``searchForObject()`` returns a string with information about the success of the search the search path has to be stored in a variable:  
-``private ArrayList <ArrayList <Vertex>> searchPath``  
-with this instruction: ``searchPath.add(currentPath)``
+Since the the function ``searchForObject()`` returns a string with information about the success of the search the search path has to be stored in a variable: ``private ArrayList <ArrayList <Vertex>> searchPath`` with this instruction: ``searchPath.add(currentPath)``
 
