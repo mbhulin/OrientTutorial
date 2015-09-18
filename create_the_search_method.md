@@ -122,10 +122,10 @@ select e2.in as pos, e1.Score as s1, e2.Score as s2, eval('s1 * s2 / 10') as com
 
 Again we iterate over the result set and fill our result list ``posList`` with ``PositionScore`` pairs.`
 
-If you like you can compare the last OrientDB query on a **graph database** with a corresponding query on a **relational database**. Suppose we had three tables: A Position-table with the coordinates x, y and z as columns and a PID as primary key, a MobileObject-table with OID as primary key a connection table PROB_IS_AT_O_To_O-table with a score column and with OIDout and OIDin as foreign keys which connects two mobile objects and a connection table PROB_IS_AT_O_To_P with a score column and OID and PID as foreign keys which connects an object with a position.
+####Excursus: Comparison to query in ralational database
 
-<img src="RelTableStruct.jpg" alt="relational table structure" height="360" width="600"> 
-
+If you like you can compare the last OrientDB query on a **graph database** with a corresponding query on a **relational database**. Suppose we had three tables: A Position-table with the coordinates x, y and z as columns and a PID as primary key, a MobileObject-table with OID as primary key a connection table PROB_IS_AT_O_To_O-table with a score column and with OIDout and OIDin as foreign keys which connects two mobile objects and a connection table PROB_IS_AT_O_To_P with a score column and OID and PID as foreign keys which connects an object with a position.  
+<img src="RelTableStruct.jpg" alt="relational table structure" height="350" width="600">  
 Three slow join operations are necessary for the query, using a relational database.
 
 ```sql
@@ -136,6 +136,13 @@ WHERE   proboo.OIDin = mo.OID AND
         probop.PID = pos.PID AND
         proboo.OIDout = ?
 ```
+####Excursus: Traversing a graph
+
+Imagine there were more than one indirection possible in the PROB_IS_AT relation between mobile objects, e.g. a glass is on a tablet which is on a table. So we have this situation in the graph:
+
+MobileObject o1 -PROB_IS_AT-> MobileObject o2 -PROB_IS_AT-> ... MobileObject on -PROB_IS_AT-> Position p
+
+If we don't know how many times we have to follow PROB_IS_AT from one mobile object to the next until we reach a position we cannot use SELECT. For these cases OrientDB offers the TRAVERSE command.
 
 ### Calculate the paths to all positions in the position list
 
