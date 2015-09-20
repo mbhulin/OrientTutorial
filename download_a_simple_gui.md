@@ -1,5 +1,5 @@
 # GUI to get the Parameters for the Search
-To define the parameters download a simple GUI (Graphical User Interface):
+To define the parameters of the search (search object, current position of search object, current position of robot) download a simple GUI (Graphical User Interface):
 
 * In Eclipse create a new package: *gui*
 * Download the files 
