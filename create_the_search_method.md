@@ -144,11 +144,19 @@ MobileObject o1 -PROB_IS_AT-> MobileObject o2 -PROB_IS_AT-> ... MobileObject on 
 
 If we don't know how many times we have to follow PROB_IS_AT from one mobile object to the next until we reach a position we cannot use SELECT. For these cases OrientDB offers the TRAVERSE command. See the [documentation](http://orientdb.com/docs/last/SQL-Traverse.html) for the full syntax of TRAVERSE. The syntax for a simple form is: 
 ```sql
-TRAVERSE <fields> FROM <target> WHERE <condition>
+TRAVERSE <fields> FROM <target>
 ```
-In our application the *target* is a single vertex: the search object o1. In *fields* specify the fields necessary to follow the path: ```outE('PROB_IS_AT')``` to get all edges of class PROB_IS_AT starting at o1 and later at o2, o3 ... on, and 
+In our application the *target* is a single vertex: the search object o1. In *fields* specify the fields necessary to follow the path: ```outE('PROB_IS_AT')``` to get all edges of class PROB_IS_AT starting at o1 and later at o2, o3 ... on, and ```PROB_IS_AT.in``` to get the destination vertices of these edges: o2, ... on, p.
 
-
+Surround the TRAVERSE command with a SELECT command to specify the desired result of the query (projection operation) and a  *WHERE condition* to filter only the paths which end at a position: ```WHERE @class = 'Position'```. Combine the pieces to the complete SQL command if o1 is the vertex with id #19:3:
+```sql
+SELECT @rid, $path
+FROM (
+  TRAVERSE outE('PROB_IS_AT'), PROB_IS_AT.in
+  FROM #19:3
+)
+WHERE @class = 'Position'
+```
 
 ### Calculate the paths to all positions in the position list
 
