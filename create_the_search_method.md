@@ -138,11 +138,17 @@ WHERE   proboo.OIDin = mo.OID AND
 ```
 ####Excursus: Traversing a graph
 
-Imagine there were more than one indirection possible in the PROB_IS_AT relation between mobile objects, e.g. a glass is on a tablet which is on a table. So we have this situation in the graph:
+Imagine there would be more than one indirection possible in the PROB_IS_AT relation between mobile objects, e.g. a glass is on a tablet which is on a table. Then we would have this representation in the graph:
 
 MobileObject o1 -PROB_IS_AT-> MobileObject o2 -PROB_IS_AT-> ... MobileObject on -PROB_IS_AT-> Position p
 
-If we don't know how many times we have to follow PROB_IS_AT from one mobile object to the next until we reach a position we cannot use SELECT. For these cases OrientDB offers the TRAVERSE command.
+If we don't know how many times we have to follow PROB_IS_AT from one mobile object to the next until we reach a position we cannot use SELECT. For these cases OrientDB offers the TRAVERSE command. See the [documentation](http://orientdb.com/docs/last/SQL-Traverse.html) for the full syntax of TRAVERSE. The syntax for a simple form is: 
+```sql
+TRAVERSE <fields> FROM <target> WHERE <condition>
+```
+In our application the *target* is a single vertex: the search object o1. In *fields* specify the fields necessary to follow the path: ```outE('PROB_IS_AT')``` to get all edges of class PROB_IS_AT starting at o1 and later at o2, o3 ... on, and 
+
+
 
 ### Calculate the paths to all positions in the position list
 
