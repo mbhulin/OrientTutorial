@@ -9,3 +9,7 @@ This chapter consists of three sections:
 2. The main part of this chapter is the [search algorithm](create_the_search_method.md).
 3. To start the simulation of the robot's search you can [download a simple GUI](download_a_simple_gui.md).
 
+If you prefer to watch a screencast video click on the video start image:
+<a href="RWM-Search.mp4
+" target="_blank"><img src="RWM-Search.jpg"
+alt="Eclipse Video" width="416" height="359" border="10" /></a>
