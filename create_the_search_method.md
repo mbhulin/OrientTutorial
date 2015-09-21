@@ -165,6 +165,11 @@ WHERE @class = 'Position'
 
 ### Calculate the paths to all positions in the position list
 
+If you prefer you can watch the next screencast video:
+<a href="RWM-Search-3.mp4
+" target="_blank"><img src="StartScreencastVideo.jpg"
+alt="Eclipse Video" width="200" height="30" border="10" /></a>
+
 Having implemented ```CreatePosList()``` we can now implement the method ```SearchForObject()``` and use ```CreatePosList()``` there. Create a function ``searchForObject()`` which first calls ``createPosList()``.
 
 ```java
