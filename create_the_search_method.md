@@ -160,15 +160,28 @@ WHERE @class = 'Position'
 
 ### Calculate the paths to all positions in the position list
 
-This is a routing task. One possible routing algorithm is the [Dijkstra algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). It is implemented in OrientDB ([dijkstra function in OrientDB](http://orientdb.com/docs/last/SQL-Functions.html#dijkstra)) and thus can be executed on the server without data transfer to the client.
-
-We iterate the *position list* and for each position calculate the path to it from the current position of the robot, the estimated time to traverse the path and finally the ratio of passing time to the score of the position. The lower the pass time or the higher the score, the better is that position. The position with the least (pass time / score)-ratio is chosen as the next position where the robot should go.
+Having implemented ```CreatePosList()``` we can now implement the method ```SearchForObject()``` and use ```CreatePosList()``` there. Create a function ``searchForObject()`` which first calls ``createPosList()``.
 
 ```java
-PositionScore bestPos = null; // Store position with best passTime/Score ratio found so far in bestPos
-float bestCost = Float.MAX_VALUE; // bestCost = passTime/Score ratio of best bestPos
-Iterable<OrientVertex> pathToBestPos = null;
-for (PositionScore ps: posList) {
+public String searchForObject (Vertex start, Vertex dest, Vertex searchObject) {
+		
+	ArrayList <PositionScore> posList = createPosList (searchObject); //Create list of positions where object could be together with scores and store it in posList
+	if (posList.isEmpty()) return "No positions exist where object " + searchObject.getProperty("Name") + " could be";
+	String startRid = start.getId().toString();
+
+```
+
+The search is a routing task. One possible routing algorithm is the [Dijkstra algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). It is implemented in OrientDB ([dijkstra function in OrientDB](http://orientdb.com/docs/last/SQL-Functions.html#dijkstra)) and thus can be executed on the server without data transfer to the client.
+
+We iterate the position list *posList* and for each position calculate the path to it from the current position of the robot, the estimated time to traverse the path and finally the ratio of passing time to the score of the position. The lower the pass time or the higher the score, the better is that position. The position with the least (pass time / score)-ratio is chosen as the next position where the robot should go.
+
+```java
+public String searchForObject (Vertex start, Vertex dest, Vertex searchObject) {
+  ... // some other code is discussed later (see below)
+  PositionScore bestPos = null; // Store position with best passTime/Score ratio found so far in bestPos
+  float bestCost = Float.MAX_VALUE; // bestCost = passTime/Score ratio of best bestPos
+  Iterable<OrientVertex> pathToBestPos = null;
+  for (PositionScore ps: posList) {
 	// let OrientDB calculate the best path to position ps.pos using the dijkstra algorithm
 	String destRid = ps.pos.getId().toString(); // id of Vertex dest
 	String dijkstraQueryString = "SELECT dijkstra(" + startRid + ", " + destRid + ", 'PassTimeSec', 'BOTH', 'IS_CONNECTED_TO')";
@@ -195,17 +208,6 @@ Therefore you have to iterate ``Iterable <Vertex> result`` though result has onl
 ```
 
 ### Repeat the search until the object is found or all possible positions are visited
-
-Create a function ``searchForObject()`` which first calls ``createPosList()`` we have just developed.
-
-```java
-public String searchForObject (Vertex start, Vertex dest, Vertex searchObject) {
-		
-	ArrayList <PositionScore> posList = createPosList (searchObject); //Create list of positions where object could be together with scores and store it in posList
-	if (posList.isEmpty()) return "No positions exist where object " + searchObject.getProperty("Name") + " could be";
-	String startRid = start.getId().toString();
-
-```
 
 Go the position with the best (passTime/Score)-ratio and look for the search object there. If the object is there the search is finished. Otherwise remove the current position from the position list and repeat the search: this is the enclosing ``while``-loop.
 
@@ -238,4 +240,6 @@ while (!posList.isEmpty()) {
 ```
 
 Since the the function ``searchForObject()`` returns a string with information about the success of the search the search path has to be stored in a variable: ``private ArrayList <ArrayList <Vertex>> searchPath`` with this instruction: ``searchPath.add(currentPath)``
+
+The search function is now ready to use. In the next step you can download a GUI that calls the search method.
 
