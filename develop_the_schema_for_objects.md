@@ -28,8 +28,8 @@ At last we define the edge classes. Since we already have defined the IS_A and I
 If you prefer to watch the last steps as screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel2c.mp4
-" target="_blank"><img src="ThumbnailEclipseVideo2c.JPG"
-alt="Eclipse Video" width="240" height="225" border="10" /></a>
+" target="_blank"><img src="StartScreencastVideo.jpg"
+alt="Eclipse Video" width="200" height="30" border="10" /></a>
 
 ```java
 OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
