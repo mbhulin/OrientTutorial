@@ -37,8 +37,8 @@ In this tutorial we will use the third alternative because *LINKLIST* is an inte
 If you prefer to watch the next screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel2a.mp4
-" target="_blank"><img src="ThumbnailEclipseVideo2a.JPG"
-alt="Eclipse Video" width="240" height="225" border="10" /></a>
+" target="_blank"><img src="StartScreencastVideo.jpg"
+alt="Eclipse Video" width="200" height="30" border="10" /></a>
 
 Remember our small Java program with the Java class *CreateDBSchema*. Up to now it consists only of two instructions which create the database "RobotWorld". We now want to add a new vertex class *Position* which consists of three Cartesian coordinates. Since the concept of a three dimensional vector may be useful for other classes let's define an abstract class *Coordinates*. Abstract classes cannot be declared with the  Tinkerpop Blueprints API. Here we use SQL and ``db.command(<OSQLCommand>).execute()``instead.
 
