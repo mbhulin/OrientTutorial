@@ -10,10 +10,9 @@ In this tutorial we will use the last method.
 If you prefer to watch a screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel.mp4
-" target="_blank"><img src="ThumbnailEclipseVideo.JPG"
-alt="Eclipse Video" width="240" height="180" border="10" /></a>
+" target="_blank"><img src="StartScreencastVideo.jpg"
+alt="Eclipse Video" width="200" height="30" border="10" /></a>
 
-Screencast Video 1: Create a new Java project in Eclipse, create a new Orient Database
 
 ### Create a Java Project
 In this tutorial we will use Java to define the database structure. To do so we will first create a Java application.
