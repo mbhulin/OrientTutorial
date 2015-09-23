@@ -2,8 +2,8 @@
 If you prefer to watch the next steps as screencast video click on the video start page.
 
 <a href="EclipseRobotWorldModel2b.mp4
-" target="_blank"><img src="ThumbnailEclipseVideo2b.JPG"
-alt="Eclipse Video" width="240" height="225" border="10" /></a>
+" target="_blank"><img src="StartScreencastVideo.jpg"
+alt="Eclipse Video" width="200" height="30" border="10" /></a>
 
 While the *location* class stores all immobile objects we need an **object class** to store mobile objects. Of course the border between immobile locations and mobile objects is fluent. A chair will often be moved to other positions, a table may be moved a little bit after cleaning the floor and a heavy wardrobe normally isn't moved at all. If you want to read again about the details of mobile objects go back to the chapter [Motivation](motivation.md#Objects-and-Object-Concepts).
 
