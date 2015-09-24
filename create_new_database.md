@@ -13,7 +13,6 @@ If you prefer to watch a screencast video click on the video start page.
 " target="_blank"><img src="StartScreencastVideo.jpg"
 alt="Eclipse Video" width="200" height="30" border="10" /></a>
 
-
 ### Create a Java Project
 In this tutorial we will use Java to define the database structure. To do so we will first create a Java application.
 
