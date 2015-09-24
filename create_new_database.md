@@ -55,7 +55,7 @@ The first instruction connects to the database. If it does not exist the databas
 
 The second instruction gets a new connection to the database from the factory. Since we want to define the structure of the database we do not use transactions and use ``factory.getNoTx()`` instead of ``factory.getTx()``.
 
-### Create a Graph Database using the Document API
+### Excursus: Create a Graph Database using the Document API
 Do you prefer *remote mode* to create a database? This subsection explains an alternative creating a database which also works in *remote mode*. However you can very well skip this subsection and go on with the tutorial.
 
 Since a graph database in OrientDB is a special *document database* with the special classes V for Vertices and E for Edges you can create a graph database using the document API. After having created the database you can then connect to it on the remote server using ``OrientGraphFactory()`` as you saw in the last section. The newly created database automatically gets three users, one of them is the admin user with the credentials "admin", "admin".
