@@ -32,11 +32,11 @@ The last alternative (EMBEDDEDLIST) is similar to the third one but the position
 
 In this tutorial we will use the third alternative because *LINKLIST* is an interesting special feature of OrientDB. Since positions can also be used to indicate the position of *mobile objects* we don't embed them into locations.
 
-## Create the Vertex Classes "Position" using the Java API
+## Create the Vertex Class "Position" using the Java API
 
 If you prefer to watch the next screencast video click on the video start page.
 
-<a href="EclipseRobotWorldModel2a.mp4
+<a href="EclipseRobotWorldModel2.mp4
 " target="_blank"><img src="StartScreencastVideo.jpg"
 alt="Eclipse Video" width="200" height="30" border="10" /></a>
 
@@ -65,7 +65,7 @@ Then we can use ``db.createVertexType()`` of the Blueprints API to define *Posit
 OrientVertexType position = db.createVertexType("Position", coordinate); // Coordinate used as position
 ```
 
-## Create the Vertex Class "Location" and "LocationConcept"
+## Create the Vertex Classes "Location" and "LocationConcept"
 
 OrientDB supports inheritance. Both classes, *LocationConcept* and *Location*, need a *Name* and a *Description* attribute. We will see later that other classes have a name and a description attribute, too. Therefore we first define a subclass **NamedVertex** of V. Then *Location* and *LocationConcept* are subclasses of *NamedVertex*.
 
