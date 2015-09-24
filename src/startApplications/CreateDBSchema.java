@@ -61,18 +61,22 @@ public class CreateDBSchema {
 		OrientEdgeType is_connected_to = db.createEdgeType("IS_CONNECTED_TO");
 		
 		OrientVertexType objectConcept = db.createVertexType("ObjectConcept", namedVertex); // Object types like cup, plate, table, ...
-		OrientVertexType object = db.createVertexType("Object", namedVertex); // Real Objects like the red cup with the little crack
-		object.createProperty("Path_to_Image", OType.STRING); // Path to image file
-		OrientVertexType size3D = db.createVertexType("Size3D", coordinate); // The abstract class coordinate is used to store sizes of objects
-		object.createProperty("Size", OType.EMBEDDED, size3D); // Size of an object with x > y and z = height in the object's default position
-		
-		/*
-		 * Sort of probability (score) that an object is at a certain position or at another object. The Score value is between 0 and 10.
-		 * However the sum of all scores is not fixed as it would be with probabilities. Scores are only compared.
-		 */
-		OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
-		prob_is_at.createProperty("Score", OType.INTEGER).setMin("0").setMandatory(true).setNotNull(true);
-		prob_is_at.createProperty("Hight", OType.FLOAT); // Height above floor for robot's linear drive
+	OrientVertexType mobileObject = db.createVertexType("MobileObject", namedVertex);
+    // Real mobile objects like the red cup with the little crack
+    mobileObject.createProperty("Path_to_Image", OType.STRING); // Path to image file
+    OrientVertexType size3D = db.createVertexType("Size3D", coordinate);
+    // The abstract class coordinate is used to store sizes of objects
+    mobileObject.createProperty("Size", OType.EMBEDDED, size3D); // Size of a mobile Object
+    // with x > y and z = height in the object's default position
+    
+    /* Sort of probability (score) that a mobile object is at a certain position
+     * or at another object. The Score value is between 0 and 10. However the sum of all
+     * scores is not fixed as it would be with probabilities. Scores are only compared.
+     */
+    OrientEdgeType prob_is_at = db.createEdgeType("PROB_IS_AT");
+    prob_is_at.createProperty("Score", OType.FLOAT).setMin("0").setMandatory(true).setNotNull(true);
+    prob_is_at.createProperty("Hight", OType.FLOAT); // Height above floor for robot's linear drive
+
 		
 		db.shutdown();
 		factory.close();
