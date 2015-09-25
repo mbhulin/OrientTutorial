@@ -67,7 +67,7 @@ OrientVertexType position = db.createVertexType("Position", coordinate); // Coor
 
 ## Create the Vertex Classes "Location" and "LocationConcept"
 
-OrientDB supports inheritance. Both classes, *LocationConcept* and *Location*, need a *Name* and a *Description* attribute. We will see later that other classes have a name and a description attribute, too. Therefore we first define a subclass **NamedVertex** of V. Then *Location* and *LocationConcept* are subclasses of *NamedVertex*.
+OrientDB supports inheritance. Both classes, *LocationConcept* and *Location*, need a *Name* and a *Description* attribute. We will see later that other classes have a name and a description attribute, too. Therefore we first define a subclass **NamedVertex** of *V*. Then *Location* and *LocationConcept* are subclasses of *NamedVertex*.
 
 Again the ``db.createVertexType()`` method is used. With the  ``db.createProperty()`` method the properties *Name* and *Description* are defined.
 ```java
