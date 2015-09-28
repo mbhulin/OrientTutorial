@@ -1,4 +1,4 @@
-# In construction! OrientDB Tutorial
+# OrientDB Graph Database: Tutorial for the Java API
 ## World-Model for Autonomous Service Robots using the Graph-Database OrientDB
 In this tutorial you will learn how to use **OrientDB** as a **Graph Database**. You will write **Java code** and use the **Java API** to access and control the database. This tutorial covers two alternatives to access the database:
 * Navigation using [Tinkerpop Blueprints](https://github.com/tinkerpop/blueprints/wiki) framework
