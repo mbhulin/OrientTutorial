@@ -1,6 +1,6 @@
 # Motivation
 ##Autonomous Service Robots
-At the University of Applied Sciences Ravensburg-Weingarten a service robot is developed that helps elderly or disabled persons in their household. It is not a nursing robot but a service robot. Usual tasks of a service robot are to search for objects and bring them to the owner, serve the dinner, clean up the kitchen etc. This [video](http://link) shows a typical activity of the service robot.
+At the University of Applied Sciences Ravensburg-Weingarten a service robot is developed that helps elderly or disabled persons in their household. It is not a nursing robot but a service robot. Usual tasks of a service robot are to search for objects and bring them to the owner, serve the dinner, clean up the kitchen etc. This [video](http://iki.hs-weingarten.de/videos/IKI-PR-Video.mp4#t=03:41) shows a typical activity of the service robot.
 
 This service is only possible with an autonomous robot. An industrial robot that performs the same task at the same position very accurately again and again is not suitable because the environment changes permanently: the equipment like cups, glasses, fruit etc. is located at different positions every time the robot looks for it, one time a yellow cup has to be used another time a blue one, the usual way to the kitchen is blocked by a chair, ...
 
