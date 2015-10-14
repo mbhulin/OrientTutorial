@@ -18,10 +18,8 @@ public class LocationTests {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		factory = new OrientGraphFactory("remote:localhost/RobotWorld1", "admin", "admin"); // The OrientDB server must be running
+		factory = new OrientGraphFactory("remote:localhost/RobotWorld", "admin", "admin"); // The OrientDB server must be running
 		db = factory.getTx(); // Connect to the database
-		
-		db.command(new OCommandSQL ("delete vertex Location")).execute(); // Delete all Location vertices in the database
 	}
 
 	@AfterClass
@@ -33,8 +31,9 @@ public class LocationTests {
 	@Test
 	public void testPositionWithoutX() {
 		String errorMessage = "";
-		Vertex pos = db.addVertex("class:Position2D");
+		Vertex pos = db.addVertex("class:Position");
 		pos.setProperty("y", 100);
+		pos.setProperty("z", 0);
 		try {
 			db.commit();
 		} catch (Exception e) {
@@ -61,10 +60,10 @@ public class LocationTests {
 	public void testLocationOK () {
 		long nrLocationsBefore = db.countVertices("Location");
 		String errorMessage = "No exception";
-		Vertex pos1 = db.addVertex("class:Position2D", "x", 0, "y", 0);
-		Vertex pos2 = db.addVertex("class:Position2D", "x", 1000, "y", 0);
-		Vertex pos3 = db.addVertex("class:Position2D", "x", 1000, "y", 500);
-		Vertex pos4 = db.addVertex("class:Position2D", "x", 0, "y", 500);
+		Vertex pos1 = db.addVertex("class:Position", "x", 0, "y", 0, "z", 0);
+		Vertex pos2 = db.addVertex("class:Position", "x", 1000, "y", 0, "z", 0);
+		Vertex pos3 = db.addVertex("class:Position", "x", 1000, "y", 500, "z", 0);
+		Vertex pos4 = db.addVertex("class:Position", "x", 0, "y", 500, "z", 0);
 		
 		ArrayList <Vertex> shape = new ArrayList <Vertex> ();
 		shape.add(pos1);
@@ -86,5 +85,11 @@ public class LocationTests {
 		long nrLocationsAfter = db.countVertices("Location");
 		Assert.assertEquals("No exception", errorMessage);
 		Assert.assertEquals(nrLocationsBefore + 1, nrLocationsAfter);
+		db.removeVertex(pos1);
+		db.removeVertex(pos2);
+		db.removeVertex(pos3);
+		db.removeVertex(pos4);
+		db.removeVertex(newLocation);
+		db.commit();
 	}
 }

@@ -3,15 +3,14 @@ package startApplication;
 import java.awt.EventQueue;
 
 import gui.MainFrameRWM;
-
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 
 public class StartGUI {
 
 	public static void main(String[] args) {
-		OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/RobotWorld", "admin", "admin");
-		OrientGraph db = factory.getTx();
+		OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/orientdb/databases/RobotWorld", "admin", "admin");
+		final OrientGraph db = factory.getTx();
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -24,7 +23,5 @@ public class StartGUI {
 				}
 			}
 		});
-
 	}
-
 }

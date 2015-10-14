@@ -1,4 +1,4 @@
-package startApplications;
+package startApplication;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,8 @@ import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 
+import operations.Operations;
+
 /**
  * Fills the database RobotWorld with some test data
  * @author hulin
@@ -16,8 +18,8 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraphFactory;
 public class FillDB {
 
 	public static void main(String[] args) {
-//		OrientGraphFactory factory = new OrientGraphFactory("remote:localhost/RobotWorld", "admin", "admin");
-		OrientGraphFactory factory = new OrientGraphFactory("plocal:C:/orientdb/databases/RobotWorld", "admin", "admin");
+		OrientGraphFactory factory = new OrientGraphFactory(Operations.urlToDB, "admin", "admin");
+//		OrientGraphFactory factory = new OrientGraphFactory(Operations.filePathToDB, "admin", "admin");
 		OrientGraph db = factory.getTx();
 		
 		// Clear the database: delete all edges and vertices
@@ -205,25 +207,25 @@ public class FillDB {
 		sizeFridge.field("x", 60);
 		sizeFridge.field("y", 60);
 		sizeFridge.field("z", 90);
-		Vertex fridgeI = db.addVertex("class:Object", "Name", "Bosch Cool2SX", "Description", "My refridgerator", "Size", sizeFridge);
+		Vertex fridgeI = db.addVertex("class:MobileObject", "Name", "Bosch Cool2SX", "Description", "My refridgerator", "Size", sizeFridge);
 		db.addEdge(null, fridgeI, fridge, "IS_A");
-		Vertex fridge2I = db.addVertex("class:Object", "Name", "AEG Cool & Fresh", "Description", "spare fridge", "Size", sizeFridge);
+		Vertex fridge2I = db.addVertex("class:MobileObject", "Name", "AEG Cool & Fresh", "Description", "spare fridge", "Size", sizeFridge);
 		db.addEdge(null, fridge2I, fridge, "IS_A");
 		
 		ODocument sizeTable = new ODocument ("Size3D");
 		sizeTable.field("x", 100);
 		sizeTable.field("y", 100);
 		sizeTable.field("z", 85);
-		Vertex tableI = db.addVertex("class:Object", "Name", "dining table", "Description", "My circular dining table", "Size", sizeTable);
+		Vertex tableI = db.addVertex("class:MobileObject", "Name", "dining table", "Description", "My circular dining table", "Size", sizeTable);
 		db.addEdge(null, tableI, table, "IS_A");
 
 		ODocument sizeJuice = new ODocument ("Size3D");
 		sizeJuice.field("x", 7);
 		sizeJuice.field("y", 7);
 		sizeJuice.field("z", 25);
-		Vertex juiceI = db.addVertex("class:Object", "Name", "Orient Apple Juice 1L", "Description", "Apple Juice of Orient; sweet", "Size", sizeJuice);
+		Vertex juiceI = db.addVertex("class:MobileObject", "Name", "Orient Apple Juice 1L", "Description", "Apple Juice of Orient; sweet", "Size", sizeJuice);
 		db.addEdge(null, juiceI, appleJuice, "IS_A");
-		Vertex juice2I = db.addVertex("class:Object", "Name", "Oracle Apple Juice 1L", "Description", "Greec Apple Juice; sweet", "Size", sizeJuice);
+		Vertex juice2I = db.addVertex("class:MobileObject", "Name", "Oracle Apple Juice 1L", "Description", "Greec Apple Juice; sweet", "Size", sizeJuice);
 		db.addEdge(null, juice2I, appleJuice, "IS_A");
 		db.commit();
 		
@@ -332,6 +334,9 @@ public class FillDB {
 
 		Edge passTime19 = db.addEdge(null, posJuice4, posJuice3, "IS_CONNECTED_TO");
 		passTime19.setProperty("PassTimeSec", 8);
+		
+		Edge passTime20 = db.addEdge(null, posJuice1, posFridge, "IS_CONNECTED_TO");
+		passTime20.setProperty("PassTimeSec", 4);
 
 		db.commit();
 		

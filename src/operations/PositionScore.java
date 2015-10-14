@@ -7,9 +7,9 @@ import com.tinkerpop.blueprints.Vertex;
  */
 public class PositionScore {
 	public Vertex pos;
-	public int score;
+	public Float score;
 	
-	public PositionScore(Vertex pos, int score) {
+	public PositionScore(Vertex pos, Float score) {
 		this.pos = pos;
 		this.score = score;
 	}

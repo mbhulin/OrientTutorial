@@ -24,6 +24,7 @@ import javax.swing.event.ListSelectionListener;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.impls.orient.OrientGraph;
 
+import gui.DrawingPane.Tasks;
 import operations.Operations;
 //import defWorlModelGUI.NewLocationEvent;
 //import defWorlModelGUI.NewLocationListener;
@@ -34,11 +35,11 @@ public class MainFrameRWM extends JFrame {
 	private JPanel contentPane;
 	protected JLabel info; // Information for the user what to do next
 	protected JLabel info1; // "User Action: " or "Info: "
-	private OrientGraph db; // Connection to the database
+	private final OrientGraph db; // Connection to the database
 	private Vertex start; // Current position of robot
 	private Vertex dest; // Current position of search object
 	private Vertex searchObject;
-	protected Operations oper;
+	protected final Operations oper;
 
 	/**
 	 * Create the frame.
@@ -47,14 +48,14 @@ public class MainFrameRWM extends JFrame {
 
 		db = graph;
 		oper = new Operations (db);
-		JButton btnStartSearch = new JButton("Start Search"); // Button to start the search for an object
-		JButton btnShowNextPathPart = new JButton("Show Path in Steps");
-		JLabel objectListLabel = new JLabel ("List of Objects"); // Label for objectList
-		JList <String> objectList = new JList <String> (); // List with names of objects; user should select one
+		final JButton btnStartSearch = new JButton("Start Search"); // Button to start the search for an object
+		final JButton btnShowNextPathPart = new JButton("Show Path in Steps");
+		final JLabel objectListLabel = new JLabel ("List of Objects"); // Label for objectList
+		final JList <String> objectList = new JList <String> (); // List with names of objects; user should select one
 		JPanel buttonPanel = new JPanel(); // Panel for buttons
 		JPanel infoPanel = new JPanel(); // Panel for info-Text
 		info1 = new JLabel ("User Action:");
-		DrawingPane drawingPane = new DrawingPane (db, this); // Panel to draw locations and positions
+		final DrawingPane drawingPane = new DrawingPane (db, this); // Panel to draw locations and positions
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -79,25 +80,35 @@ public class MainFrameRWM extends JFrame {
 		drawingPane.repaint();
 		drawingPane.addDrawingPaneListener(new DrawingPaneListener() {
 			@Override
-			public void DrawingPaneChanged(DrawingPaneChangedEvent e)
-			{
-				if (drawingPane.getTask() == 1) { // if task == get current position of search object
+			public void DrawingPaneChanged(DrawingPaneChangedEvent e) {
+				switch (drawingPane.getTask()) {
+				case SETPOSOBJECT: // if task == get current position of search object
 					dest = e.getPos();
 					if (dest != null) {
 						info.setText("Click on current position of robot!");
-						drawingPane.setTask(2); // task = get current position of robot
+						drawingPane.setTask(Tasks.SETPOSROBOT); // task = get current position of robot
 					} else info.setText("No valid position; try again!");
-				} else if (drawingPane.getTask() == 2) { // if task == get current position of robot
+					break;
+					
+				case SETPOSROBOT: // if task == get current position of robot
 					start = e.getPos();
 					if (start != null) {
-						info.setText(oper.searchForObject(start, dest, searchObject)); // Start the search simulation
-						drawingPane.setTask(3); // task = show path
+						String searchResult = oper.searchForObject(start, dest, searchObject); // Start the search simulation
+
+						/*
+						 *  display search result
+						 */
+						info.setText(searchResult); 
+						info1.setText("Info: ");
+						drawingPane.setTask(Tasks.DRAWPATHCOMPLETE); // task = show path
 						btnStartSearch.setText("Start another search");
 						btnStartSearch.setEnabled(true); // Enable Start button for the next search
-						info1.setText("Info: ");
 						if (oper.getSearchPath().size() > 1) btnShowNextPathPart.setVisible(true);
 						drawingPane.repaint();
 					} else info.setText("No valid position; try again!");
+					break;
+					
+				default: break;
 				}
 			}
 		});
@@ -105,10 +116,10 @@ public class MainFrameRWM extends JFrame {
 		JPanel listPanel = new JPanel(); // Panel for Object List
 		listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
 		
-		Vector<Vertex>vertexVectorObjects = new Vector<Vertex> (); // Vector of object vertices in database
-		Vector<String> nameVectorObjects = new Vector<String> (); // Vector of names of objects
-		for (Vertex v: db.getVerticesOfClass("Object")) {
-			nameVectorObjects.add(v.getProperty("Name"));
+		final Vector<Vertex>vertexVectorObjects = new Vector<Vertex> (); // Vector of object vertices in database
+		final Vector<String> nameVectorObjects = new Vector<String> (); // Vector of names of objects
+		for (Vertex v: db.getVerticesOfClass("MobileObject")) {
+			nameVectorObjects.add((String) v.getProperty("Name"));
 			vertexVectorObjects.add(v);
 		};
 		objectList.setListData(nameVectorObjects);
@@ -117,7 +128,7 @@ public class MainFrameRWM extends JFrame {
 			public void valueChanged(ListSelectionEvent lsEvent) {
 				if (!objectList.isSelectionEmpty()){
 					searchObject = vertexVectorObjects.get(objectList.getSelectedIndex());
-					drawingPane.setTask(1); // task = get current position of search object
+					drawingPane.setTask(Tasks.SETPOSOBJECT); // task = get current position of search object
 					info.setText("Choose current position of search object by clicking on a position.");
 					objectList.setEnabled(false);
 				}
@@ -142,7 +153,7 @@ public class MainFrameRWM extends JFrame {
 				info1.setText("User action: ");
 				info.setText("Choose search object out of list");
 				info.setVisible(true);
-				drawingPane.setTask(0);
+				drawingPane.setTask(Tasks.START);
 				oper.clearSearchPath();
 				objectListLabel.setVisible(true);
 				objectList.setVisible(true);
@@ -158,7 +169,7 @@ public class MainFrameRWM extends JFrame {
 		btnShowNextPathPart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnShowNextPathPart.setVisible(false);
-				drawingPane.setTask(4); // task = show path in parts, step for step
+				drawingPane.setTask(Tasks.DRAWPATHINSTEPS); // task = show path in parts, step for step
 				drawingPane.setPathPart(0);
 				info1.setText("User action: ");
 				info.setText("Click anywhere on drawing to show the next search step!");
@@ -187,6 +198,5 @@ public class MainFrameRWM extends JFrame {
 	public void setStart(Vertex start) {
 		this.start = start;
 	}
-
 }
 
