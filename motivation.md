@@ -4,7 +4,7 @@ At the University of Applied Sciences Ravensburg-Weingarten a service robot is d
 
 This service is only possible with an autonomous robot. An industrial robot that performs the same task at the same position very accurately again and again is not suitable because the environment changes permanently: the equipment like cups, glasses, fruit etc. is located at different positions every time the robot looks for it, one time a yellow cup has to be used another time a blue one, the usual way to the kitchen is blocked by a chair, ...
 
-Find more information about this project at [Univesity Ravensburg-Weingarten, Institute for Artificial Intelligence](http://iki.hs-weingarten.de/?lang=eng&page=aktuelles)
+Find more information about this project at [University Ravensburg-Weingarten, Institute for Artificial Intelligence](http://iki.hs-weingarten.de/?lang=eng&page=aktuelles)
 ###World Model
 The service robot can perform a lot of tasks in a permanently changing environment using its sensors: find its way avoiding obstacles at changing positions, detect and grasp objects, understand commands given in natural language etc. However to plan its activities the robot needs some information about its environment: Where are other rooms? Where are doors to get from one room to another one? Where could certain objects be? To which object class does an object belong? How can similar objects be distinguished?
 
